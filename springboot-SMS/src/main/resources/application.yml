@@ -1,0 +1,7 @@
+server:
+  port: 9090
+spring:
+  redis:
+    password:
+    host: 127.0.0.1
+    port: 6379
