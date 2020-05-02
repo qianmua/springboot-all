@@ -13,6 +13,7 @@
         <module>springboot-websocket</module>
         <module>springboot-quartZ</module>
         <module>springboot-SMS</module>
+        <module>spring-ioc</module>
     </modules>
 
     <dependencyManagement>

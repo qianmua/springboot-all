@@ -31,7 +31,7 @@ public class SmsSendController {
     private RedisTemplate<String,String> template;
 
     @GetMapping("/send/{phone}")
-    public String send(@PathVariable("p")String p){
+    public String send(@PathVariable("phone")String p){
         String code = template.opsForValue().get(p);
         if (!StringUtils.isEmpty(code)){
             return "redis 中存在该玩意";
