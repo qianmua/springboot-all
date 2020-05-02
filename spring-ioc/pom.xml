@@ -11,5 +11,9 @@
 
     <artifactId>spring-ioc</artifactId>
 
+    <dependencies>
+        
+    </dependencies>
+
 
 </project>
