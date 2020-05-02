@@ -1,6 +1,5 @@
 package pres.qianmuna.spring.demo;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -32,7 +31,8 @@ public class TankDemo {
         int live = scanner.nextInt();
         //添加到容器
         tanks.put(tankName, new Tank(x,y,dire,speed,live));
-        System.out.println(tanks.toString());
+        tanks.values().forEach(System.out::println);
+        tanks.forEach(( k ,v ) -> System.out.println("key" + k + " value" + v));
     }
     /**
      * 坦克类

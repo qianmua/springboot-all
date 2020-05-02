@@ -1,5 +1,9 @@
 package pres.qianmuna.spring;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import pres.qianmuna.spring.bean.A;
+import pres.qianmuna.spring.bean.UserModel;
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -10,4 +14,13 @@ package pres.qianmuna.spring;
  * @time 22:50
  */
 public class SpringIocApplication {
+
+    public static void main(String[] args) {
+        //初始化spring context
+        //实例化bean
+        AnnotationConfigApplicationContext
+                context = new AnnotationConfigApplicationContext(UserModel.class);
+
+        System.out.println(context.getBean(A.class));
+    }
 }
