@@ -13,7 +13,10 @@ import org.springframework.context.annotation.Configuration;
  * @time 23:16
  */
 @Configuration
-@ComponentScan("pres.qianmuna.spring.bean")
-public class UserModel {
+@ComponentScan("pres.qianmuna.spring")
 
+public class UserModel {
+    /**
+     * spring自己会把这个config注册
+     * */
 }

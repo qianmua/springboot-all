@@ -7,11 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spring-ioc" />
+        <module name="springboot-cache" />
         <module name="springboot-SMS" />
         <module name="springboot-websocket" />
         <module name="springboot-quartZ" />
-        <module name="springboot-cache" />
+        <module name="spring-ioc" />
       </profile>
     </annotationProcessing>
   </component>
