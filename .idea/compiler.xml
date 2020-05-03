@@ -10,8 +10,9 @@
         <module name="springboot-cache" />
         <module name="springboot-SMS" />
         <module name="springboot-websocket" />
-        <module name="springboot-quartZ" />
         <module name="spring-ioc" />
+        <module name="springboot-quartZ" />
+        <module name="springboot-redis" />
       </profile>
     </annotationProcessing>
   </component>
