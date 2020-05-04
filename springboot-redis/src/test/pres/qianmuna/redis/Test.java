@@ -224,7 +224,9 @@ public class Test {
     * unwatch 取消监视
     *
     *
-    *
+    * springboot 2.x 之后 jedis 被替换成lettuce
+    * jedis 采用直连，多个线程操作不安全 ， 避免 就使用jedis pool 线程池 BIO
+    * lettuce 采用netty 实例可以在多线程中共享没不存在线程不安全的情况，可以减少线程数据 NIO
     *
     *
     *
