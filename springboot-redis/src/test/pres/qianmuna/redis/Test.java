@@ -140,5 +140,93 @@ public class Test {
     * zrem 移除
     * zcount 大小
     *
+    *
+    * 三种特数的数据类型
+    *
+    * geospatial地理位置
+    * 可以推算地理位置信息，两地之间距离，方圆几里的人
+    * 规则 : 两极无法直接添加 一般会直接下载数据，java一次全部导入
+    * 参数 key 经度 纬度  名称
+    *
+    * geoadd china:city 116.40 39.90 beijing 添加到key 经纬度，地点
+    * geoadd china:city 121.40 31.923 shanghai 添加到key
+    * geopos china:city beijing 得到经纬度
+    * geodist 两地之间的距离 单位 m km mi ft
+    * georadius china:city 110 30 500 km [withdist 显示到中心的距离| withcorrd 列出经纬度]某 经纬度 半径（单位）之内的所有东西 可以指定数量
+    * georadiusbymember 以key为中心
+    * geohash 返回hash字符  11个长度
+    *
+    * 底层是Zset实现的
+    *
+    *
+    *hyperloglog 基数统计
+    * 可以接受误差
+    *
+    * pfadd mykey a b c d e f g h
+    * pfcount mykey 计数
+    * pfmerge mukey1 mykey mykey2 合并 到 新的mykey1
+    *
+    * bitmap 位存储
+    * 统计两种信息 是，否 就有两种结果 0 1
+    *
+    * setbit mysign 0 1
+    * setbit mysign 1 1
+    * setbit mysign 2 0 .......
+    *
+    * gtebit mysign 2 查看0 or 1
+    * bitcount mysign 统计记录
+    *
+    *
+    * redis事务
+    * mysql ACID原则
+    * redis事务本质 一些命令的集合 aof rdb
+    * redis单条命令保证原子性
+    * 但是事务不保证原子性
+    * 一次性，顺序性，排他性（不允许呗其他东西干扰）
+    * redis事务没有隔离级概念
+    *
+    * redis事务 -> 开启multi 入队 执行exec
+    * multi
+    * set k1 vi
+    * set k2 v2
+    * get k2
+    * set k3 v2
+    * exec
+    *
+    * discard 取消事务
+    * 代码有问题事务中所有命令都不会运行
+    * getset k1 //
+    *
+    * 语法性异常其他命令正常运行
+    * 比如 除零 给一个不存在的值incr
+    *
+    *
+    * 监控watch
+    * 悲观锁 什么时候都会出问题 无论做什么都会加锁
+    *
+    * 乐观锁 什么时候都不会出现问题 所以不会加锁 更新的时候判断一下是不是有人修改过
+    *
+    * redis的监视
+    *
+    * set k1 100
+    * set k2 0
+    * watch k1
+    * //正常的
+    * multi
+    * decrby k1 20
+    * incrby k2 20
+    * exec
+    *
+    * //有问题的
+    * 当在watch的时候
+    * watch的值被其他的线程修改后，事务就会执行失败
+    *
+    * unwatch 取消监视
+    *
+    *
+    *
+    *
+    *
+    *
     * */
 }
