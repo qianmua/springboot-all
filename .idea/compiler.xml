@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="springboot-cache" />
+        <module name="springboot-mongodb" />
         <module name="springboot-SMS" />
         <module name="springboot-websocket" />
         <module name="spring-ioc" />

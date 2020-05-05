@@ -15,6 +15,7 @@
         <module>springboot-SMS</module>
         <module>spring-ioc</module>
         <module>springboot-redis</module>
+        <module>springboot-mongodb</module>
     </modules>
 
     <dependencyManagement>
