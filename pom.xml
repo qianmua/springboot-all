@@ -16,6 +16,7 @@
         <module>spring-ioc</module>
         <module>springboot-redis</module>
         <module>springboot-mongodb</module>
+        <module>springboot-rabbitmq</module>
     </modules>
 
     <dependencyManagement>

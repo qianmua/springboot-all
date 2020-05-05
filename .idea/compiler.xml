@@ -10,10 +10,11 @@
         <module name="springboot-cache" />
         <module name="springboot-mongodb" />
         <module name="springboot-SMS" />
+        <module name="springboot-rabbitmq" />
         <module name="springboot-websocket" />
         <module name="spring-ioc" />
-        <module name="springboot-quartZ" />
         <module name="springboot-redis" />
+        <module name="springboot-quartZ" />
       </profile>
     </annotationProcessing>
   </component>

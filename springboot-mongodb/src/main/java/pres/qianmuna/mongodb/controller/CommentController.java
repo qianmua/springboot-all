@@ -23,7 +23,6 @@ public class CommentController {
     @Autowired
     private CommentService service;
 
-
     @GetMapping("/mdb/getall")
     public List<CommentPO> queryAll(){
         return service.queryAll();
