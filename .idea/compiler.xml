@@ -7,14 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="springboot-cache" />
+        <module name="springboot-mybatisplus" />
         <module name="springboot-mongodb" />
         <module name="springboot-SMS" />
         <module name="springboot-rabbitmq" />
         <module name="springboot-websocket" />
         <module name="spring-ioc" />
-        <module name="springboot-redis" />
+        <module name="springboot-cache" />
+        <module name="springboot-empty" />
         <module name="springboot-quartZ" />
+        <module name="springboot-redis" />
       </profile>
     </annotationProcessing>
   </component>
