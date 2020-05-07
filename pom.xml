@@ -21,6 +21,7 @@
         <module>springboot-empty</module>
         <module>springboot-data-jpa</module>
         <module>springboot-security</module>
+        <module>springboot-start</module>
     </modules>
 
     <dependencyManagement>

@@ -19,6 +19,7 @@
         <module name="springboot-empty" />
         <module name="springboot-quartZ" />
         <module name="springboot-cache" />
+        <module name="springboot-start" />
       </profile>
     </annotationProcessing>
   </component>
