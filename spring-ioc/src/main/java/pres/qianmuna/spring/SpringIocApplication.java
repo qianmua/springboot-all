@@ -47,6 +47,15 @@ public class SpringIocApplication {
         * 4、
         *
         * */
-        System.out.println(context.getBean(A.class));
+//        System.out.println(context.getBean(A.class));
+//        System.out.println(context.getBean(B.class));
+
+
+
+//        @Import  //导入bean定义
+        // 1、导入一个普通的类
+        // 2、实现ImportBeanDefinitionRegistrar 导入bean定义的注册器
+        // 3、实现了importSelector
+
     }
 }

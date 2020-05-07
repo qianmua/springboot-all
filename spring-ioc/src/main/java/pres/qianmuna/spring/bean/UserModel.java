@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan("pres.qianmuna.spring")
-
 public class UserModel {
     /**
      * spring自己会把这个config注册

@@ -1,5 +1,6 @@
 package pres.qianmuna.spring.bean;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,9 +14,15 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class A {
+
     public A() {
-        System.out.println("A");
+        System.out.println("A zhuce A- >");
     }
+
+
+    @Autowired
+    B b;
+
 
     @Override
     public String toString() {

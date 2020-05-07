@@ -10,13 +10,14 @@
         <module name="springboot-mybatisplus" />
         <module name="springboot-mongodb" />
         <module name="springboot-SMS" />
-        <module name="springboot-rabbitmq" />
+        <module name="springboot-data-jpa" />
         <module name="springboot-websocket" />
         <module name="spring-ioc" />
-        <module name="springboot-cache" />
+        <module name="springboot-rabbitmq" />
+        <module name="springboot-redis" />
         <module name="springboot-empty" />
         <module name="springboot-quartZ" />
-        <module name="springboot-redis" />
+        <module name="springboot-cache" />
       </profile>
     </annotationProcessing>
   </component>

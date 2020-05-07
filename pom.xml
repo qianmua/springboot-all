@@ -19,6 +19,7 @@
         <module>springboot-rabbitmq</module>
         <module>springboot-mybatisplus</module>
         <module>springboot-empty</module>
+        <module>springboot-data-jpa</module>
     </modules>
 
     <dependencyManagement>
