@@ -20,6 +20,7 @@
         <module>springboot-mybatisplus</module>
         <module>springboot-empty</module>
         <module>springboot-data-jpa</module>
+        <module>springboot-security</module>
     </modules>
 
     <dependencyManagement>

@@ -14,6 +14,7 @@
         <module name="springboot-websocket" />
         <module name="spring-ioc" />
         <module name="springboot-rabbitmq" />
+        <module name="springboot-security" />
         <module name="springboot-redis" />
         <module name="springboot-empty" />
         <module name="springboot-quartZ" />
