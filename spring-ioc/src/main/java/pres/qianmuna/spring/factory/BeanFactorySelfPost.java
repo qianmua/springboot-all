@@ -26,6 +26,7 @@ public class BeanFactorySelfPost implements BeanFactoryPostProcessor {
         System.out.println("init bean");
         //this.beanDefinitionMap.get(beanName)
 //        BeanDefinition a = configurableListableBeanFactory.getBeanDefinition("b");
+        //只能update 不可以修改哦
 //        a.setBeanClassName("b");
 
         //从池子中拿到这个孵化对象

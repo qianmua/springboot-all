@@ -2,6 +2,8 @@ package pres.qianmuna.spring.bean;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import pres.qianmuna.spring.factory.HelloImportBeanDefinitionRegistart;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,6 +16,8 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan("pres.qianmuna.spring")
+//import
+@Import(HelloImportBeanDefinitionRegistart.class)
 public class UserModel {
     /**
      * spring自己会把这个config注册

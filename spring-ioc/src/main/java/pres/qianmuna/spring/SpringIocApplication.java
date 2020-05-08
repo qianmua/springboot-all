@@ -3,9 +3,7 @@ package pres.qianmuna.spring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import pres.qianmuna.spring.bean.A;
-import pres.qianmuna.spring.bean.B;
-import pres.qianmuna.spring.bean.UserModel;
+import pres.qianmuna.spring.bean.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,6 +20,7 @@ public class SpringIocApplication {
         //初始化spring context
         //实例化bean
         // 初始化beanFactory
+        // BeanDefinition spring用来描述类
         AnnotationConfigApplicationContext
                 //this();
                 //register(componentClasses);
@@ -38,6 +37,15 @@ public class SpringIocApplication {
                 //扫描器
                 //this.scanner = new ClassPathBeanDefinitionScanner(this);
                 context = new AnnotationConfigApplicationContext(UserModel.class);
+
+        //特殊点
+        // &helloFactoryBean and helloFactoryBean
+        //System.out.println(context.getBean("&helloFactoryBean"));
+
+        // D()
+        EProxy d = (EProxy) context.getBean("helloFactoryBean");
+        System.out.println(d);
+        d.f();
 
         /*
         * 1、scan
