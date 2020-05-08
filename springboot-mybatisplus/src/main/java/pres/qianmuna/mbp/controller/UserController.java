@@ -3,6 +3,8 @@ package pres.qianmuna.mbp.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +44,8 @@ public class UserController {
         return users;
     }
 
+    //开始事务 触发回滚异常 ， 隔离级别
+    @Transactional( rollbackFor = { RuntimeException.class , Error.class} , isolation = Isolation.DEFAULT)
     @GetMapping("/insert")
     public void insert(){
         Users users = new Users().setAddrname("100").setAddress("200").setName("666");

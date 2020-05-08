@@ -22,6 +22,7 @@
         <module>springboot-data-jpa</module>
         <module>springboot-security</module>
         <module>springboot-start</module>
+        <module>spring-aop</module>
     </modules>
 
     <dependencyManagement>
