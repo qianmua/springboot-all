@@ -17,6 +17,7 @@
         <module name="springboot-security" />
         <module name="springboot-redis" />
         <module name="springboot-data-jpa" />
+        <module name="springboot-netty" />
         <module name="springboot-start" />
         <module name="springboot-mybatisplus" />
         <module name="springboot-quartZ" />

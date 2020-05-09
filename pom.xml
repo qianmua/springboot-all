@@ -23,6 +23,7 @@
         <module>springboot-security</module>
         <module>springboot-start</module>
         <module>spring-aop</module>
+        <module>springboot-netty</module>
     </modules>
 
     <dependencyManagement>
