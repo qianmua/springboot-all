@@ -19,9 +19,26 @@ import java.util.logging.Handler;
  * @date 2020/5/8
  * @time 21:22
  */
-//注释后通过spring提供的另一个方式注册
+//注释后通过spring提供的另一个方式注册  ？ 什么方式
+//ImportBeanDefinitionRegistrar 这种方式 ，辣鸡这都不知道。。。
 //@Component
 public class HelloFactoryBean implements FactoryBean {
+
+    /**
+     * 工厂模式
+     *
+     *  bean factory
+     *  1、db
+     *  2、bean
+     *  3、rigi 注册
+     *
+     *
+     * factory bean
+     * 1、自己注册一个
+     * 2、自己也是个bean
+     *
+     *
+     * */
 
     //在这里动态代理
 
@@ -35,7 +52,11 @@ public class HelloFactoryBean implements FactoryBean {
         Class[] classes = new Class[]{EProxy.class};
         //通过代理得到对象
         //你这个代理的要是个接口呐
-        EProxy eProxy = (EProxy) Proxy.newProxyInstance(SpringIocApplication.class.getClassLoader() , classes , new HelloHadler());
+        EProxy eProxy = (EProxy) Proxy.newProxyInstance(HelloFactoryBean.class.getClassLoader()
+                //代理谁？哪个接口
+                , classes
+                // 代理逻辑
+                , new HelloHadler());
 
         return eProxy;
 //        return new D();

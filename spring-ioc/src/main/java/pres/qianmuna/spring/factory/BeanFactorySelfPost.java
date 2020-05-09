@@ -18,6 +18,11 @@ import pres.qianmuna.spring.bean.B;
  * @date 2020/5/3
  * @time 15:51
  */
+
+/**
+ *
+ * spring bean工厂的后置函数 ， 前面的bean信息会传到这里过来 ， 然后 bean初始化啦~
+ */
 @Component
 public class BeanFactorySelfPost implements BeanFactoryPostProcessor {
     @Override

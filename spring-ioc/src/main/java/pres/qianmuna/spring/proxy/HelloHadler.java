@@ -16,11 +16,13 @@ import java.lang.reflect.Method;
  */
 /**
  * java 动态代理机制
+ * 代理逻辑
  * */
 public class HelloHadler implements InvocationHandler {
 
     /**
      * 是java的动态代理哦！
+     * 代理对象
      * @param proxy
      * @param method
      * @param args
@@ -30,7 +32,19 @@ public class HelloHadler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        System.out.println(method.getAnnotation(TestAnnotatin.class).value());
+        System.out.println("-----------------------------------------------------");
+//        System.out.println(method.getAnnotation(TestAnnotatin.class).value());
+//        System.out.println(method.getAnnotation(TestAnnotatin.class) == null ? "null" : "not null");
+
+        // 这里写 代理逻辑
+        //是否Object属性
+        if (Object.class.equals(method.getDeclaringClass())){
+            //拿到代理类
+            return method.invoke(this,args);
+        }
+
+//        System.out.println(method.getName());
+        System.out.println("-----------------------------------------------------");
 
         return null;
     }

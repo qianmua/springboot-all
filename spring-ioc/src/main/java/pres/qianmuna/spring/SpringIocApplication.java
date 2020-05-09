@@ -43,7 +43,8 @@ public class SpringIocApplication {
         //System.out.println(context.getBean("&helloFactoryBean"));
 
         // D()
-        EProxy d = (EProxy) context.getBean("helloFactoryBean");
+        EProxy d = context.getBean("helloFactoryBean",EProxy.class);
+//        System.out.println(context.getBean("helloFactoryBean", EProxy.class).toString());
         System.out.println(d);
         d.f();
 
