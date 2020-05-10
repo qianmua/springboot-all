@@ -23,6 +23,7 @@ public class NIOSelector2 {
      * */
     public static void main(String[] args) throws IOException {
         // 创建 ServerSocketChannel 通道
+        //用于在服务端监听新的客户端连接
         ServerSocketChannel open = ServerSocketChannel.open();
 
         //得到selector
@@ -34,8 +35,20 @@ public class NIOSelector2 {
         //设置为非阻塞式
         open.configureBlocking(false);
 
-        //注册 到Selector中西 添加事件
+        //注册 到Selector中西 添加事件为OP_ACCEPT
+        //SelectorKey 关注的是事件
+        //事件 accept 有新的网络连接 值为16
+        // connect 连接已经建立 值为8
+        // read 读操作 值为1
+        // write 写操作 值为4
+        //selector 里面有个几个 存放的是selectorKey
+        //这个key对应了channel通道 ， 可以反向得到channel
         open.register(selector , SelectionKey.OP_ACCEPT);
+        System.out.println(" 注册到selector  : " );
+        //表示所有注册的通道
+        System.out.println(" 注册到selector  : " + selector.keys());
+        //表示所有发生事件的通道
+        System.out.println(" 注册到selector  : " + selector.selectedKeys());
 
         //等待连接
         while (true){
@@ -66,8 +79,11 @@ public class NIOSelector2 {
                     //accept 这个方法是阻塞的， 但是！ 重点来了
                     // 我们这里是事件驱动过来的，所以直接能连接到！
                     //懂了吗？ 一半
+                    //具体负责读写操作
+                    // ScatteringByteChannel, GatheringByteChannel
                     SocketChannel accept = open.accept();
                     //设置非阻塞
+                    // NIO 一般设置为false
                     accept.configureBlocking(false);
 
 
