@@ -26,6 +26,8 @@
         <module>springboot-netty</module>
         <module>springboot-generator</module>
         <module>springboot-file-upload</module>
+        <module>springboot-exception</module>
+        <module>springboot-async</module>
     </modules>
 
     <dependencyManagement>
