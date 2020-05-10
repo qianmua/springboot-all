@@ -25,6 +25,7 @@
         <module>spring-aop</module>
         <module>springboot-netty</module>
         <module>springboot-generator</module>
+        <module>springboot-file-upload</module>
     </modules>
 
     <dependencyManagement>
