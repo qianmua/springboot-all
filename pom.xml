@@ -24,6 +24,7 @@
         <module>springboot-start</module>
         <module>spring-aop</module>
         <module>springboot-netty</module>
+        <module>springboot-generator</module>
     </modules>
 
     <dependencyManagement>
