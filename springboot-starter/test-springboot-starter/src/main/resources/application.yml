@@ -1,0 +1,12 @@
+server:
+  port: 9090
+
+# 配置 demo.hello
+# 使用@ConfigurationProperties( prefix = "demo.hello")
+# 得到自动配置
+demo:
+  hello:
+    # 配置 字段
+    prefix: WWW.
+    suffix: .COM
+
