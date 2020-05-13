@@ -9,17 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springboot-netty</artifactId>
+    <artifactId>springboot-netty2</artifactId>
 
     <dependencies>
-
-        <!--start netty-->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.1.48.Final</version>
         </dependency>
-
     </dependencies>
 
 
