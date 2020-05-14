@@ -20,6 +20,7 @@ import pres.qianmuna.netty.handler.NettyClientHandler;
  */
 public class NettyClient {
 
+
     public static void main(String[] args) throws InterruptedException {
         //客户端需要一个事件循环组
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
