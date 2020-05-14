@@ -24,6 +24,8 @@ public class SpringAopDemoApplication {
          * aspectJ 也是实现aop的东东
          *
          * spring aop 借助了 aspectJ的编程风格
+         *
+         *
          * */
 
         //构建初始化context

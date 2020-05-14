@@ -53,6 +53,35 @@ public class Test1Aspect {
      * 进到里面的if 下面调用了doGetBean() 所以说 getBean 和 初始化都会调用这个doGetBean
      *
      *
+     * aop 的动态代理
+     *
+     * spring aop 实际用到的是 cglib 或者proxy
+     *
+     * cglib 代理的必须是一个接口
+     *
+     * 取决于代理的对象是接口
+     * 还是 class
+     *
+     * 原生service -> 代理对象
+     * 是init容器是 代理 还是 getBean是代理？
+     *
+     * 注意doGetBean
+     * 启动时调用了一次
+     * getBean也调用了一次哦
+     *
+     * DefaultAopProxyFactory 这个类产生了是cglib 还是 jdk 的代理对象
+     * return new ObjenesisCglibAopProxy(config);
+     * return new JdkDynamicAopProxy(config);
+     *
+     * 为什么代理对象必须是一个接口？
+     * java 是单继承多实现的 ， 他已经继承了Proxy 类
+     * public final class $Proxy extends Proxy implements UserBean
+     *
+     *
+     *
+     *
+     *
+     *
      *
      * */
     @Pointcut( "execution(* pres.qianmuna.aop.entity..*.*(..))")
