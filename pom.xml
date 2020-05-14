@@ -30,6 +30,7 @@
         <module>springboot-async</module>
         <module>springboot-starter</module>
         <module>springboot-netty2</module>
+        <module>spring-mvc</module>
     </modules>
 
     <dependencyManagement>
