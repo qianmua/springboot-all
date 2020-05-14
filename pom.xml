@@ -31,6 +31,7 @@
         <module>springboot-starter</module>
         <module>springboot-netty2</module>
         <module>spring-mvc</module>
+        <module>spring-myabtis</module>
     </modules>
 
     <dependencyManagement>
