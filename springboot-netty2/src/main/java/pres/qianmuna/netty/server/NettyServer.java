@@ -8,7 +8,6 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
 import pres.qianmuna.netty.handler.NettyServiceHandler;
 
 /**
@@ -28,6 +27,7 @@ public class NettyServer {
         //boss 处理连接
         // work 处理业务
         //含有的子线程（NioEventLoop）个数默认时cpu核数*2
+        //参数 就是给他分配的线程数
         EventLoopGroup boss = new NioEventLoopGroup();
         EventLoopGroup work = new NioEventLoopGroup();
         try {
@@ -42,6 +42,7 @@ public class NettyServer {
                     .option(ChannelOption.SO_BACKLOG,128)
                     //设置保持活动连接状态
                     .childOption(ChannelOption.SO_KEEPALIVE,true)
+                    //可以用lambda优化
                     .childHandler(new ChannelInitializer<SocketChannel>(){
                         //创建一个通道测试对象
                         //给pipeline设置处理器

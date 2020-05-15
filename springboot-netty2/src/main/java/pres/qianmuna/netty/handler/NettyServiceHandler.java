@@ -9,6 +9,7 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.util.CharsetUtil;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by IntelliJ IDEA.
@@ -49,6 +50,45 @@ public class NettyServiceHandler extends ChannelInboundHandlerAdapter {
 
         System.out.println("msg: \t"+ buffer.toString(CharsetUtil.UTF_8));
         System.out.println("address: \t" + channel.remoteAddress());
+
+        /*
+        * 定时任务
+        * */
+        //处理耗时，大量数据据请求 会导致服务端阻塞
+        // 所以需要异步去执行
+        /*
+        * 解决
+        * */
+
+        //自定义普通任务
+        /**
+         * 会被提交到NIOEventLoop中的taskQueue中去执行
+         * 是个队列 所以要取一个去执行
+         * 在同一个线程哦
+         */
+        ctx.channel().eventLoop().execute( () ->{
+            try {
+                Thread.sleep(3 * 1000);
+                ctx.writeAndFlush(Unpooled.copiedBuffer("hello 喵喵喵 自定义普通任务" , CharsetUtil.UTF_8));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        /*
+        * 自定义定时任务
+        * 是提交到scheduleTaskQueue中执行的
+        * */
+        ctx.channel().eventLoop().schedule(() ->{
+            try {
+                TimeUnit.SECONDS.sleep(2);
+                ctx.writeAndFlush(Unpooled.copiedBuffer("喵喵喵 ， 定时普通任务", CharsetUtil.UTF_8) );
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        },2 , TimeUnit.SECONDS);
+
+
 
     }
 
