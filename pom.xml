@@ -33,6 +33,7 @@
         <module>spring-mvc</module>
         <module>spring-myabtis</module>
         <module>springboot-intercaptor</module>
+        <module>springboot-druid</module>
     </modules>
 
     <dependencyManagement>
