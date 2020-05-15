@@ -1,0 +1,15 @@
+server:
+  port: 9090
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+  level:
+    pres:
+      qianmuna:
+        cache2:
+          mapper: debug

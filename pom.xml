@@ -35,6 +35,7 @@
         <module>springboot-intercaptor</module>
         <module>springboot-druid</module>
         <module>springboot-listener</module>
+        <module>springboot-cache2</module>
     </modules>
 
     <dependencyManagement>
