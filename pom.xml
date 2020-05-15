@@ -32,6 +32,7 @@
         <module>springboot-netty2</module>
         <module>spring-mvc</module>
         <module>spring-myabtis</module>
+        <module>springboot-intercaptor</module>
     </modules>
 
     <dependencyManagement>
