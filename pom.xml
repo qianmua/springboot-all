@@ -38,6 +38,8 @@
         <module>springboot-cache2</module>
         <module>springboot-webflux</module>
         <module>servlet-async</module>
+        <module>springboot-webflux2</module>
+        <module>springboot-webflux-client</module>
     </modules>
 
     <dependencyManagement>
