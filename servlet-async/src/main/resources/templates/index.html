@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+
+<script>
+    /*
+    * 会 自定重连
+    *
+    * */
+    var  sse = new EventSource("hello");
+
+    sse.onmessage = function(e){
+        console.log("message" , e.data , e);
+    }
+
+    //事件
+    sse.addEventListener("me" , function (evt) {
+       console.log("me event" , evt.data);
+       if (4 == evt.data){
+           //关闭重连
+           sse.close();
+       }
+    });
+
+
+</script>
+</html>

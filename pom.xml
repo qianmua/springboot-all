@@ -36,6 +36,8 @@
         <module>springboot-druid</module>
         <module>springboot-listener</module>
         <module>springboot-cache2</module>
+        <module>springboot-webflux</module>
+        <module>servlet-async</module>
     </modules>
 
     <dependencyManagement>
