@@ -1,0 +1,9 @@
+server:
+  port: 9091
+
+spring:
+  data:
+    mongodb:
+      host: 47.96.230.44
+      port: 27017
+      database: webflux
