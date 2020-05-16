@@ -35,6 +35,11 @@ public class NettyServer {
             //创建启动对象，配置参数
             ServerBootstrap bootstrap = new ServerBootstrap();
             // 绑定线程组
+            /*
+            * 绑定端口是异步操作
+            * 处理完 会调用相应的处理逻辑
+            *
+            * */
             bootstrap.group(boss , work)
                     // 服务器通道实现 boss 线程 用NioServerSocketChannel
                     .channel(NioServerSocketChannel.class)
@@ -59,7 +64,17 @@ public class NettyServer {
 
             //绑定端口同步
             //启动服务
+            /*
+            * 要是绑定端口成功，会触发监听器
+            * */
             ChannelFuture future = bootstrap.bind(6668).sync();
+            /*注册监听事件 监控*/
+            future.addListener( future1 -> {
+                if ( future1.isSuccess())
+                    System.out.println(" 监听 BIND 事件 SUCCESS PORT : 6668");
+                else
+                    System.out.println("FAIL");
+            });
 
             //监听关闭通道
             future.channel().closeFuture().sync();

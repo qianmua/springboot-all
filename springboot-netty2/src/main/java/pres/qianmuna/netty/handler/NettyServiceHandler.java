@@ -56,6 +56,36 @@ public class NettyServiceHandler extends ChannelInboundHandlerAdapter {
         * */
         //处理耗时，大量数据据请求 会导致服务端阻塞
         // 所以需要异步去执行
+
+        /*
+        * 异步模型
+        * netty 中的IO操作是异步的
+        * 每个异步结果不会直接返回结果 而是直接返回一个ChannelFuture
+        * 通过 future listener 机制 用户主动或者通过通知得到操作结果
+        *
+        * 即 在调用一个fun 的时候先返回一个 future 后面通过 future监控fun的处理
+        *
+        * future 表示异步的结果 可以检测执行是否成功
+        *
+        * 链式操作
+        *
+        * 读取 -> 处理（编码） -> 传输 -> 处理（解码） -》 操作
+        * 每步都对应一个handler
+        * 在handler处理中 可以使用 callback 或者 future 异步处理
+        *
+        * 当future 刚创建时 处于非完全机制  可以通过返回的 ChannelFuture 得到操作状态，注册监听函数执行完成后操作
+        *
+        * 状态：
+        * idDone 完成？
+        * isSuccess 成功？
+        * getCause 失败原因
+        * isChanneled 是否取消
+        * addListener 注册监听器
+        *
+        *
+        *
+        *
+        * */
         /*
         * 解决
         * */
