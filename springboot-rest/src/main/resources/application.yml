@@ -1,0 +1,14 @@
+server:
+  port: 9090
+
+password: ENC(Tve6SzodVsDL6x4ULHL8NlrGjetbBUxR)
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://${password}:27017/usertest
+
+jasypt:
+  encryptor:
+    password: 123456
+

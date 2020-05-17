@@ -43,6 +43,7 @@
         <module>springboot-netty-http</module>
         <module>springboot-jasypt</module>
         <module>springboot-data-jpa2</module>
+        <module>springboot-rest</module>
     </modules>
 
     <dependencyManagement>
