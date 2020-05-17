@@ -40,6 +40,8 @@
         <module>servlet-async</module>
         <module>springboot-webflux2</module>
         <module>springboot-webflux-client</module>
+        <module>springboot-netty-http</module>
+        <module>springboot-jasypt</module>
     </modules>
 
     <dependencyManagement>
