@@ -15,4 +15,5 @@ spring:
     hibernate:
       # 自动更新表
       ddl-auto: update
+    database: mysql
 

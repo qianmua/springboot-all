@@ -42,6 +42,7 @@
         <module>springboot-webflux-client</module>
         <module>springboot-netty-http</module>
         <module>springboot-jasypt</module>
+        <module>springboot-data-jpa2</module>
     </modules>
 
     <dependencyManagement>
