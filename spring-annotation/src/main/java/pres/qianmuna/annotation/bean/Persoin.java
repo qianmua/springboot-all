@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,6 +21,10 @@ import lombok.experimental.Accessors;
 @Accessors( chain = true)
 public class Persoin {
 
+    @Value("sasad")
     private String name;
+    // spel #{}
+    // ${} 取出配置
+    @Value("#{20-10}")
     private int age;
 }
