@@ -1,5 +1,6 @@
 package pres.qianmuna.async.async;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 @Async
 public class DemoAsync {
 
+//    @Autowired
     /**
      * 普通异步 无返回
      */

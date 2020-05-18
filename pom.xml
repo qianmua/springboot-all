@@ -44,6 +44,8 @@
         <module>springboot-jasypt</module>
         <module>springboot-data-jpa2</module>
         <module>springboot-rest</module>
+        <module>springboot-annotation</module>
+        <module>spring-annotation</module>
     </modules>
 
     <dependencyManagement>
@@ -53,6 +55,19 @@
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>2.2.6.RELEASE</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-mongodb</artifactId>
+                <version>2.2.6.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.melloware</groupId>
+                <artifactId>jasypt</artifactId>
+                <version>1.9.4</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
