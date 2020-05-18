@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-mvc</artifactId>
+    <artifactId>servlet-annotation</artifactId>
 
     <dependencies>
 
@@ -20,15 +20,6 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>5.2.5.RELEASE</version>
-        </dependency>
-
-
-
 
     </dependencies>
 

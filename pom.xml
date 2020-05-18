@@ -46,6 +46,7 @@
         <module>springboot-rest</module>
         <module>springboot-annotation</module>
         <module>spring-annotation</module>
+        <module>servlet-annotation</module>
     </modules>
 
     <dependencyManagement>

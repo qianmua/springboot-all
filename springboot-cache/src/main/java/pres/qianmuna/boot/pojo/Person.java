@@ -34,7 +34,7 @@ public class Person implements Serializable {
         this.age = age;
         this.address = address;
     }
-    public Iterable<Long> getId() {
+    public Long getId() {
         return id;
     }
     public void setId(Long id) {
