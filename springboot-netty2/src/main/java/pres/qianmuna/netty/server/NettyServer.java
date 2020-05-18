@@ -48,6 +48,8 @@ public class NettyServer {
                     //设置保持活动连接状态
                     .childOption(ChannelOption.SO_KEEPALIVE,true)
                     //可以用lambda优化
+//                    .channel() // 绑定到 boss
+                    // 绑定到work
                     .childHandler(new ChannelInitializer<SocketChannel>(){
                         //创建一个通道测试对象
                         //给pipeline设置处理器

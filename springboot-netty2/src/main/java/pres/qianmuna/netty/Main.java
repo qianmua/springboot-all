@@ -42,5 +42,33 @@ public class Main {
      * 每个NioChannel只会绑定一个NioEventLoop
      * 每个NioChannel绑定一个自己的pipeline
      *
+     *
+     * channel 不同协议 不同的阻塞通道 都有不同的channel对应
+     * NioSocketChannel 异步客户端
+     * NioServerSocketChannel 异步服务端
+     * 异步udp
+     * 异步客户端sctp
+     * 异步sctp服务端
+     *
+     * selector
+     * 管理channel 基于事件驱动
+     *
+     * channelHandler 处理IO事件
+     *  实现类 处理 出站入站事务
+     *  事件的驱动方向是客户端到服务端 这位 出站， 反之 则为入站
+     *  HandlePipeline 提供了handler 链的容器
+     *
+     * handler 构成了netty的核心
+     *
+     * pipeline
+     *
+     * channelPipeline 是一个handler 的集合 负责处理和拦截inBound 或者outBound的事件 相当于官场netty的链
+     *
+     *
+     *
+     *
+     *
+     *
+     *
      * */
 }
