@@ -62,7 +62,22 @@ public class Main {
      *
      * pipeline
      *
-     * channelPipeline 是一个handler 的集合 负责处理和拦截inBound 或者outBound的事件 相当于官场netty的链
+     * channelPipeline 是一个handler 的集合 负责处理和拦截inBound 或者outBound的事件 相当于关联netty的链
+     * 在双向链表里面放的是一个 handlerContext
+     * 还包含了解码器 ， 就是通过链表里面的
+     *
+     * 双向链表的每个节点就是ChannelHandlerContext
+     * ChannelHandlerContext又 关联了 channelHandler 和 绑定了对应的 pipeline
+     *
+     * 就是在节点中也能得到他的info
+     *
+     * EventLoopGroup
+     *
+     * unpooled netty提供操作缓冲区的
+     *
+     *
+     *
+     *
      *
      *
      *
