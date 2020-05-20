@@ -47,6 +47,7 @@
         <module>springboot-annotation</module>
         <module>spring-annotation</module>
         <module>servlet-annotation</module>
+        <module>springboot-netty-chat</module>
     </modules>
 
     <dependencyManagement>
