@@ -9,6 +9,8 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,6 +29,11 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
      */
     private static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
+
+    //使用hashMap添加
+    public static Map<String , Channel> channelMap = new HashMap<>();
+    // 添login
+    public static Map<User , Channel> channelMap2 = new HashMap<>();
     /**
      * 链接建立
      * 连接之后第一个执行
@@ -45,6 +52,12 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
          */
         channels.writeAndFlush("[client]" + channel.remoteAddress() + "link..\n");
         channels.add(channel);
+
+        channelMap.put("id" , channel);
+
+        // 用户 登录验证
+        //可以这样玩
+        channelMap2.put(new User("111" , "222") , channel);
 
 
     }
@@ -106,6 +119,9 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
         Channel channel = channelHandlerContext.channel();
 
         //loop channels 排除自己
+        /**
+         * 做 单独聊天的话 可以扩展
+         */
         channels.forEach( channel1 -> {
             //排除自己 转发
             if (channel1 != channel)
