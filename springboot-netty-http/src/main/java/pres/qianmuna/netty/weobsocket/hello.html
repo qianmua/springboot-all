@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>web socket netty chat</title>
+</head>
+<body>
+
+<form action="">
+
+    <label>
+        <span>input:</span>
+        <textarea name="message" style="height: 300px ; width: 300px;"></textarea>
+    </label>
+    <input type="button" value="send" onclick="send(this.form.message,value)">
+    <label for="resp">
+        <span>input:</span>
+    </label>
+    <textarea id="resp" style="height: 300px ; width: 300px" ></textarea>
+    <input type="button" value="refulsh" onclick="document.getElementById('resp').value=''">
+</form>
+
+</body>
+
+<script>
+
+    var socket;
+
+    //判断是否支持web socket
+    if (window.WebSocket){
+
+        socket = new WebSocket("ws://localhost:7000/test");
+
+        //跟channelRead0 一样
+        //读到msg
+        socket.onmessage = function (ev) {
+            var id = document.getElementById("resp");
+            id.value = id.value + "\n" + ev.data;
+        }
+
+        //连接开启
+        socket.onopen = function (ev) {
+            var id = document.getElementById("resp");
+            id.value = "link start";
+        }
+
+        //连接关闭
+        socket.onclose = function (ev) {
+            var id = document.getElementById("resp");
+            id.value = id.value + "\n" +"link close.....";
+        }
+
+    } else {
+        alert("?");
+    }
+
+
+    /**
+     *  发送消息到服务器
+     * @param msg
+     */
+    function send(msg){
+        if (!window.socket) return;
+        if (socket.readyState == WebSocket.OPEN){
+            //发送
+            socket.send(msg);
+        }else {
+            alert("请开启连接！");
+        }
+    }
+</script>
+</html>
