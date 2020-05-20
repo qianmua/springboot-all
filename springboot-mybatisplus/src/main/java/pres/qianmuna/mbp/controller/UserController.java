@@ -29,8 +29,11 @@ import java.util.Map;
 @RestController
 public class UserController {
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
+
+    public UserController(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     /**
      * select all
@@ -69,7 +72,7 @@ public class UserController {
      * @param id
      * @return
      */
-    @GetMapping("/select/search")
+    @GetMapping("/select/search/{id}")
     public List<Users> querySearchById(@PathVariable("id") Long id){
         return userMapper.selectBatchIds(Arrays.asList(1,2,3));
     }
@@ -117,8 +120,7 @@ public class UserController {
                 .isNotNull("email")
                 .ge("age" , 10)
                 .eq("name" , "hu")
-                .between("age" , 20 , 30)
-                ;
+                .between("age" , 20 , 30);
 
         userMapper.selectList(wrapper);
         userMapper.selectOne(wrapper);
