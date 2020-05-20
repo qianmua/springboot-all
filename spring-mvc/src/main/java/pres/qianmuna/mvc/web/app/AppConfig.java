@@ -25,7 +25,7 @@ import pres.qianmuna.mvc.web.interceptor.MyInterceptor;
  * 定制 mvc 实现无配置
  *
  */
-@ComponentScan(value = "" , includeFilters = {
+@ComponentScan(value = "pres,qianmuna.mvc.web" , includeFilters = {
         @ComponentScan.Filter(type = FilterType.ANNOTATION , classes = {Controller.class})
 },useDefaultFilters = false)
 @EnableWebMvc

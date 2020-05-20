@@ -15,6 +15,47 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringbootStartDemoApplication {
 
+    /**
+     * @SpringBootApplication
+     *
+     * @SpringBootConfiguration = @Configuration
+     *
+     * @ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
+     *                @Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
+     *                 主次容器扫描
+     *
+     *
+     * @EnableAutoConfiguration 实现自动配置核心！
+     * @AutoConfigurationPackage 配置自动扫描包 ， 扫描当前类 下面 所有包
+     * @Import(AutoConfigurationImportSelector.class)
+     * AutoConfigurationImportSelector.class 真正实现自动配置 和 ImportSelector （spring的扩展类） 继承关系
+     *
+     * selectImports() 方法 返回一个String[] 内容时 返回类名形式的String字符串 然后通过反射加载到spring ioc
+     *
+     * 自动配置 就是 把所有javaConfig 提前帮你写好 然后 加载到spring ioc
+     * javaConfig 在autoConfigure这个模块里面
+     *
+     * 他回去扫描 mata-inf spring.factories
+     *
+     * selectImports() 会去 扫描 这个 spring.factories文件
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     * @param args
+     */
+
     public static void main(String[] args) {
 
         /**
