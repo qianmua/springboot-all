@@ -1,0 +1,12 @@
+server:
+  port: 9091
+
+
+
+dubbo:
+  application:
+    name: user-consumer
+  registry:
+    address: zookeeper://127.0.0.1:2181
+
+

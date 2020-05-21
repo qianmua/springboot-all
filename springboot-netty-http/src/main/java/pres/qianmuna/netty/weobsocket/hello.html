@@ -36,19 +36,19 @@
         socket.onmessage = function (ev) {
             var id = document.getElementById("resp");
             id.value = id.value + "\n" + ev.data;
-        }
+        };
 
         //连接开启
         socket.onopen = function (ev) {
             var id = document.getElementById("resp");
             id.value = "link start";
-        }
+        };
 
         //连接关闭
         socket.onclose = function (ev) {
             var id = document.getElementById("resp");
             id.value = id.value + "\n" +"link close.....";
-        }
+        };
 
     } else {
         alert("?");
@@ -61,7 +61,7 @@
      */
     function send(msg){
         if (!window.socket) return;
-        if (socket.readyState == WebSocket.OPEN){
+        if (socket.readyState === WebSocket.OPEN){
             //发送
             socket.send(msg);
         }else {
