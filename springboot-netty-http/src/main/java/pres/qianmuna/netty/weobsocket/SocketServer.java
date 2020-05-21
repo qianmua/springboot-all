@@ -44,6 +44,43 @@ public class SocketServer {
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
 
+                            /*
+                            * 数据在网络中传输的是 二进制码
+                            *
+                            * 所以需要编解码
+                            *
+                            * 客户端 数据 -》 编码 -》 网络传输（二进制字节码）
+                            *
+                            * 服务端 得到二进制数据 -》 解码 -》 数据
+                            *
+                            * netty提供的编码器
+                            * StringEncoder 对字符串
+                            * ObjectEncoder 对java对象编码
+                            *
+                            * 问题：
+                            * netty 底层使用的是还是java序列化，效率不高
+                            * 无法跨程序
+                            * 序列化体积大
+                            * 性能低
+                            *
+                            * 解决方案
+                            * google的Protobuf
+                            *
+                            * Protobuf
+                            * 可以用来序列化，适合做数据存储或者RPC数据交换
+                            * 是以message方式管理数据
+                            *
+                            * 支持跨平台 跨语言
+                            *
+                            * 高性能高可靠
+                            *
+                            * 使用示意图
+                            * 数据.protoc -> protoc.exe -> 数据.java -> 编码protobuf  -> 传输
+                            * protobuf解码 -> 使用
+                            *
+                            *
+                            *
+                            * */
 
                             //基于http协议  使用http 编解码器
                             pipeline.addLast(new HttpServerCodec());
@@ -63,6 +100,13 @@ public class SocketServer {
                              * WebSocketServerProtocolHandler 将http协议升级为 ws协议 保持长连接
                              *
                              * 参数path 就是 接口了 ， 可以试别
+                             *
+                             * http协议升级为 ws 协议？
+                             *
+                             * 通过一个状态码 101 转换
+                             * 将协议提升为ws协议
+                             *
+                             *
                              */
                             pipeline.addLast(new WebSocketServerProtocolHandler("/test"));
 

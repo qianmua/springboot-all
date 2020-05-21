@@ -1,0 +1,37 @@
+syntax = "proto3"; //协议版本
+option optimize_for = SPEED; // 加快解析
+option java_package="pres.qianmuna.netty.codec"; //指定到那个包下面
+option java_outer_classname = "MessagePOJO"; //生成的外部类名，文件名
+//message 管理数据
+
+// 可以使用message管理message
+message AllMessage{
+
+    //定义一个枚举
+    enum DataType{
+        studentType = 0; //在proto3 enum 规范编号从0开始
+        WorkerType = 1;
+    }
+
+    //标识 传递的是那个枚举 不是枚举里面的1
+    //关联的是 枚举 DataType 中的第一个属性
+    DataType data_type = 1;
+
+    //表示每次枚举最多出现一个 ， 节省空间的
+    // DataType 表示enum 中第一个类型
+    //oneof 表示 出现的 第二个类型 或者 第三个类型
+    oneof dataBody{
+        Student student = 2;
+        Worker worker =3;
+    }
+}
+message Student{ //在StudentPOJO生成一个内部类Student 就是发送的Student对象
+    int32 id = 1; //1表示属性序号 不是值
+    string name =2 ;
+}
+
+message Worker{
+    string name = 1;
+    int32 age = 2;
+    string address = 3;
+}
