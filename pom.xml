@@ -49,6 +49,7 @@
         <module>servlet-annotation</module>
         <module>springboot-netty-chat</module>
         <module>springboot-dubbo</module>
+        <module>springboot-fileupload</module>
     </modules>
 
     <dependencyManagement>
