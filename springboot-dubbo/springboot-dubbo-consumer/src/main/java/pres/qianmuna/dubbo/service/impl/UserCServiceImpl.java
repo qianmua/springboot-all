@@ -1,6 +1,7 @@
 package pres.qianmuna.dubbo.service.impl;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.apache.dubbo.rpc.cluster.Constants;
 import org.springframework.stereotype.Component;
 import pres.qianmuna.dubbo.service.UserCService;
 import pres.qianmuna.dubbo.service.UserService;
@@ -20,7 +21,21 @@ import java.util.Map;
 @Component
 public class UserCServiceImpl implements UserCService {
 
-    @Reference
+    /**
+     * Reference
+     * 服务之间检查
+     * check
+     * true 检测 如果没有 检测到服务 会启动失败 // 要是循环依赖呢？
+     * false 关闭检测  在服务上线时会自动链接
+     *
+     * loadbalance
+     * 负载均衡机制
+     *
+     * 默认  轮询
+     *
+     */
+    //注册中心引用服务
+    @Reference( check = false , loadbalance = Constants.LOADBALANCE_KEY)
     private UserService userService;
 
 
