@@ -76,6 +76,13 @@ public class Main {
      * unpooled netty提供操作缓冲区的
      *
      *
+     * channelHandler 充当了 处理入站 出战 逻辑的容器
+     *
+     * channelPipeline 充当了 管理这些容器 的链接
+     *
+     *
+     *
+     *
      *
      *
      *
