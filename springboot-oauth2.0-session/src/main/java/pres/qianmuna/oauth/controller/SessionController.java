@@ -32,4 +32,15 @@ public class SessionController {
         return "SUCCESS";
     }
 
+    @GetMapping("/r/r1")
+    public String r1(){
+        return "R1";
+    }
+
+
+    @GetMapping("/r/r2")
+    public String r2(){
+        return "R2";
+    }
+
 }

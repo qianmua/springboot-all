@@ -7,7 +7,9 @@ import pres.qianmuna.oauth.model.UserDto;
 import pres.qianmuna.oauth.service.AuthSessionService;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,7 +48,12 @@ public class AuthSessionServiceImpl implements AuthSessionService {
 
     private Map<String , UserDto> userMap = new HashMap<>();
     {
-        userMap.put("101" , new UserDto("111" , "222","222","444"));
-        userMap.put("202" , new UserDto("222222" , "222","222","444"));
+
+        Set<String> au1 = new HashSet<>();
+        au1.add("1");
+        Set<String> au2 = new HashSet<>();
+        au2.add("2");
+        userMap.put("101" , new UserDto("111" , "222","222","444", au1) );
+        userMap.put("202" , new UserDto("222222" , "222","222","444",au2) );
     }
 }

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Set;
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -24,4 +26,7 @@ public class UserDto {
     private String userName;
     private String fullName;
     private String tel;
+
+
+    private Set<String> auth;
 }
