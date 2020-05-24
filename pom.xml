@@ -52,6 +52,7 @@
         <module>springboot-fileupload</module>
         <module>springboot-netty-rpc</module>
         <module>springboot-oauth2.0-session</module>
+        <module>springboot-oauth2.0-security</module>
     </modules>
 
     <dependencyManagement>
