@@ -63,11 +63,11 @@ public class SpringbootStartDemoApplication {
          * //先创建构造器 在run
          * new SpringApplication(primarySources).run(args);
          *
-         * public SpringApplication(Class<?>... primarySources) {
+         * publics SpringApplication(Class<?>... primarySources) {
          * 		this(null, primarySources);
          * }
          * //加载bean
-         * public SpringApplication(ResourceLoader resourceLoader, Class<?>... primarySources) {
+         * publics SpringApplication(ResourceLoader resourceLoader, Class<?>... primarySources) {
          * 		this.resourceLoader = resourceLoader;
          * 		Assert.notNull(primarySources, "PrimarySources must not be null");
          * 		this.primarySources = new LinkedHashSet<>(Arrays.asList(primarySources));
@@ -81,7 +81,7 @@ public class SpringbootStartDemoApplication {
          * }
          *
          * //run
-         * public ConfigurableApplicationContext run(String... args) {
+         * publics ConfigurableApplicationContext run(String... args) {
          * 		StopWatch stopWatch = new StopWatch();
          * 		stopWatch.start();
          * 		ConfigurableApplicationContext context = null;

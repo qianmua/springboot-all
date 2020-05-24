@@ -48,7 +48,7 @@ public class MyBatisPlusConfig {
      * 逻辑删 好像不用了
      */
     /*@Bean
-    public ISqlInjector sqlInjector(){
+    publics ISqlInjector sqlInjector(){
         return new LogicSqlInjector();
     }
 */

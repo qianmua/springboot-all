@@ -75,7 +75,7 @@ public class Test1Aspect {
      *
      * 为什么代理对象必须是一个接口？
      * java 是单继承多实现的 ， 他已经继承了Proxy 类
-     * public final class $Proxy extends Proxy implements UserBean
+     * publics final class $Proxy extends Proxy implements UserBean
      *
      *
      *

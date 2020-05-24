@@ -24,7 +24,7 @@ public class UserController {
     @Resource
     private UserService userService;
 /*
-    public UserController(UserService userService) {
+    publics UserController(UserService userService) {
         this.userService = userService;
     }*/
 

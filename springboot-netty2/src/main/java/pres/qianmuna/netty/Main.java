@@ -81,6 +81,13 @@ public class Main {
      * channelPipeline 充当了 管理这些容器 的链接
      *
      *
+     * netty 启动
+     *
+     * 追踪到 ， 调用 doBind 方法 导无限循环 去监听事件段
+     *
+     *
+     *
+     *
      *
      *
      *

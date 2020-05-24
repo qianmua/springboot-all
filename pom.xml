@@ -50,6 +50,7 @@
         <module>springboot-netty-chat</module>
         <module>springboot-dubbo</module>
         <module>springboot-fileupload</module>
+        <module>springboot-netty-rpc</module>
     </modules>
 
     <dependencyManagement>
