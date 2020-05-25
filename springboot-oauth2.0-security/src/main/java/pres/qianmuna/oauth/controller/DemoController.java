@@ -20,4 +20,8 @@ public class DemoController {
     public String a1(){
         return "A1";
     }
+    @GetMapping("/a/2")
+    public String a2(){
+        return "A2";
+    }
 }

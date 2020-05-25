@@ -5,11 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * 查询用户
      * @return
      */
-    @Bean
+    /*@Bean
     @Override
     protected UserDetailsService userDetailsService() {
         // 内存 形式 创建用户
@@ -38,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         manager.createUser(User.withUsername("admin").password("123").authorities("1").build());
 
         return manager;
-    }
+    }*/
 
     /**
      * 密码 比对 编码 校验
@@ -46,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
     /**
@@ -58,6 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 // 拦截 /r/** 下面所有请求
+                .antMatchers("/r/1").hasAnyAuthority("1")
+                .antMatchers("/r/2").hasAnyAuthority("2")
                 .antMatchers("/r/**").authenticated()
                 .anyRequest().permitAll()
                 .and()

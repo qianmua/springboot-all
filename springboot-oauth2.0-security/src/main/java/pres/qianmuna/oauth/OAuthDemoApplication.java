@@ -15,6 +15,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class OAuthDemoApplication {
 
+    /*
+    * security 的 三种 权限 投票规则
+    *
+    * */
+
     public static void main(String[] args) {
         SpringApplication.run(OAuthDemoApplication.class ,args);
     }
