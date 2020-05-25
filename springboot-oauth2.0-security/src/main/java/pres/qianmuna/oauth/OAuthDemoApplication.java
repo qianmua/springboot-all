@@ -18,6 +18,9 @@ public class OAuthDemoApplication {
     /*
     * security 的 三种 权限 投票规则
     *
+    *
+    * 小心 csrf
+    *
     * */
 
     public static void main(String[] args) {

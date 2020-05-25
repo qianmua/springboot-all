@@ -24,4 +24,20 @@ public class DemoController {
     public String a2(){
         return "A2";
     }
+
+    @GetMapping("/login-success")
+    public String success(){
+        return "SUCCESS";
+    }
+
+
+    @GetMapping("/loginPage")
+    public String loginPage(){
+        return "page";
+    }
+
+    @GetMapping("/login")
+    public String login(String name , String password){
+        return "success";
+    }
 }
