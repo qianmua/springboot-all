@@ -53,6 +53,7 @@
         <module>springboot-netty-rpc</module>
         <module>springboot-oauth2.0-session</module>
         <module>springboot-oauth2.0-security</module>
+        <module>springboot-quartZ2</module>
     </modules>
 
     <dependencyManagement>
