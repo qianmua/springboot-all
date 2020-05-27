@@ -1,9 +1,14 @@
 package pres.qianmuna.oauth.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import pres.qianmuna.oauth.mapper.UserMapper;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,6 +20,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * @time 22:34
  */
 public class DataUserService implements UserDetailsService {
+
+
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 根据 账号 查询 用户
@@ -30,7 +39,13 @@ public class DataUserService implements UserDetailsService {
         UserDetails build = User.withUsername("1").password("1").authorities("1").build();
 
         //从 数据库中得到 用户名 密码
+        List<Map<String, Object>> maps = userMapper.queryByUserName(username);
+        UserDetails build2 = User.withUsername(maps.get(0).get("name").toString()).
+                password(maps.get(0).get("password").toString())
+                .authorities("1").build();
 
-        return build;
+
+
+        return build2;
     }
 }
