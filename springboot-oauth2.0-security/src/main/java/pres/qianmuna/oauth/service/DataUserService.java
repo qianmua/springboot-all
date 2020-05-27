@@ -26,8 +26,10 @@ public class DataUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         // password 用 加密 over
+        // 模拟
         UserDetails build = User.withUsername("1").password("1").authorities("1").build();
 
+        //从 数据库中得到 用户名 密码
 
         return build;
     }

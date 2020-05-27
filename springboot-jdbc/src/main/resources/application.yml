@@ -1,0 +1,9 @@
+server:
+  port: 9090
+
+spring:
+  datasource:
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 123456
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC%2B8
