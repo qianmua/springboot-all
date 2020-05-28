@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -54,15 +55,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                // 拦截 /r/** 下面所有请求
-                .antMatchers("/r/1").hasAnyAuthority("1")
-                .antMatchers("/r/2").hasAnyAuthority("2")
-                .antMatchers("/r/**").authenticated()
+                // 拦截 /a/** 下面所有请求
+                .antMatchers("/a/1").hasAnyAuthority("1")
+                .antMatchers("/a/2").hasAnyAuthority("2")
+                .antMatchers("/a/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
+                // 登陆页 定制 提交
                 .formLogin()
                 .loginPage("/loginPage")
                 .loginProcessingUrl("/login")
-                .successForwardUrl("/login-success");
+                .successForwardUrl("/login-success")
+                // 会话 管理 创建 规则
+                // session
+                // 分布式 token 保存 令牌
+                // 还有 安全会话等
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .and()
+                // 退出登录
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/logout-success");
     }
 }

@@ -19,7 +19,7 @@ public class Test {
 
     @org.junit.Test
     public void text(){
-        String haspw = BCrypt.hashpw("123" , BCrypt.gensalt());
+        String haspw = BCrypt.hashpw("123456" , BCrypt.gensalt());
 
         System.out.println(haspw);
     }

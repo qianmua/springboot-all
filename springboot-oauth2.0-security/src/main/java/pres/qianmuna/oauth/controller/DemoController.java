@@ -1,7 +1,9 @@
 package pres.qianmuna.oauth.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pres.qianmuna.oauth.tools.UserTools;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,19 +27,16 @@ public class DemoController {
         return "A2";
     }
 
-    @GetMapping("/login-success")
+    @PostMapping("/login-success")
     public String success(){
-        return "SUCCESS";
+        // 得到 用户 身份
+        return new UserTools().getuserName() + " \t\tSUCCESS";
     }
 
+    @PostMapping("/login")
+    public String login(String username , String password){
+        System.out.println("提交 到 login？？？");
 
-    @GetMapping("/loginPage")
-    public String loginPage(){
-        return "page";
-    }
-
-    @GetMapping("/login")
-    public String login(String name , String password){
         return "success";
     }
 }

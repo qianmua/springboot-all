@@ -17,7 +17,7 @@ import java.util.Map;
 public interface UserMapper {
 
 
-    @Select("select * from users where  name = #{userName} ")
+    @Select("select * from users where  uid = #{userName} ")
     List<Map<String , Object>> queryByUserName(String userName);
 
 
