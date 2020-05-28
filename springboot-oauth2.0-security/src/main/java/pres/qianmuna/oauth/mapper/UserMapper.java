@@ -17,8 +17,22 @@ import java.util.Map;
 public interface UserMapper {
 
 
+    /**
+     * 查询 用户
+     * @param userName
+     * @return
+     */
     @Select("select * from users where  uid = #{userName} ")
     List<Map<String , Object>> queryByUserName(String userName);
+
+    /**
+     * 查询 权限
+     * repertory
+     * @param id
+     * @return
+     */
+    @Select(" select repertory from product ")
+    List<String> queryRoteByUserId(Long id);
 
 
 }

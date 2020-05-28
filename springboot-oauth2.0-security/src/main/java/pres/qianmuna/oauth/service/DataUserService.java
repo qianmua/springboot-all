@@ -42,16 +42,25 @@ public class DataUserService implements UserDetailsService {
         UserDetails build = User.withUsername("1").password("1").authorities("1").build();
 
         System.out.println("userName ->.............." + username);
+        System.out.println("//================================//");
 
         //从 数据库中得到 用户名 密码
         List<Map<String, Object>> maps = userMapper.queryByUserName(username);
         // err
-        maps.forEach(v1 -> {
-            v1.forEach( (v2 , v3) -> System.out.println(v2 + " -----" + v3));
-        });
-        UserDetails build2 = User.withUsername(maps.get(0).get("name").toString()).
+        maps.forEach(v1 -> v1.forEach( (v2 , v3) -> System.out.println(v2 + " -----" + v3)));
+
+        // 得到 权限
+        List<String> repertory = userMapper.queryRoteByUserId(1L);
+        System.out.println("//================================//");
+        repertory.forEach(System.out::println);
+//        repertory.forEach( stringStringMap -> stringStringMap.forEach((s, s2) -> System.out.println(s + "==========" + s2)));
+
+        // list to String
+        String[] array = repertory.toArray(new String[0]);
+        // 生成 校验 用户
+        UserDetails build2 = User.withUsername(maps.get(0).get("uid").toString()).
                 password(maps.get(0).get("password").toString())
-                .authorities("1").build();
+                .authorities(array).build();
 
 
 

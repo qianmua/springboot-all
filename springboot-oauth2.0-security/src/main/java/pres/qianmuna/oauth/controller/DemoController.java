@@ -1,5 +1,6 @@
 package pres.qianmuna.oauth.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,10 +20,15 @@ public class DemoController {
 
 
     @GetMapping("/a/1")
+    // 拥有 p1 权限 即可访问
+    @PreAuthorize("hasAnyAuthority('99')")
     public String a1(){
         return "A1";
     }
+
+
     @GetMapping("/a/2")
+    @PreAuthorize("hasAnyAuthority('p2')")
     public String a2(){
         return "A2";
     }

@@ -2,6 +2,7 @@ package pres.qianmuna.oauth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -20,6 +21,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @EnableWebSecurity
 @Configuration
+// 开启 方法拦截 的secured
+// 权限验证
+@EnableGlobalMethodSecurity( securedEnabled = true  , prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
@@ -56,9 +60,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 // 拦截 /a/** 下面所有请求
-                .antMatchers("/a/1").hasAnyAuthority("1")
+                /*
+                * 基于 web 授权
+                * //
+                * 拦截 请求地址 进行 授权验证
+                *
+                * // 基于 方法 授权
+                * //
+                * 拦截从 controller 拦截
+                * */
+                // 使用 方法 拦截
+                // 这里 是 基于 web拦截
+                /*.antMatchers("/a/1").hasAnyAuthority("1","2")
+                // 拥有 1 即可 访问
+                .antMatchers("/a/3").hasAuthority("1")
                 .antMatchers("/a/2").hasAnyAuthority("2")
-                .antMatchers("/a/**").authenticated()
+                .antMatchers("/a/**").authenticated()*/
                 .anyRequest().permitAll()
                 .and()
                 // 登陆页 定制 提交
