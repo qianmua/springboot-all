@@ -17,9 +17,6 @@ public final class UserTools {
 
     /**
      * 会话控制
-     *
-     *
-     *
      * @return
      */
     public String getuserName(){
