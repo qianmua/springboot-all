@@ -57,6 +57,7 @@
         <module>springboot-jdbc</module>
         <module>springboot-rocketmq</module>
         <module>springboot-shiro</module>
+        <module>spring-1</module>
     </modules>
 
     <dependencyManagement>
