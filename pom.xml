@@ -58,6 +58,7 @@
         <module>springboot-rocketmq</module>
         <module>springboot-shiro</module>
         <module>spring-1</module>
+        <module>kotlin-mybatis</module>
     </modules>
 
     <dependencyManagement>

@@ -44,7 +44,6 @@ public class MyTest2 {
         /*service -> */
         InfoService infoService2 = (InfoService) applicationContext.getBean("infoService");
         /*  okokokokok */
-
     }
 
 
