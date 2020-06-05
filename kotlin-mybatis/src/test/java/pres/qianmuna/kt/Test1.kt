@@ -2,7 +2,11 @@ package pres.qianmuna.kt
 
 import org.junit.Test
 import pres.qianmuna.kt.config.MybatisFactoryConfig
+import pres.qianmuna.kt.entity.BillModel
+import pres.qianmuna.kt.entity.ProviderModel
 import pres.qianmuna.kt.entity.UserModel
+import pres.qianmuna.kt.mapper.BillMapping
+import pres.qianmuna.kt.mapper.ProviderMapping
 import pres.qianmuna.kt.mapper.UserMapping
 
 /**
@@ -16,16 +20,94 @@ import pres.qianmuna.kt.mapper.UserMapping
 class Test1 {
 
 
-
+    /**
+     * 查找
+     */
     @Test
     fun m1(){
 
         //select user by id
         val sqlSession = MybatisFactoryConfig.sqlSession
 
-        var one = sqlSession.selectOne<UserModel>("pres.qianmuna.kt.mapper.UserMapping.queryUserById", 1L)
+        val mapper = sqlSession.getMapper(BillMapping::class.java)
 
-        println(one)
+        val mutableList = mapper.queryBillByNameAndProviderIdAndIsPay("%油%", 7, 2)
+
+        println(mutableList)
+
+        MybatisFactoryConfig.closeSqlSession
+
+    }
+
+    /**
+     * 添加
+     */
+    @Test
+    fun m2(){
+
+        //select user by id
+        val sqlSession = MybatisFactoryConfig.sqlSession
+
+        val mapper = sqlSession.getMapper(ProviderMapping::class.java)
+
+        val provier = ProviderModel(0,"1","1",
+                "1","1","1","1","1","1")
+        var i = mapper.addProvider(provier)
+
+        //
+        //提交啊
+        sqlSession.commit()
+
+        println(i)
+
+        MybatisFactoryConfig.closeSqlSession
+
+    }
+
+    /**
+     * 修改
+     */
+    @Test
+    fun m3(){
+
+        //select user by id
+        val sqlSession = MybatisFactoryConfig.sqlSession
+
+        val mapper = sqlSession.getMapper(ProviderMapping::class.java)
+
+        val provier = ProviderModel(19,"777777","666",
+                "7777","1","1","1","1","1")
+        var i = mapper.updateProvider(provier)
+
+        //
+        //提交啊
+        sqlSession.commit()
+
+        println(i)
+
+        MybatisFactoryConfig.closeSqlSession
+
+    }
+
+    /**
+     * 删除
+     */
+    @Test
+    fun m4(){
+
+        //select user by id
+        val sqlSession = MybatisFactoryConfig.sqlSession
+
+        val mapper = sqlSession.getMapper(ProviderMapping::class.java)
+
+        var i = mapper.deleteProviderById(20L)
+        //
+        //提交啊
+        sqlSession.commit()
+
+        println(i)
+
+        MybatisFactoryConfig.closeSqlSession
 
     }
 }

@@ -1,5 +1,7 @@
 package pres.qianmuna.kt
 
+import pres.qianmuna.kt.provider.ProviderSqlUpdate
+
 
 /**
 @author HJC
@@ -9,3 +11,6 @@ package pres.qianmuna.kt
 谦谦君子 卑以自牧也
  */
 
+
+fun main() {
+}

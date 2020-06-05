@@ -1,5 +1,7 @@
 package pres.qianmuna.kt.entity
 
+import java.sql.Date
+
 /**
 @author HJC
 @date 2020/6/4  17:11
@@ -8,18 +10,18 @@ package pres.qianmuna.kt.entity
 谦谦君子 卑以自牧也
  */
 
-class ProviderModel (private val id:Long?,
-                     private val proCode:String?,
-                     private val proName:String?,
-                     private val proDesc:String?,
-                     private val proContact:String?,
-                     private val proPhone:String?,
-                     private val proAddress:String?,
-                     private val proFax:String?,
-                     private val createdBy:String?,
-                     private val creationDate:String?,
-                     private val modifyDate:String?,
-                     private val modifyBy:String? ){
+class ProviderModel (var id:Long? = null,
+                     var proCode:String?= null,
+                     var proName:String?= null,
+                     var proDesc:String?= null,
+                     var proContact:String?= null,
+                     var proPhone:String?= null,
+                     var proAddress:String?= null,
+                     var proFax:String?= null,
+                     var createdBy:String?= null,
+                     var creationDate:Date? = null,
+                     private var modifyDate:Date? = null,
+                     var modifyBy:String? = null ){
 
 
     override fun toString(): String {

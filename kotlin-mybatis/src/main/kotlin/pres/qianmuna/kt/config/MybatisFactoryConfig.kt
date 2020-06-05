@@ -19,6 +19,7 @@ class MybatisFactoryConfig private constructor(){
 
         // sqlSession 事务 自动化提交
         // 默认 false
+        // 关闭后 需要 手动提交
         val sqlSession:SqlSession by lazy (LazyThreadSafetyMode.SYNCHRONIZED) { factory.openSession(false) }
         //close
         val closeSqlSession = fun() = sqlSession.close()
