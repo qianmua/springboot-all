@@ -1,0 +1,6 @@
+# Initializers
+org.springframework.context.ApplicationContextInitializer=\
+pres.qianmuna.start.listener.HelloApplicationContextInitializer
+
+org.springframework.boot.SpringApplicationRunListener=\
+pres.qianmuna.start.listener.HelloSpringApplicationRunListener

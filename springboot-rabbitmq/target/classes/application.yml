@@ -1,0 +1,11 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: springboot-rabbitmq-demo
+  rabbitmq:
+    host:
+    port:
+    username:
+    password:
+    virtual-host:

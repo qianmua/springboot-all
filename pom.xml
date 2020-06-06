@@ -59,6 +59,7 @@
         <module>springboot-shiro</module>
         <module>spring-1</module>
         <module>kotlin-mybatis</module>
+        <module>spring-s-m</module>
     </modules>
 
     <dependencyManagement>

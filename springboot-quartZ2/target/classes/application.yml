@@ -1,0 +1,9 @@
+server:
+  port: 9090
+
+
+# 任务 调度 配置
+spring:
+  quartz:
+    # name
+    scheduler-name: defaultName

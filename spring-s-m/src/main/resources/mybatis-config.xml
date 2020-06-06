@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+<!--    <properties resource="config/database.properties" />-->
+
+    <!-- 实体类起别名-->
+    <typeAliases>
+        <package name="pres.qianmuna.kt.entity"/>
+    </typeAliases>
+
+    <!--控制 mybatis 全局-->
+    <!--<settings>
+        &lt;!&ndash;mybatis 输出 日志&ndash;&gt;
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    &lt;!&ndash;环境&ndash;&gt;
+    <environments default="development">
+    <environment id="development">
+        &lt;!&ndash; 配置事务管理，采用jdbc的事务管理 &ndash;&gt;
+        <transactionManager type="JDBC" />
+        &lt;!&ndash; mybatis自带的数据源 , JNDI:基于tomcat的数据源 &ndash;&gt;
+        <dataSource type="POOLED">
+            <property name="driver" value="${driver}"/>
+            <property name="url" value="${url}"/>
+            <property name="username" value="${user}"/>
+            <property name="password" value="${password}"/>
+        </dataSource>
+    </environment>
+</environments>
+
+    &lt;!&ndash;mapper 路径&ndash;&gt;
+    <mappers>
+        <package name="mapper"/>
+    </mappers>-->
+</configuration>
