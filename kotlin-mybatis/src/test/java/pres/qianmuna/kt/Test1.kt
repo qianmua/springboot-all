@@ -75,7 +75,7 @@ class Test1 {
 
         val mapper = sqlSession.getMapper(ProviderMapping::class.java)
 
-        val provier = ProviderModel(19,"777777","666",
+        val provier = ProviderModel(21,"8888","666",
                 "7777","1","1","1","1","1")
         var i = mapper.updateProvider(provier)
 
@@ -100,8 +100,8 @@ class Test1 {
 
         val mapper = sqlSession.getMapper(ProviderMapping::class.java)
 
-        var i = mapper.deleteProviderById(20L)
-        //
+        val i = mapper.deleteProviderById(21L)
+
         //提交啊
         sqlSession.commit()
 
