@@ -110,5 +110,27 @@ class Test1 {
         MybatisFactoryConfig.closeSqlSession
 
     }
+
+    /**
+     * 查找用户 地址
+     */
+    @Test
+    fun m5(){
+
+        //select user by id
+        val sqlSession = MybatisFactoryConfig.sqlSession
+
+        val mapper = sqlSession.getMapper(UserMapping::class.java)
+
+        var list = mapper.queryUserAddress2()
+
+        list?.forEach { println(it) }
+
+        //提交啊
+
+
+        MybatisFactoryConfig.closeSqlSession
+
+    }
 }
 

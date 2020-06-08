@@ -1,6 +1,5 @@
 package pres.qianmuna.kt
 
-import pres.qianmuna.kt.provider.ProviderSqlUpdate
 
 
 /**
@@ -13,4 +12,13 @@ import pres.qianmuna.kt.provider.ProviderSqlUpdate
 
 
 fun main() {
+
+    val v1:Array<Char> = arrayOf('A' , 'B' , 'C')
+
+    val v2:Array<Byte> = Array(3){ v1[it].toByte() }
+
+    v2.forEach { println(it) }
+
+
+
 }

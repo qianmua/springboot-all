@@ -1,8 +1,7 @@
 package pres.qianmuna.kt.mapper
 
-import org.apache.ibatis.annotations.Mapper
-import org.apache.ibatis.annotations.Param
-import org.apache.ibatis.annotations.Select
+import org.apache.ibatis.annotations.*
+import org.apache.ibatis.mapping.FetchType
 import pres.qianmuna.kt.entity.UserModel
 
 /**
@@ -21,6 +20,28 @@ interface UserMapping {
      */
     @Select("select * from smbms_user where id = #{id}")
     fun queryUserById(@Param("id") v1: Long): UserModel?
+
+
+    @Select("""
+        select u.id , contact , addressDesc , tel , postCode
+        from smbms_user u , smbms_address a
+        where u.id = a.userId
+    """)
+    fun queryUserAddress(): MutableList<Map<String , Any>>?
+
+    @Select("""
+        select u.id 
+        from smbms_user u , smbms_address a
+        where u.id = a.userId
+       
+    """)
+    @Results(id = "res1" ,value = [
+        Result(id = true, column = "id", property = "id"),
+        Result(property = "addressModel"  ,
+                column = "id" ,
+                many = Many(select = "pres.qianmuna.kt.mapper.AddressMapping.queryAddressByUserid"))
+    ])
+    fun queryUserAddress2(): MutableList<UserModel>?
 
 
 }
