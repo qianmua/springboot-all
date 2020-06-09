@@ -60,6 +60,7 @@
         <module>spring-1</module>
         <module>kotlin-mybatis</module>
         <module>spring-s-m</module>
+        <module>spring-s-m-2</module>
     </modules>
 
     <dependencyManagement>
