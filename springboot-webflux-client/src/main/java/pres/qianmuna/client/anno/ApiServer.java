@@ -15,6 +15,7 @@ import java.lang.annotation.Target;
  * @time 18:50
  */
 @Target( ElementType.TYPE)
+// 运行时
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ApiServer {
 

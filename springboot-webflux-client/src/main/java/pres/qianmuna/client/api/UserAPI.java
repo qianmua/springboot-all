@@ -1,5 +1,6 @@
 package pres.qianmuna.client.api;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import pres.qianmuna.client.anno.ApiServer;
 import pres.qianmuna.client.entity.User;
@@ -16,6 +17,7 @@ import reactor.core.publisher.Flux;
  */
 
 @ApiServer("http://localhost:9090/user")
+@Repository
 public interface UserAPI {
 
     @GetMapping("/queryall")

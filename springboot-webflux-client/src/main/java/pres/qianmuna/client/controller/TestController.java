@@ -27,6 +27,7 @@ public class TestController {
         Flux<User> userFlux = userAPI.queryall();
         //整个日志？
         userFlux.subscribe(System.out::println);
+
     }
 
 
