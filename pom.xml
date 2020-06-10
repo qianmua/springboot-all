@@ -61,6 +61,7 @@
         <module>kotlin-mybatis</module>
         <module>spring-s-m</module>
         <module>spring-s-m-2</module>
+        <module>spring-s-m-3</module>
     </modules>
 
     <dependencyManagement>
@@ -82,7 +83,6 @@
                 <artifactId>jasypt</artifactId>
                 <version>1.9.4</version>
             </dependency>
-
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
