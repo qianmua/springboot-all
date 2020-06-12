@@ -42,7 +42,12 @@ public class MethodsInfo {
     /**
      * 请求体
      * */
-    private Mono<?> body;
+    private Mono body;
+
+    /**
+     * 请求body类型
+     */
+    private Class<?> bodyElementType;
 
 
     /**

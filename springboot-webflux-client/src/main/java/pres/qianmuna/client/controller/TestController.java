@@ -33,7 +33,10 @@ public class TestController {
         // 直接调用
         Flux<User> userFlux = userAPI.queryall();
         //整个日志？
-        userFlux.subscribe(System.out::println);
+        userFlux.subscribe( r -> System.out.println("success") , e -> {
+            System.err.println("错误信息！！！！");
+            e.printStackTrace();
+        });
     }
 
 

@@ -15,7 +15,9 @@ import reactor.core.publisher.Mono;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -112,8 +114,12 @@ public class JDKProxyCreator implements ProxyCreator {
                             if (annotation != null)
                                 parms.put(annotation.value() , v3[i]);
                             RequestBody annotation1 = r.getAnnotation(RequestBody.class);
-                            if (annotation1 != null)
+                            if (annotation1 != null){
                                 info.setBody( (Mono<?>) v3[i] );
+                                // 请求对象的实际类型
+                                info.setBodyElementType( extractElementType(r.getParameterizedType()));
+
+                            }
                         }
                 )
         );
@@ -125,9 +131,21 @@ public class JDKProxyCreator implements ProxyCreator {
         boolean assignableFrom = v2.getReturnType().isAssignableFrom(Flux.class);
         info.setReturnFlux(assignableFrom);
 
-
-
+        Class<?> elementType = extractElementType( v2.getGenericReturnType());
+        // 存到bean
+        info.setElementType(elementType);
         return info;
+    }
+
+    /**
+     * 得到返回的实际类型
+     * @param genericReturnType
+     * @return
+     */
+    private Class<?> extractElementType(Type genericReturnType) {
+        Type[] types = ((ParameterizedType) genericReturnType).getActualTypeArguments();
+
+        return (Class<?>) types[0];
     }
 
     /**

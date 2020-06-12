@@ -28,5 +28,5 @@ public interface RestHandler {
      * @param serverInfo
      * @param methodInfo
      */
-    void invokeRest(ServerInfo serverInfo, MethodsInfo methodInfo);
+    Object invokeRest(ServerInfo serverInfo, MethodsInfo methodInfo);
 }
