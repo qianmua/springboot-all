@@ -73,5 +73,51 @@ public class Init {
         User2 user = (User2) context.getBean("user");
         user.say();
 
+
+
+        /*
+        *
+        * mybatis sql 注入问题
+        *
+        * */
+
+        // # $
+        // 静态sql
+        // 使用 ？
+        // 动态sql
+        // 在使用的时候 采取翻译
+
+        // getMapper // 返回了一个代理对象
+        // 使用的 是 jdk的动态代理
+        //
+        // mapper 包含了 sql 的执行
+
+
+        // @Param
+
+        // 固定生成的
+        // 跟你你的 参数 个数生成的
+        // 可以在 sql 里面用 param1 param2
+        // 或者 arg0 arg1
+
+        // 跟 反射有关系
+        //
+        // java 8 之前 不支持 不适用 param
+        // 反射 的底层
+        // 要用到 arg0 1
+        // java8 之后 可以 不用 这个 // 直接 通过 name，password 得到参数区
+
+
+
+        /// 然后 执行sql
+        // 给 $ 赋值
+        // 将 # 变为问号
+
+        //动态sql 会直接赋值
+
+
+
+
+
     }
 }
