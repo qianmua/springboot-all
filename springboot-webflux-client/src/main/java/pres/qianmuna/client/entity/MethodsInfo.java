@@ -43,4 +43,15 @@ public class MethodsInfo {
      * 请求体
      * */
     private Mono<?> body;
+
+
+    /**
+     * 返回结果类型
+     */
+    private boolean returnFlux;
+
+    /**
+     * 返回对象类型
+     */
+    private Class<?> elementType;
 }

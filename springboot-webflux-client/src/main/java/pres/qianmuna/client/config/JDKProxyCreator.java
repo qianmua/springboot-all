@@ -10,6 +10,7 @@ import pres.qianmuna.client.entity.ServerInfo;
 import pres.qianmuna.client.handler.RestHandler;
 import pres.qianmuna.client.handler.WebClientRestHandler;
 import pres.qianmuna.client.tools.PublicTools;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.lang.annotation.Annotation;
@@ -116,6 +117,16 @@ public class JDKProxyCreator implements ProxyCreator {
                         }
                 )
         );
+
+        // 得到返回对象信息
+        // 返回 flux 还是 mono
+
+        // 注意判断 类型 或者是 实例
+        boolean assignableFrom = v2.getReturnType().isAssignableFrom(Flux.class);
+        info.setReturnFlux(assignableFrom);
+
+
+
         return info;
     }
 

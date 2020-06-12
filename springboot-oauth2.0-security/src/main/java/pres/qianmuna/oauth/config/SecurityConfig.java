@@ -81,9 +81,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 登陆页 定制 提交
                 .formLogin()
                 .loginPage("/loginPage")
+                // 接管 login page 路由  拦截器 处理方法
                 .loginProcessingUrl("/login")
                 .successForwardUrl("/login-success")
-                // 会话 管理 创建 规则
+                // 会话 管理 创建 规则s
                 // session
                 // 分布式 token 保存 令牌
                 // 还有 安全会话等

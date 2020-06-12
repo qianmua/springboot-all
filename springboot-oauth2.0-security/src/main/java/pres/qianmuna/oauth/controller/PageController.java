@@ -16,7 +16,6 @@ public class PageController {
 
     @GetMapping("/loginPage")
     public String loginPage(){
-
         return "login";
     }
 

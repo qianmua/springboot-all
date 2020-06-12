@@ -61,9 +61,6 @@ public class DataUserService implements UserDetailsService {
         UserDetails build2 = User.withUsername(maps.get(0).get("uid").toString()).
                 password(maps.get(0).get("password").toString())
                 .authorities(array).build();
-
-
-
         return build2;
     }
 }
