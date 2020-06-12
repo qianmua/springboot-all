@@ -20,5 +20,14 @@ fun main() {
     v2.forEach { println(it) }
 
 
+    val v3 = 1
+
+    var v4 = when (v3) {
+        1 -> 1
+        2 -> 2
+        else -> 3
+    }
+
+
 
 }

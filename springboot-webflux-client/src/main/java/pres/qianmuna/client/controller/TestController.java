@@ -20,15 +20,23 @@ import reactor.core.publisher.Flux;
 public class TestController {
 
     @Autowired
-    UserAPI userAPI;
+    private UserAPI userAPI;
+
 
     @GetMapping("/")
     public void test(){
+
+        // 测试信息 提取
+        userAPI.queryall();
+
+
+        // 直接调用
         Flux<User> userFlux = userAPI.queryall();
         //整个日志？
         userFlux.subscribe(System.out::println);
-
     }
+
+
 
 
 }
