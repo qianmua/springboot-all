@@ -1,6 +1,7 @@
 package pres.qianmuna.shiro2.service;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -109,6 +110,23 @@ public interface GlobalService<T> {
     Collection<T> listByMap(Map<String , Object> columnMap);
 
     /**
+     * 根据wrapper 查询一条
+     * @param queryWrapper
+     * @return
+     */
+    default T getOne(Wrapper<T> queryWrapper){
+        return getOne(queryWrapper,  true);
+    }
+
+    /**
+     * 根据wrapper 查询一条
+     * @param queryWrapper
+     * @param throwException
+     * @return
+     */
+    T getOne(Wrapper<T> queryWrapper , boolean throwException);
+
+    /**
      * 根据wrapper 查询一条记录
      * @param queryWrapper
      * @return
@@ -130,5 +148,38 @@ public interface GlobalService<T> {
         return count(Wrappers.emptyWrapper());
     }
 
+    /**
+     * 查询列表
+     * @param queryWrapper
+     * @return
+     */
     List<T> list(Wrapper<T> queryWrapper);
+
+    /**
+     * 查询全部
+     * @return
+     */
+    default List<T> list(){
+        return list(Wrappers.emptyWrapper());
+    }
+
+    /**
+     * 翻页查询
+     * @param page
+     * @param queryWrapper
+     * @return
+     */
+    IPage<T> page(IPage<T> page , Wrapper<T> queryWrapper);
+
+    /**
+     * 无条件翻页
+     * @param page
+     * @return
+     */
+    default IPage<T> page(IPage<T> page){
+        return page(page,Wrappers.emptyWrapper());
+    }
+
+
+
 }
