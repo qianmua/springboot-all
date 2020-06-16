@@ -1,5 +1,7 @@
 package pres.qianmuna.shiro2.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,17 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class TestController {
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
+
+    @GetMapping("/redis")
+    @ResponseBody
+    public String redisTest(){
+        redisTemplate.opsForValue().set("k1" , "demo1");
+
+        return "1";
+    }
 
     @GetMapping("/login")
     @ResponseBody
