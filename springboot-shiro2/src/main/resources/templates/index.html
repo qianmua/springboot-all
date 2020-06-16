@@ -5,14 +5,10 @@
     <title>Title</title>
 </head>
 <body>
+    <th:block th:text="${hello}" />
 
-    <div>
-        <div th:each="n,i:${list}">
-
-            <div th:text="${n.address}" th:if="${i.index} le 5"></div>
-
-        </div>
-    </div>
-
+    <h1>
+        hello spring boot
+    </h1>
 </body>
 </html>

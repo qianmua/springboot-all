@@ -1,6 +1,7 @@
 package pres.qianmuna.shiro2.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,16 +20,31 @@ public class TestController {
 
     @GetMapping("/login")
     @ResponseBody
-    public String login(){
+    public String login() {
         System.out.println("login..");
         return "666";
     }
 
-
     @GetMapping("/demo")
-    public String demo(HttpServletRequest request){
-        request.getSession().setAttribute("user" , "111");
+    public String demo(HttpServletRequest request, Model model) {
+        request.getSession().setAttribute("user", "111");
+        model.addAttribute("hello", "hello world");
         return "index";
     }
+
+    @GetMapping("/demo2")
+    @ResponseBody
+    public String demo2(){
+        System.out.println("demo3");
+        return"demo2";
+    }
+
+    @GetMapping("/demo3")
+    @ResponseBody
+    public String demo3(){
+        System.out.println("demo44");
+        return"demo3";
+    }
+
 
 }

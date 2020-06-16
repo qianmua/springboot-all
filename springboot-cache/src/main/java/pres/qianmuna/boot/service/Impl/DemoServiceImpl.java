@@ -41,9 +41,9 @@ public class DemoServiceImpl implements DemoService {
     //@Cacheable缓存key为person 的id 数据到缓存people 中,如果没有指定key则方法参数作为key保存到缓存中。
     @Cacheable(value = "people", key = "#person.id")
     public Person findOne(Person person) {
-        Person p = personRepository.findAllById(person.getId()).get(0);
-        System.out.println("为id、key为:"+p.getId()+"数据做了缓存");
-        return p;
+//        Person p = personRepository.findAllById(person.getId()).get(0);
+//        System.out.println("为id、key为:"+p.getId()+"数据做了缓存");
+        return null; // return p;
     }
 
 }
