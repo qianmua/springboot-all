@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration >
+    <appenders>
+
+        <consloe name="Console" target="SYSTEM_OUT">
+
+            <patternlauout pattern="%d{yyyy-MM-dd HH:mm:ss} : [%p] %c %m %n" />
+
+        </consloe>
+    </appenders>
+
+    <loggers>
+        <root level="INFO">
+            <appender-ref ref="Console" />
+        </root>
+
+        <logger name="org.springframework" leave="ERROR" />
+        <logger name="pres.qianmuna.shiro2" leave="ERROR" />
+
+
+    </loggers>
+</configuration>
