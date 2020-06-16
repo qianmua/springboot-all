@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * @author HJC
@@ -29,10 +30,13 @@ public class RedisConfig {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
 
-//        redisTemplate.setKeySerializer();
-//        redisTemplate.setValueSerializer();
-//        redisTemplate.setHashKeySerializer();
-//        redisTemplate.setHashValueSerializer();
+        redisTemplate.setKeySerializer(stringRedisSerializer());
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer());
+        redisTemplate.setHashKeySerializer(stringRedisSerializer());
+        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer());
+
+        //开启事务
+        redisTemplate.setEnableTransactionSupport(true);
         return redisTemplate;
     }
 
@@ -43,7 +47,15 @@ public class RedisConfig {
         mapper.setVisibility(PropertyAccessor.ALL , JsonAutoDetect.Visibility.ANY);
         mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         serializer.setObjectMapper(mapper);
+
         return serializer;
     }
+
+    @Bean
+    public StringRedisSerializer stringRedisSerializer(){
+        return new StringRedisSerializer();
+    }
+
+
 
 }
