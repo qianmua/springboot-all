@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
     <th:block th:text="${hello}" />
+
+
+    <!--<shiro:hashPermission name="cms:news:view">
+        <h1>demo</h1>
+    </shiro:hashPermission>-->
 
     <h1>
         hello spring boot

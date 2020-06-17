@@ -24,6 +24,15 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 
+        /*
+        * 给用户 授权
+        * */
+
+        // 从数据库查到角色
+
+        // 然后 检查 权限
+
+
         // 授权检查
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
@@ -47,6 +56,7 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         // 得到token
+        log.info("login system..");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 
         String username = token.getUsername();
@@ -65,6 +75,7 @@ public class ShiroRealm extends AuthorizingRealm {
         // 创建 信息认证
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, s, super.getName());
 
+        log.info("info auth success");
         return info;
     }
 }

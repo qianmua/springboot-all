@@ -1,4 +1,5 @@
 package pres.qianmuna.shiro2;
+/*
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
+*/
 
 /**
  * @author HJC
@@ -32,12 +34,15 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
  * </p>
  */
 public class Generator {
+/*
 
-    /**
+    */
+/**
      * <p>
      * MySQL 生成演示
      * </p>
-     */
+     *//*
+
     public static void main(String[] args) {
         AutoGenerator mpg = new AutoGenerator();
         // 选择 freemarker 引擎，默认 Veloctiy
@@ -52,7 +57,9 @@ public class Generator {
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(false);// XML columList
-        /* 自定义文件命名，注意 %s 会自动填充表实体属性！ */
+        */
+/* 自定义文件命名，注意 %s 会自动填充表实体属性！ *//*
+
         // gc.setMapperName("%sDao");
         // gc.setXmlName("%sDao");
         // gc.setServiceName("MP%sService");
@@ -62,7 +69,8 @@ public class Generator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        /*dsc.setDbType(DbType.MYSQL);
+        */
+/*dsc.setDbType(DbType.MYSQL);
         dsc.setTypeConvert(new MySqlTypeConvert() {
             // 自定义数据库表字段类型转换【可选】
             public DbColumnType processTypeConvert(String fieldType) {
@@ -70,7 +78,8 @@ public class Generator {
                 // 注意！！processTypeConvert 存在默认类型转换，如果不是你要的效果请自定义返回、非如下直接返回。
                 return super.processTypeConvert(fieldType);
             }
-        });*/
+        });*//*
+
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
@@ -165,5 +174,6 @@ public class Generator {
         // 打印注入设置【可无】
 //        System.err.println(mpg.getCfg().getMap().get("abc"));
     }
+*/
 
 }

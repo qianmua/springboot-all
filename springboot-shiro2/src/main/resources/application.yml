@@ -18,6 +18,9 @@ spring:
   thymeleaf:
     cache: false
 
-  redis:
-    password:
-    host:
+#  redis:
+#    password:
+#    host:
+
+
+#debug: true
