@@ -1,6 +1,7 @@
 package pres.qianmuna.shiro2.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -9,6 +10,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pres.qianmuna.shiro2.handler.ShiroCacheManage;
 import pres.qianmuna.shiro2.handler.ShiroRealm;
 
 import java.awt.*;
@@ -62,9 +64,21 @@ public class ShiroConfig {
     public SecurityManager securityManager(){
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
 
+        // 注入realm
         manager.setRealm(shiroRealm());
+        // 注入 缓存管理
+//        manager.setCacheManager(cacheManager());
         return manager;
     }
+
+    /**
+     * shiro 缓存 管理
+     * @return
+     */
+    /*@Bean
+    public CacheManager cacheManager(){
+        return new ShiroCacheManage();
+    }*/
 
     /**
      * 过滤规则
