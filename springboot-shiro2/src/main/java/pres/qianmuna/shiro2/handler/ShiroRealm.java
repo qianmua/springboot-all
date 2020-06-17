@@ -1,11 +1,13 @@
 package pres.qianmuna.shiro2.handler;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 
 /**
  * @author HJC
@@ -43,6 +45,13 @@ public class ShiroRealm extends AuthorizingRealm {
         info.addStringPermission("cms:news:list");
 
         log.info("rote success...");
+
+        /// 得到 权限用户
+        Subject subject = SecurityUtils.getSubject();
+        Object principal = subject.getPrincipal();
+
+        // 得到权限列联表
+        info.addStringPermission("");
 
         return info;
     }

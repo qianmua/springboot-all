@@ -40,4 +40,9 @@ public class UserController {
         subject.logout();
         return "redirect:/login";
     }
+
+    @GetMapping("/noauth")
+    public String noauth(){
+        return "noauth";
+    }
 }

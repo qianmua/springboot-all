@@ -91,6 +91,8 @@ public class ShiroConfig {
         bean.setSecurityManager(securityManager());
 
         bean.setLoginUrl("/login");
+        // 没有 权限页面
+        bean.setUnauthorizedUrl("/noauth");
 
         Map<String, String> hashMap = new LinkedHashMap<>();
 
@@ -99,7 +101,9 @@ public class ShiroConfig {
         hashMap.put("/img/**" , "anon");
         hashMap.put("/js/**" , "anon");
         hashMap.put("/lib/**" , "anon");
-        hashMap.put("/**" , "user");
+        hashMap.put("/p1" , "perms[user:add]");
+        hashMap.put("/p2" , "perms[user:update]");
+        hashMap.put("/p3" , "perms[user:insert]");
 
         // 过滤规则
         bean.setFilterChainDefinitionMap(hashMap);

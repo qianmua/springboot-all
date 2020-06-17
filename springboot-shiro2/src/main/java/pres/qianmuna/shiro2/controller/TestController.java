@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,6 +58,11 @@ public class TestController {
     public String demo3(){
         System.out.println("demo44");
         return"demo3";
+    }
+
+    @GetMapping("p/{id}")
+    public String p(@PathVariable String id){
+        return id + "p";
     }
 
 
