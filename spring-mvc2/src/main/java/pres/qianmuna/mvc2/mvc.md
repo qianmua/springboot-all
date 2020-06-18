@@ -79,4 +79,41 @@
     以 uri 去 map查找 得到 返回值 -> controller (反射调用)
     
     
+    //controller 两种类型
+    BeanName @controller
+    //三种实现类型
+    HttpRequestHandler Controller @Controller
+    
+    //注解 反射调用  -> 得到 Method ——> 得到 参数 数组 （参数处理器 // （27种 参数处理器））—> 参数赋值
+    //实现类 调用 接口的实现类
+    
+    适配器 去 决策 。
+    
+    
+    /// 自定义 参数赋值逻辑
+    //  实现 HandlerMethodArgumentResolver 接口
+    
+    
+    
+    
+## 流程图 
+
+    user -> 发送请求
+    dispatcherServlet 接受请求 然后分发
+    处理器handlerMapping 处理 查找 handler （适配器 查找 -> 处理 ， 返回结果）
+    返回 handler
+    //
+    寻找视图 渲染 或者 data
+    响应用户
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
