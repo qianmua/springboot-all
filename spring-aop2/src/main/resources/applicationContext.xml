@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="service" class="pres.qianmuna.aop2.proxy.Impl" />
+
+    <bean id="adv" class="pres.qianmuna.aop2.proxy.MAdvisor" />
+
+    <bean id="aop" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces" value="pres.qianmuna.aop2.inter.Service" />
+        <property name="interceptorNames" >
+            <list>
+                <value>adv</value>
+            </list>
+        </property>
+        
+        <property name="target" ref="service" />
+
+    </bean>
+
+
+</beans>

@@ -33,6 +33,7 @@ class Test1 {
 
         val mutableList = mapper.queryBillByNameAndProviderIdAndIsPay("%油%", 7, 2)
 
+
         println(mutableList)
 
         MybatisFactoryConfig.closeSqlSession
