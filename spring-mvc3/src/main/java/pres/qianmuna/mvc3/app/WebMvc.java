@@ -7,7 +7,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  * @version 1.0
  * 谦谦君子 卑以自牧也
  * @date 2020/6/26  10:50
- * @description :
+ * @description :  自动加载
  */
 public class WebMvc extends AbstractAnnotationConfigDispatcherServletInitializer {
 
