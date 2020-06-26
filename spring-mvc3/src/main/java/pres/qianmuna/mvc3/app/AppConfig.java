@@ -33,6 +33,10 @@ public class AppConfig {
         return resolver;
     }
 
+    /**
+     * json 转换
+     * @return mapping adapter
+     */
     /*@Bean( name = "requestMappingHandlerAdapter")
     public HandlerAdapter handlerAdapter(){
         // 适配器
