@@ -2,6 +2,7 @@ package pres.qianmuna.spring.bean;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import pres.qianmuna.spring.aspect.DemoScan;
 import pres.qianmuna.spring.factory.HelloImportBeanDefinitionRegistart;
@@ -21,6 +22,7 @@ import pres.qianmuna.spring.factory.HelloImportBeanDefinitionRegistart;
 //import
 @Import(HelloImportBeanDefinitionRegistart.class)
 @DemoScan("pres.hjc.qqq")
+@EnableAspectJAutoProxy
 public class UserModel {
     /**
      * spring自己会把这个config注册

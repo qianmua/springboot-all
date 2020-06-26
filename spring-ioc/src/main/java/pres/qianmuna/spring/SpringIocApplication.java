@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import pres.qianmuna.spring.bean.*;
+import pres.qianmuna.spring.service.Service1;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,10 +44,12 @@ public class SpringIocApplication {
         //System.out.println(context.getBean("&helloFactoryBean"));
 
         // D()
-        EProxy d = context.getBean("helloFactoryBean",EProxy.class);
+//        EProxy d = context.getBean("helloFactoryBean",EProxy.class);
 //        System.out.println(context.getBean("helloFactoryBean", EProxy.class).toString());
-        System.out.println(d);
-        d.f();
+//        System.out.println(d);
+//        d.f();
+        Service1 service1 = (Service1) context.getBean("service1");
+        service1.test();
 
         /*
         * 1、scan
