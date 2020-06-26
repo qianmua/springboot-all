@@ -65,6 +65,7 @@
         <module>springboot-shiro2</module>
         <module>spring-mvc2</module>
         <module>spring-aop2</module>
+        <module>spring-mvc3</module>
     </modules>
 
     <dependencyManagement>
