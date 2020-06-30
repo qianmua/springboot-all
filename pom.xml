@@ -66,6 +66,7 @@
         <module>spring-mvc2</module>
         <module>spring-aop2</module>
         <module>spring-mvc3</module>
+        <module>spring-reactive</module>
     </modules>
 
     <dependencyManagement>

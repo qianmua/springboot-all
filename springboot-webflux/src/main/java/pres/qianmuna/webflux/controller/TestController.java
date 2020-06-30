@@ -170,7 +170,7 @@ public class TestController {
                     return this.userRepository.save(user1);
                 })
                 //转换返回数据 将mono 转换位 ResponseEntity
-                .map( user1 -> new ResponseEntity<User>(user1,HttpStatus.OK))
+                .map( user1 -> new ResponseEntity<>(user1, HttpStatus.OK))
                 // 404
                 .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
