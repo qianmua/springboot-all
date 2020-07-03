@@ -10,4 +10,14 @@ package pres.qianmuna.dubbo;
  * @time 20:21
  */
 public class Init {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        int x = 1;
+        int y = 2;
+        if((x++)>=1 || (y--)>=2) {
+            System.out.println(x+"" +y);
+        }
+    }
+
 }

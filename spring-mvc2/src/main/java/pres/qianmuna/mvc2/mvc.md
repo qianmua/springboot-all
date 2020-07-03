@@ -70,7 +70,7 @@
     得到controller： get Handler(Controller) ->
     遍历方法：forEach method ->
     识别接口：check RequestMapping ->
-    存入map：map k put= requestmapping value ->
+    存入map：map k put= requestmapping value ->    
     接口 在 map的 key中
     
     发送请求：

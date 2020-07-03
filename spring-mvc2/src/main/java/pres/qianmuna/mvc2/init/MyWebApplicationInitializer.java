@@ -29,7 +29,12 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 
         context.register(AppConfig.class);
-//        context.refresh();
+        context.refresh();
+        // 扫描
+        // 实例化
+        // bean描述
+        // 后置处理 bean
+        // di
 
         DispatcherServlet servlet = new DispatcherServlet(context);
 
@@ -37,7 +42,6 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
 
         dynamic.setLoadOnStartup(1);
         dynamic.addMapping("/");
-
 
     }
 }

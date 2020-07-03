@@ -1,6 +1,8 @@
 package pres.qianmuna.mvc2.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author HJC
@@ -25,4 +27,11 @@ public class TestController {
     *
     * controller
     * */
+
+
+    @RequestMapping("/hello")
+    @ResponseBody
+    public String demo(){
+        return "demo";
+    }
 }

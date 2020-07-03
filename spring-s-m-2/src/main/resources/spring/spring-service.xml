@@ -6,7 +6,9 @@
 
 
     <!--scan-->
-    <context:component-scan base-package="pres.qianmuna.ssm.service" />
+    <context:component-scan base-package="pres.qianmuna.ssm" >
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <!--开启事务-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
