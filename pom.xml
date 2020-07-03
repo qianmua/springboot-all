@@ -68,6 +68,7 @@
         <module>spring-mvc3</module>
         <module>spring-reactive</module>
         <module>springboot-reactor</module>
+        <module>springboot-webflux3</module>
     </modules>
 
     <dependencyManagement>

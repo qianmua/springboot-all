@@ -192,15 +192,9 @@ public class TestController {
     @GetMapping("/getage/{s}/{e}")
     public Flux<User> findTest(@PathVariable("s")int s ,
                                                @PathVariable("e") int e){
-
         return this.userRepository.findByAgeBetween(s,e);
 
     }
-
-
-
-
-
     /**
      * test time out
      * @return
