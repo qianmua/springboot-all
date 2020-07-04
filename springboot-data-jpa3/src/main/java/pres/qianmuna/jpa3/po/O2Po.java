@@ -15,7 +15,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 @Entity
 @Table(name = "table_demo_jpa_o2po")
 public class O2Po implements Serializable {
@@ -31,6 +30,17 @@ public class O2Po implements Serializable {
     @Setter
     private String name;
 
-    @OneToMany(mappedBy = "o1id")
-    private Long o1id;
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH} , optional = false)
+    @JoinColumn(name = "o1id", referencedColumnName = "o1id")
+    @Getter
+    @Setter
+    private O1Po o1id;
+
+    @Override
+    public String toString() {
+        return "O2Po{" +
+                "o2id=" + o2id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

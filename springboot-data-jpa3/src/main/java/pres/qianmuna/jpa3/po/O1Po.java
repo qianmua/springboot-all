@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author HJC
@@ -31,4 +32,11 @@ public class O1Po implements Serializable {
     @Getter
     @Setter
     private String name;
+
+    @OneToMany(mappedBy = "o1id" , cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+//    @JoinColumn(name = "o2id", referencedColumnName = "o2id")
+    @Getter
+    @Setter
+    private List<O2Po> o2id;
+
 }
