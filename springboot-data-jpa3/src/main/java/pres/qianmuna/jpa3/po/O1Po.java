@@ -1,5 +1,6 @@
 package pres.qianmuna.jpa3.po;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+//@Builder
 @ToString
 @Entity
 @Table(name = "table_demo_jpa_o1po")

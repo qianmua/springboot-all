@@ -31,11 +31,12 @@ public class Test2Controller {
         all.forEach(System.out::println);
         return all;
     }
+
     @GetMapping("/o2")
-    public String o2(){
+    public List<O1Po> o2(){
         List<O1Po> all = o1Mapper.findAll();
         all.forEach(v1 -> v1.getO2id().forEach(System.out::println));
-        return "1";
+        return all;
     }
 
 

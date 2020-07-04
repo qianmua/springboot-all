@@ -1,5 +1,6 @@
 package pres.qianmuna.jpa3.po;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import java.io.Serializable;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+//@Builder
 @Entity
 @Table(name = "table_demo_jpa_o2po")
 public class O2Po implements Serializable {
@@ -34,6 +35,7 @@ public class O2Po implements Serializable {
     @JoinColumn(name = "o1id", referencedColumnName = "o1id")
     @Getter
     @Setter
+    @JsonIgnore
     private O1Po o1id;
 
     @Override
