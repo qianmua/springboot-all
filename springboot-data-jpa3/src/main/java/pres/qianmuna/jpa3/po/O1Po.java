@@ -12,7 +12,7 @@ import java.util.List;
  * @version 1.0
  * 谦谦君子 卑以自牧也
  * @date 2020/7/4  21:55
- * @description :
+ * @description : 关系 被 维护 端
  */
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +21,6 @@ import java.util.List;
 @Entity
 @Table(name = "table_demo_jpa_o1po")
 public class O1Po implements Serializable {
-
 
     private static final long serialVersionUID = 259780995455379036L;
     @Id
