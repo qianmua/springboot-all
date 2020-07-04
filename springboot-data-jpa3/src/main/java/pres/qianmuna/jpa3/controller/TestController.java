@@ -3,11 +3,12 @@ package pres.qianmuna.jpa3.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pres.qianmuna.jpa3.mapper.QueryMapper;
-import pres.qianmuna.jpa3.mapper.Table2Mapper;
+import pres.qianmuna.jpa3.dao.QueryMapper;
+import pres.qianmuna.jpa3.dao.Table2Mapper;
 import pres.qianmuna.jpa3.po.TableOne;
 import pres.qianmuna.jpa3.po.TableTow;
 import pres.qianmuna.jpa3.service.QueryService;
+import pres.qianmuna.jpa3.vo.ViewInfo;
 
 import java.util.List;
 
@@ -39,6 +40,13 @@ public class TestController {
     @GetMapping("/q2")
     public List<TableTow> q2(){
         List<TableTow> all = table2Mapper.findAll();
+        all.forEach(System.out::println);
+        return all;
+    }
+
+    @GetMapping("/q3")
+    public List<ViewInfo> q3(){
+        List<ViewInfo> all = queryMapper.findViewInfo();
         all.forEach(System.out::println);
         return all;
     }

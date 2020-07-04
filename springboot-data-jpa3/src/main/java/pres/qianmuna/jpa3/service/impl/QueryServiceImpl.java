@@ -12,4 +12,31 @@ import pres.qianmuna.jpa3.service.QueryService;
  */
 @Service
 public class QueryServiceImpl implements QueryService {
+    /*public static void main(String[] args) {
+        A a = new A("A");
+        A b = new A("B");
+        swap(a,b);
+        System.out.println(a.name);
+        System.out.println(b.name);
+    }
+    static void swap(A a , A b){
+        A c;
+        c = a;
+        a = b;
+        b = c;
+        System.out.println(a.name);
+        System.out.println(b.name);
+    }*/
 }
+
+
+
+/*class A{
+    String name;
+
+    public A(String name) {
+        this.name = name;
+    }
+}*/
+
+

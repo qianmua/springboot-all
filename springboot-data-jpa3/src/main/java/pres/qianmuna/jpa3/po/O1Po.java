@@ -4,13 +4,12 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author HJC
  * @version 1.0
  * 谦谦君子 卑以自牧也
- * @date 2020/7/4  18:33
+ * @date 2020/7/4  21:55
  * @description :
  */
 @AllArgsConstructor
@@ -18,28 +17,18 @@ import java.util.List;
 @Builder
 @ToString
 @Entity
-@Table(name = "table_demo_jpa_one")
-public class TableOne implements Serializable {
+@Table(name = "table_demo_jpa_o1po")
+public class O1Po implements Serializable {
 
-    private static final long serialVersionUID = 2737182236918393214L;
 
+    private static final long serialVersionUID = 259780995455379036L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    private Long oid;
+    private Long o1id;
 
     @Getter
     @Setter
     private String name;
-
-    @Getter
-    @Setter
-    private Long tid;
-
-    @OneToMany( mappedBy = "tid" , cascade = CascadeType.ALL , orphanRemoval = true)
-    private List<TableTow> tableTowList;
-
-
-
 }
