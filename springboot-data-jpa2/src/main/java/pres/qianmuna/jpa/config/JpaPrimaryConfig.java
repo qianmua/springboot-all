@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -57,7 +58,6 @@ public class JpaPrimaryConfig {
                 .build();
     }
 
-
     @Resource
     private JpaProperties jpaProperties;
 
@@ -68,7 +68,7 @@ public class JpaPrimaryConfig {
     @Primary
     @Bean( name = "trans")
     public PlatformTransactionManager transactionManager(EntityManagerFactoryBuilder builder){
-        return new JpaTransactionManager(entityManagerFactoryBean(builder).getObject());
+        return new JpaTransactionManager(Objects.requireNonNull(entityManagerFactoryBean(builder).getObject()));
     }
 
 }
