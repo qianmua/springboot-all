@@ -70,6 +70,7 @@
         <module>springboot-reactor</module>
         <module>springboot-webflux3</module>
         <module>springboot-data-jpa3</module>
+        <module>springboot-data-jpa4</module>
     </modules>
 
     <dependencyManagement>

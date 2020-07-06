@@ -1,5 +1,5 @@
 server:
-  port: 9090
+  port: 8080
 
 spring:
   application:
@@ -10,7 +10,7 @@ spring:
     username: root
     password: 123456
     url: jdbc:mysql://localhost:3306/test?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
-
+    initialization-mode: always
   jpa:
     show-sql: true
     hibernate:
