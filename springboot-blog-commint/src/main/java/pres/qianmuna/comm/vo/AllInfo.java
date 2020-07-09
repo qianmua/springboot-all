@@ -4,6 +4,8 @@ import lombok.Data;
 import pres.qianmuna.comm.po.Commit1;
 import pres.qianmuna.comm.po.Commit2;
 
+import java.util.List;
+
 /**
  * @author HJC
  * @version 1.0
@@ -14,6 +16,9 @@ import pres.qianmuna.comm.po.Commit2;
 @Data
 public class AllInfo {
 
-    private Commit1 commit1;
-    private Commit2 commit2;
+    private  Long cid;
+    private  Long uid;
+    private  String commValue;
+    Commit1 commit1;
+    private List<Commit2> commit2;
 }

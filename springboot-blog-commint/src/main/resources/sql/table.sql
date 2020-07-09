@@ -33,8 +33,12 @@ insert into commit_2( comm_value, cid, from_uid, to_uid) VALUES ('是啊',1,1,3)
 insert into commit_2( comm_value, cid, from_uid, to_uid) VALUES ('是啊',2,3,1);
 
 
+
 select * from commit_1;
 select * from commit_2;
 
 select * from test.commit_1 c1 , test.commit_2 c2 where c1.cid = c2.cid;
+
+alter table commit_2 add constraint FK_COMM2 foreign key (cid) references commit_1(cid);
+
 

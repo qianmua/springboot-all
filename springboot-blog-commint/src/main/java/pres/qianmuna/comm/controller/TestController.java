@@ -8,6 +8,7 @@ import pres.qianmuna.comm.po.Commit1;
 import pres.qianmuna.comm.po.Commit2;
 import pres.qianmuna.comm.vo.AllInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,9 +26,18 @@ public class TestController {
 
     @GetMapping("/queryall")
     public List<AllInfo> queryall(){
-        List<AllInfo> allInfos = allMapper.queryAll();
-        allInfos.forEach(System.out::println);
-        return allInfos;
+        List<Commit1> allInfos = allMapper.queryComm1();
+        List<AllInfo> info = new ArrayList<>();
+        allInfos.forEach(v1 -> {
+            List<Commit2> commit2s = allMapper.queryById(v1.getCid());
+            AllInfo info1 = new AllInfo();
+            info1.setCommit1(v1);
+            info1.setCommit2(commit2s);
+            info.add(info1);
+        });
+        info.forEach(System.out::println);
+//        System.out.println(allInfos);
+        return info;
     }
 
     @GetMapping("/v1")
