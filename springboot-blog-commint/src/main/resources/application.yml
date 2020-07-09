@@ -3,9 +3,12 @@ server:
 
 spring:
   datasource:
-    username: rppt
+    username: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 123456
     url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8
   thymeleaf:
     cache: false
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
