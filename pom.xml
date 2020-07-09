@@ -73,6 +73,7 @@
         <module>springboot-data-jpa4</module>
         <module>springboot-scheduled</module>
         <module>springboot-vue</module>
+        <module>springboot-blog-commint</module>
     </modules>
 
     <dependencyManagement>

@@ -1,0 +1,11 @@
+server:
+  port: 9090
+
+spring:
+  datasource:
+    username: rppt
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 123456
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8
+  thymeleaf:
+    cache: false
