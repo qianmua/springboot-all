@@ -1,4 +1,4 @@
-package pres.qianmuna.ioc.framework.annotation;
+package pres.qianmuna.ioc.v1.framework.annotation;
 
 import java.lang.annotation.*;
 

@@ -1,9 +1,9 @@
-package pres.qianmuna.ioc.framework.servlet;
+package pres.qianmuna.ioc.v1.framework.servlet;
 
-import pres.qianmuna.ioc.framework.annotation.Autowired;
-import pres.qianmuna.ioc.framework.annotation.Controller;
-import pres.qianmuna.ioc.framework.annotation.RequestMapping;
-import pres.qianmuna.ioc.framework.annotation.Service;
+import pres.qianmuna.ioc.v1.framework.annotation.Autowired;
+import pres.qianmuna.ioc.v1.framework.annotation.Controller;
+import pres.qianmuna.ioc.v1.framework.annotation.RequestMapping;
+import pres.qianmuna.ioc.v1.framework.annotation.Service;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.*;
@@ -61,8 +62,12 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        doDispatch(req,resp);
+        try {
+            doDispatch(req,resp);
+        } catch (IOException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+            resp.getWriter().write("500 exception error -> " + Arrays.toString(e.getStackTrace()));
+        }
     }
 
     /**
@@ -70,7 +75,34 @@ public class DispatcherServlet extends HttpServlet {
      * @param req
      * @param resp
      */
-    private void doDispatch(HttpServletRequest req, HttpServletResponse resp) {
+    private void doDispatch(HttpServletRequest req, HttpServletResponse resp) throws IOException, InvocationTargetException, IllegalAccessException {
+
+        //得到请求路径
+        String uri = req.getRequestURI();
+        // 相对 路径
+        String contextPath = req.getContextPath();
+
+        // 处理 路径
+        uri = ( "/" + uri).replaceAll(contextPath , "").replaceAll("/+" , "/");
+
+
+        if (!this.handlerMapping.containsKey(uri))
+            resp.getWriter().write("404 not found!");
+
+
+        Method method = this.handlerMapping.get(uri);
+
+        // 调用 1、obj 2、param
+        // ...[]
+
+        // 实参
+        Map<String, String[]> parameterMap = req.getParameterMap();
+        // 得到 对象
+        // beanName
+        // 从ioc 中 获取
+        String simpleName = toLowerFirstCase(method.getDeclaringClass().getSimpleName());
+        // 执行
+        method.invoke(ioc.get(simpleName) , req, resp , parameterMap.get("name")[0] , parameterMap.get("age")[0]).var;
 
     }
 
@@ -131,7 +163,8 @@ public class DispatcherServlet extends HttpServlet {
                 RequestMapping mapping = method.getAnnotation(RequestMapping.class);
 
                 // 接口 路径
-                String url = baseUrl + mapping.value();
+                // 接口 / 修正
+                String url = ("/" + baseUrl + "/" + mapping.value() ).replaceAll("/+" , "/");
 
                 // 添加 到 handler 容器 后面调用
                 handlerMapping.put(url , method );
