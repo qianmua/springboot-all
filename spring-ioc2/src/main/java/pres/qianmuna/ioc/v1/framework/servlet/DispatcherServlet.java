@@ -102,7 +102,7 @@ public class DispatcherServlet extends HttpServlet {
         // 从ioc 中 获取
         String simpleName = toLowerFirstCase(method.getDeclaringClass().getSimpleName());
         // 执行
-        method.invoke(ioc.get(simpleName) , req, resp , parameterMap.get("name")[0] , parameterMap.get("age")[0]).var;
+        method.invoke(ioc.get(simpleName) , req, resp , parameterMap.get("name")[0] , parameterMap.get("age")[0]);
 
     }
 
