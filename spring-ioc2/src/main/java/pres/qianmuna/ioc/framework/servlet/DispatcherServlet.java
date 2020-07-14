@@ -1,6 +1,8 @@
 package pres.qianmuna.ioc.framework.servlet;
 
+import pres.qianmuna.ioc.framework.annotation.Autowired;
 import pres.qianmuna.ioc.framework.annotation.Controller;
+import pres.qianmuna.ioc.framework.annotation.RequestMapping;
 import pres.qianmuna.ioc.framework.annotation.Service;
 
 import javax.servlet.ServletConfig;
@@ -12,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.*;
 
@@ -43,6 +46,13 @@ public class DispatcherServlet extends HttpServlet {
      * 保存 扫描到的 类名
      */
     private List<String> classNames = new ArrayList<>();
+
+    /**
+     *  handler 容器
+     */
+    private Map<String , Method> handlerMapping = new HashMap<>();
+
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -92,6 +102,43 @@ public class DispatcherServlet extends HttpServlet {
      * 初始化 handler
      */
     private void doInitHandlerMapping() {
+        if (ioc.isEmpty())
+            return;
+        for (Map.Entry<String, Object> entry : ioc.entrySet()) {
+
+            //扫描 方法
+            Class<?> aClass = entry.getValue().getClass();
+
+            // 是个 controller？
+            if (aClass.isAnnotationPresent(Controller.class))
+                continue;
+
+            //controller url
+            //
+            String baseUrl = "";
+            if (aClass.isAnnotationPresent(RequestMapping.class)){
+                Controller annotation = aClass.getAnnotation(Controller.class);
+                baseUrl = annotation.value().trim();
+            }
+
+            // 得到 method
+            for (Method method : aClass.getMethods()) {
+
+                // 是个接口访问？
+                if (!method.isAnnotationPresent(RequestMapping.class))
+                    continue;
+
+                RequestMapping mapping = method.getAnnotation(RequestMapping.class);
+
+                // 接口 路径
+                String url = baseUrl + mapping.value();
+
+                // 添加 到 handler 容器 后面调用
+                handlerMapping.put(url , method );
+                System.out.println(" scan url -> " + url);
+
+            }
+        }
     }
 
     /**
@@ -108,6 +155,31 @@ public class DispatcherServlet extends HttpServlet {
             Field[] fields = entry.getValue().getClass().getDeclaredFields();
             // 赋值
             for (Field field : fields) {
+                // 是否有 注解
+                if (!field.isAnnotationPresent(Autowired.class))
+                    continue;
+                Autowired annotation = field.getAnnotation(Autowired.class);
+                // 得到注解值
+                String value = annotation.value().trim();
+
+                // beanName
+                if ("".equals(value)){
+                    value = field.getType().getName();
+                }
+
+                // private 等 是不可 直接访问的
+                // 强制 级别 访问
+                field.setAccessible(true);
+
+                try {
+                    // 设置 值
+                    // 注入
+                    // 给 字段 属性//
+                    field.set(entry.getValue() , ioc.get(value));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
 
             }
 
