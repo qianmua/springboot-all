@@ -1,5 +1,8 @@
 package pres.qianmuna.ioc.framework.servlet;
 
+import pres.qianmuna.ioc.framework.annotation.Controller;
+import pres.qianmuna.ioc.framework.annotation.Service;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.*;
 
@@ -94,6 +98,20 @@ public class DispatcherServlet extends HttpServlet {
      * di
      */
     private void doAutowired() {
+        // 注入
+        if (ioc.isEmpty())
+            return;
+        for (Map.Entry<String, Object> entry : ioc.entrySet()) {
+
+            // 得到 所有类型字段
+            // private public protected default
+            Field[] fields = entry.getValue().getClass().getDeclaredFields();
+            // 赋值
+            for (Field field : fields) {
+
+            }
+
+        }
     }
 
     /**
@@ -110,20 +128,57 @@ public class DispatcherServlet extends HttpServlet {
             try {
                 // 得到 反射Class
                 Class<?> aClass = Class.forName(name);
+
+                //判断 是否 是个Bean
+                // 有 相关 注解
+                if (! (aClass.isAnnotationPresent(Controller.class)
+                        || aClass.isAnnotationPresent(Service.class))){
+                    continue;
+                }
+                // bean Name
+                // 首字母小写
+                String beanName = toLowerFirstCase(aClass.getSimpleName());
+                // 不同包 同名？
+                // 自定义beanName
+                // 读取到 注解 的值
+                Service service = aClass.getAnnotation(Service.class);
+                if ("".equals(service.value())){
+                    beanName = service.value();
+                }
+
                 // 反射到 对象
                 Object instance = aClass.newInstance();
 
-                // bean Name
-                // 首字母小写
-                String beanName = null;
-
                 //添加 到ioc
+                ioc.put(beanName , instance);
+
+                // 处理接口
+                // 使用 实现类 去 赋值
+                for (Class<?> anInterface : aClass.getInterfaces()) {
+                    if (ioc.containsKey(anInterface.getName())){
+                        throw new Exception("bean name \" " + anInterface.getName() + " \" is exists");
+                    }
+                    ioc.put(anInterface.getName() , instance);
+                }
 
 
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * 小写首字母
+     * @param simpleName
+     * @return
+     */
+    private String toLowerFirstCase(String simpleName) {
+        char[] chars = simpleName.toCharArray();
+        // 小写
+        chars[0] += 32;
+        return String.valueOf(chars);
     }
 
     /**
