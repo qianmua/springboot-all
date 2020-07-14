@@ -74,6 +74,7 @@
         <module>springboot-scheduled</module>
         <module>springboot-vue</module>
         <module>springboot-blog-commint</module>
+        <module>spring-ioc2</module>
     </modules>
 
     <dependencyManagement>
