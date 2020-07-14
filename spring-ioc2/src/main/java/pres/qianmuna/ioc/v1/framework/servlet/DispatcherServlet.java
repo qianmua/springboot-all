@@ -1,9 +1,6 @@
 package pres.qianmuna.ioc.v1.framework.servlet;
 
-import pres.qianmuna.ioc.v1.framework.annotation.Autowired;
-import pres.qianmuna.ioc.v1.framework.annotation.Controller;
-import pres.qianmuna.ioc.v1.framework.annotation.RequestMapping;
-import pres.qianmuna.ioc.v1.framework.annotation.Service;
+import pres.qianmuna.ioc.v1.framework.annotation.*;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -95,8 +93,46 @@ public class DispatcherServlet extends HttpServlet {
         // 调用 1、obj 2、param
         // ...[]
 
+        // 形参
+        // 参数类型
+        Class<?>[] types = method.getParameterTypes();
+
         // 实参
         Map<String, String[]> parameterMap = req.getParameterMap();
+        Object[] values = new Object[types.length];
+
+        // 实参 赋值
+        // 判断 类型
+        for (int i = 0; i < values.length; i++) {
+            Class<?> type = types[i];
+            if (type == HttpServletRequest.class)
+                values[i] = req;
+            else if (type == HttpServletResponse.class)
+                values[i] = resp;
+            else if (type == String.class){
+                // 得到 参数 注解
+                // 有注解?
+                Annotation[][] pa = method.getParameterAnnotations();
+                for (Annotation annotation : pa[i]) {
+                    // 是当前 注解？
+                    if (annotation instanceof RequestParam){
+                        String value = ((RequestParam) annotation).value().trim();
+                        if (!"".equals(value)){
+                            // 解析 并得到 参数
+                            String valueName = Arrays.toString(parameterMap.get(value))
+                                    .replaceAll("\\[]", "")
+                                    .replaceAll("\\s", "");
+                            // 赋值
+                            values[i] = valueName;
+                        }
+                    }
+                }
+            }
+            else
+                values[i] = null;
+
+        }
+
         // 得到 对象
         // beanName
         // 从ioc 中 获取
