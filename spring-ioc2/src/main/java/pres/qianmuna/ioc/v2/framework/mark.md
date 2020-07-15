@@ -24,4 +24,19 @@
         
         
         
+## servlet
+
+    applicationCOntext
+        beanDefinitionReqder
+            doLoadBeanDefinitions
+                beanDefitionMap<beanName,BeanDefinition>        
+                
+        getBean
+            beanDefitionMap.get
+            instanceBean
+            beanWrapper
+            populateBean         
+            beanWrapper.getWrapperInstance
+            
+        
         

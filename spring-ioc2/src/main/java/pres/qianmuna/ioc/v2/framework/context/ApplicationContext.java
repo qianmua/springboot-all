@@ -32,9 +32,11 @@ public class ApplicationContext {
 
     /**
      * bean config
+     * bean 使用
+     * ioc
+     * 原型Bean
      */
     private Map<String ,BeanDefinition> beanDefinitionMap = new HashMap<>();
-
 
     /**
      * 真正的 ioc
@@ -133,6 +135,7 @@ public class ApplicationContext {
         // di
         populateBean(beanName,definition , wrapper);
 
+        // 从 ioc 中娶到
         return this.factoryBeanInstanceCache.get(beanName).getWrapperInstance();
     }
 
@@ -162,7 +165,7 @@ public class ApplicationContext {
             String autowiredBeanName = annotation.value().trim();
 
             // beanName
-            if ("".equals(beanName)){
+            if ("".equals(autowiredBeanName)){
                 autowiredBeanName = field.getType().getName();
             }
             // private 等 是不可 直接访问的
