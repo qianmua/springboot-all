@@ -1,9 +1,13 @@
 package pres.qianmuna.ioc.v2.framework.context;
 
+import pres.qianmuna.ioc.annotation.Autowired;
+import pres.qianmuna.ioc.annotation.Controller;
+import pres.qianmuna.ioc.annotation.Service;
 import pres.qianmuna.ioc.v2.framework.beans.BeanWrapper;
 import pres.qianmuna.ioc.v2.framework.beans.config.BeanDefinition;
 import pres.qianmuna.ioc.v2.framework.beans.support.BeanDefinitionReader;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,6 +146,44 @@ public class ApplicationContext {
      */
     private void populateBean(String beanName, BeanDefinition definition, BeanWrapper wrapper) {
 
+        Object instance = wrapper.getWrapperInstance();
+
+        Class<?> aClass = wrapper.getWrapperClass();
+
+        // 注解？
+        if ( ! (aClass.isAnnotationPresent(Controller.class) || aClass.isAnnotationPresent(Service.class)))
+            return;
+
+        // 赋值
+        for (Field field : aClass.getFields()) {
+            // 是否有 注解
+            if (!field.isAnnotationPresent(Autowired.class))
+                continue;
+            Autowired annotation = field.getAnnotation(Autowired.class);
+            // 得到注解值
+            String autowiredBeanName = annotation.value().trim();
+
+            // beanName
+            if ("".equals(beanName)){
+                autowiredBeanName = field.getType().getName();
+            }
+            // private 等 是不可 直接访问的
+            // 强制 级别 访问
+            field.setAccessible(true);
+            try {
+                // 设置 值
+                // 注入
+                // 给 字段 属性//
+                if (this.factoryBeanInstanceCache.get(beanName) == null)
+                    continue;
+                field.set(instance , this.factoryBeanInstanceCache.get(autowiredBeanName).getWrapperInstance());
+
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+
+        }
     }
 
     /**
@@ -158,6 +200,11 @@ public class ApplicationContext {
         try {
             Class<?> aClass = Class.forName(className);
             instance = aClass.newInstance();
+
+            // aop 代理
+            // 入口
+
+
             //缓存 原型对象
             this.factoryBeanObjectCache.put(beanName , instance);
 

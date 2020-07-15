@@ -254,7 +254,7 @@ public class DispatcherServlet extends HttpServlet {
      */
     private void doAutowired() {
         // 注入
-        if (ioc.isEmpty())
+        /*if (ioc.isEmpty())
             return;
         for (Map.Entry<String, Object> entry : ioc.entrySet()) {
 
@@ -291,7 +291,7 @@ public class DispatcherServlet extends HttpServlet {
 
             }
 
-        }
+        }*/
     }
 
     /**
