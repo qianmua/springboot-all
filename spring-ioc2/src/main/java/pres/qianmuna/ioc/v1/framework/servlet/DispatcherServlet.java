@@ -82,7 +82,7 @@ public class DispatcherServlet extends HttpServlet {
      */
     private void doDispatch(HttpServletRequest req, HttpServletResponse resp) throws IOException, InvocationTargetException, IllegalAccessException {
 
-        //得到请求路径
+        /*//得到请求路径
         String uri = req.getRequestURI();
         // 相对 路径
         String contextPath = req.getContextPath();
@@ -139,14 +139,14 @@ public class DispatcherServlet extends HttpServlet {
                 //优化
                 // 从下标中得到 //
 //                String value = paramIndex.get();
-                /*if (!"".equals(value)){
+                *//*if (!"".equals(value)){
                     // 解析 并得到 参数
                     String valueName = Arrays.toString(parameterMap.get(value))
                             .replaceAll("[\\[\\]]", "")
                             .replaceAll("\\s", "");
                     // 赋值
                     values[i] = valueName;
-                }*/
+                }*//*
                 Annotation[][] pa = method.getParameterAnnotations();
                 for (Annotation annotation : pa[i]) {
                     // 是当前 注解？
@@ -174,12 +174,12 @@ public class DispatcherServlet extends HttpServlet {
         String simpleName = toLowerFirstCase(method.getDeclaringClass().getSimpleName());
         // 执行
         method.invoke(ioc.get(simpleName) , req, resp , values);
-
+*/
     }
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        /*//=============ioc=================
+        //=============ioc=================
         // 读取 配置 文件
         doLoadConfig(config.getInitParameter("contextConfigLocation"));
 
@@ -193,7 +193,7 @@ public class DispatcherServlet extends HttpServlet {
 
         //=============di=================
         // di
-        doAutowired();*/
+        doAutowired();
 
         applicationContext = new ApplicationContext(config.getInitParameter("contextConfigLocation"));
 
@@ -229,7 +229,7 @@ public class DispatcherServlet extends HttpServlet {
             }
 
             // 得到 method
-            for (Method method : aClass.getMethods()) {
+            /*for (Method method : aClass.getMethods()) {
 
                 // 是个接口访问？
                 if (!method.isAnnotationPresent(RequestMapping.class))
@@ -245,7 +245,7 @@ public class DispatcherServlet extends HttpServlet {
                 handlerMapping.put(url , method );
                 System.out.println(" scan url -> " + url);
 
-            }
+            }*/
         }
     }
 

@@ -8,9 +8,7 @@ import pres.qianmuna.ioc.v2.framework.beans.config.BeanDefinition;
 import pres.qianmuna.ioc.v2.framework.beans.support.BeanDefinitionReader;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author HJC
@@ -222,5 +220,21 @@ public class ApplicationContext {
      */
     public Object getBean(Class className){
         return getBean(className.getName());
+    }
+
+    /**
+     * 容器大小
+     * @return size
+     */
+    public int getBeanDefinitionCount() {
+        return this.beanDefinitionMap.size();
+    }
+
+    /**
+     * getBeanNames
+     * @return arr
+     */
+    public String[] getBeanDefinitionNames() {
+        return this.beanDefinitionMap.keySet().toArray(new String[this.getBeanDefinitionCount()]);
     }
 }
