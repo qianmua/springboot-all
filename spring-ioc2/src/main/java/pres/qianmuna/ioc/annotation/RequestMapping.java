@@ -1,4 +1,4 @@
-package pres.qianmuna.ioc.v1.framework.annotation;
+package pres.qianmuna.ioc.annotation;
 
 import java.lang.annotation.*;
 
@@ -10,9 +10,9 @@ import java.lang.annotation.*;
  * @description :
  */
 
-@Target({ElementType.FIELD})
+@Target({ElementType.TYPE ,ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Autowired {
+public @interface RequestMapping {
     String value() default "";
 }

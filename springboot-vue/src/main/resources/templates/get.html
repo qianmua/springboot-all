@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/lib/element/element-style.css">
+</head>
+<body>
+    <div id="app">
+
+        <el-table
+                :data="info"
+                style="width: 100%">
+            <el-table-column type="index" label="编号" width="90px">
+
+            </el-table-column>
+            <el-table-column
+                    prop="name"
+                    label="姓名"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="age"
+                    label="年龄"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="dateTime"
+                    label="时间">
+            </el-table-column>
+            <el-table-column
+                    label="操作">
+                <template scope="scope">
+                    <el-button type="info" @click="show(scope.row.name)">姓名</el-button>
+                    <el-button type="primary" @click="show(scope.row.age)">年龄</el-button>
+                    <el-button type="warning" @click="show(scope.row.dateTime)">时间</el-button>
+                </template>
+
+            </el-table-column>
+        </el-table>
+
+        <div>结果：<span>{{res}}</span></div>
+
+    </div>
+</body>
+<script src="../static/js/jquery-3.3.1.min.js"></script>
+<script src="../static/lib/vue/vue.min.js"></script>
+<script src="../static/lib/axios/axios.min.js"></script>
+<script src="../static/lib/element/element.js"></script>
+
+<script>
+
+    new Vue({
+        el: '#app',
+        data:{
+            info: [
+                {name: '0707',age: 53,dateTime: '2020/9/10' } ,
+                {name: '0709',age: 43,dateTime: '2020/9/11' } ,
+                {name: '0708',age: 33,dateTime: '2020/9/12' } ,
+                {name: '0704',age: 13,dateTime: '2020/9/13' } ,
+                {name: '0705',age: 23,dateTime: '2020/9/14' } ,
+                {name: '0703',age: 3,dateTime: '2020/9/15' } ,
+            ],
+            res:''
+        },
+        methods:{
+            show(id){
+                this.res = id
+            }
+        },
+
+    });
+</script>
+</html>

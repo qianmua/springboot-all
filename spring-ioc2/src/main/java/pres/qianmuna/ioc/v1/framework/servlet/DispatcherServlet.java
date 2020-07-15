@@ -1,6 +1,6 @@
 package pres.qianmuna.ioc.v1.framework.servlet;
 
-import pres.qianmuna.ioc.v1.framework.annotation.*;
+import pres.qianmuna.ioc.annotation.*;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -101,6 +101,22 @@ public class DispatcherServlet extends HttpServlet {
         Map<String, String[]> parameterMap = req.getParameterMap();
         Object[] values = new Object[types.length];
 
+        // 参数 顺序
+        Map<String , Integer> paramIndex = new HashMap<>();
+
+        // 优化
+        Annotation[][] params = method.getParameterAnnotations();
+        // 保存 参数名 和 下标
+        for (int i = 0; i < params.length; i++) {
+            for (Annotation annotation : params[i]) {
+                if (annotation instanceof RequestParam){
+                    String pName = ((RequestParam) annotation).value().trim();
+                    paramIndex.put(pName , i);
+
+                }
+            }
+        }
+
         // 实参 赋值
         // 判断 类型
         for (int i = 0; i < values.length; i++) {
@@ -112,6 +128,18 @@ public class DispatcherServlet extends HttpServlet {
             else if (type == String.class){
                 // 得到 参数 注解
                 // 有注解?
+
+                //优化
+                // 从下标中得到 //
+//                String value = paramIndex.get();
+                /*if (!"".equals(value)){
+                    // 解析 并得到 参数
+                    String valueName = Arrays.toString(parameterMap.get(value))
+                            .replaceAll("[\\[\\]]", "")
+                            .replaceAll("\\s", "");
+                    // 赋值
+                    values[i] = valueName;
+                }*/
                 Annotation[][] pa = method.getParameterAnnotations();
                 for (Annotation annotation : pa[i]) {
                     // 是当前 注解？
@@ -120,7 +148,7 @@ public class DispatcherServlet extends HttpServlet {
                         if (!"".equals(value)){
                             // 解析 并得到 参数
                             String valueName = Arrays.toString(parameterMap.get(value))
-                                    .replaceAll("\\[]", "")
+                                    .replaceAll("[\\[\\]]", "")
                                     .replaceAll("\\s", "");
                             // 赋值
                             values[i] = valueName;
@@ -138,13 +166,13 @@ public class DispatcherServlet extends HttpServlet {
         // 从ioc 中 获取
         String simpleName = toLowerFirstCase(method.getDeclaringClass().getSimpleName());
         // 执行
-        method.invoke(ioc.get(simpleName) , req, resp , parameterMap.get("name")[0] , parameterMap.get("age")[0]);
+        method.invoke(ioc.get(simpleName) , req, resp , values);
 
     }
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-
+        //=============ioc=================
         // 读取 配置 文件
         doLoadConfig(config.getInitParameter("contextConfigLocation"));
 
@@ -156,9 +184,11 @@ public class DispatcherServlet extends HttpServlet {
         // 实例化 ， 并且 缓存到 缓存
         doInstance();
 
+        //=============di=================
         // di
         doAutowired();
 
+        //=============mvc=================
         // init HandlerMapping
         doInitHandlerMapping();
 
