@@ -1,6 +1,7 @@
 package pres.qianmuna.ioc.v1.framework.servlet;
 
 import pres.qianmuna.ioc.annotation.*;
+import pres.qianmuna.ioc.v2.framework.context.ApplicationContext;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -39,6 +40,12 @@ public class DispatcherServlet extends HttpServlet {
      * 解析  配置文件
      */
     private Properties contextConfig = new Properties();
+
+
+    /**
+     * context
+     */
+    private ApplicationContext applicationContext;
 
 
     /**
@@ -172,7 +179,7 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        //=============ioc=================
+        /*//=============ioc=================
         // 读取 配置 文件
         doLoadConfig(config.getInitParameter("contextConfigLocation"));
 
@@ -186,7 +193,9 @@ public class DispatcherServlet extends HttpServlet {
 
         //=============di=================
         // di
-        doAutowired();
+        doAutowired();*/
+
+        applicationContext = new ApplicationContext(config.getInitParameter("contextConfigLocation"));
 
         //=============mvc=================
         // init HandlerMapping
@@ -359,7 +368,7 @@ public class DispatcherServlet extends HttpServlet {
     private void doScanner(String property) {
 
         // 修改 包路径 到 文件路径
-        URL url = this.getClass().getClassLoader().getResource("/" + property.replaceAll("\\.", "/"));
+        /*URL url = this.getClass().getClassLoader().getResource("/" + property.replaceAll("\\.", "/"));
         // 封装 url
         // 读取  class file
         File file = new File(Objects.requireNonNull(url).getFile());
@@ -381,7 +390,7 @@ public class DispatcherServlet extends HttpServlet {
                 classNames.add(fileName);
             }
 
-        }
+        }*/
 
     }
 
@@ -394,7 +403,7 @@ public class DispatcherServlet extends HttpServlet {
         // classpath 加载 到 配置 文件
         // properties
         // 读取到数据流
-        InputStream stream = this.getClass().getClassLoader().getResourceAsStream(contextConfigLocation);
+        /*InputStream stream = this.getClass().getClassLoader().getResourceAsStream(contextConfigLocation);
 
         try {
             contextConfig.load(stream);
@@ -408,7 +417,7 @@ public class DispatcherServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
 
     }
 }
