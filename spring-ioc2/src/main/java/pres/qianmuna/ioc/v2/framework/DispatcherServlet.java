@@ -159,10 +159,19 @@ public class DispatcherServlet extends HttpServlet {
 
     }
 
+
+    /**
+     * init context
+     * @param config web.xml config
+     * @throws ServletException err
+     */
     @Override
     public void init(ServletConfig config) throws ServletException {
-
+        // 初始化 spring
         applicationContext = new ApplicationContext(config.getInitParameter("contextConfigLocation"));
+
+        // 初始化 组件
+        initStrategies(applicationContext);
 
         //=============mvc=================
         // init HandlerMapping
@@ -170,6 +179,102 @@ public class DispatcherServlet extends HttpServlet {
 
         // success
         System.out.println("spring framework init success.");
+    }
+
+    /**
+     * 初始化 组件
+     * @param applicationContext spring
+     */
+    private void initStrategies(ApplicationContext applicationContext) {
+        // file upload
+        initMultipartResolver(applicationContext);
+        // lang
+        initLocaleResolver(applicationContext);
+        // 主题模板
+        initThemeResolver(applicationContext);
+        // handler mapping
+        initHandlerMappings(applicationContext);
+        // adapter适配
+        initHandlerAdapters(applicationContext);
+        // 异常拦截
+        initHandlerExceptionResolvers(applicationContext);
+        // 视图预处理 // 视图 提取
+        initRequestToViewNameTranslator(applicationContext);
+        // 视图转换 初始化
+        initViewResolvers(applicationContext);
+        // flashMap 管理
+        initFlashMapManager(applicationContext);
+    }
+
+    /**
+     * 主题模板
+     * @param applicationContext spring
+     */
+    private void initThemeResolver(ApplicationContext applicationContext) {
+    }
+
+    /**
+     * flashMap 管理
+     * 参数缓存
+     * 页面跳转 防止 参数丢失
+     * 作用域 对象
+     * @param applicationContext spring
+     */
+    private void initFlashMapManager(ApplicationContext applicationContext) {
+    }
+
+    /**
+     * 视图转换 初始化
+     * 模板引擎
+     * @param applicationContext spring
+     */
+    private void initViewResolvers(ApplicationContext applicationContext) {
+    }
+
+    /**
+     * 视图预处理
+     * 视图 提取
+     * request 中
+     * @param applicationContext spring
+     */
+    private void initRequestToViewNameTranslator(ApplicationContext applicationContext) {
+    }
+
+    /**
+     * 异常拦截
+     * @param applicationContext spring
+     */
+    private void initHandlerExceptionResolvers(ApplicationContext applicationContext) {
+    }
+
+    /**
+     * handlerAdapter
+     * 动态参数 适配
+     * @param applicationContext spring
+     */
+    private void initHandlerAdapters(ApplicationContext applicationContext) {
+    }
+
+    /**
+     * handlerMapping
+     * url 映射
+     * @param applicationContext spring
+     */
+    private void initHandlerMappings(ApplicationContext applicationContext) {
+    }
+
+    /**
+     * 初始化 本地语言 环境
+     * @param applicationContext spring
+     */
+    private void initLocaleResolver(ApplicationContext applicationContext) {
+    }
+
+    /**
+     * 多文件 上传
+     * @param applicationContext spring
+     */
+    private void initMultipartResolver(ApplicationContext applicationContext) {
     }
 
     /**
