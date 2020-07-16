@@ -1,4 +1,4 @@
-package pres.qianmuna.ioc.v2.framework;
+package pres.qianmuna.ioc.v2.framework.servlet;
 
 import pres.qianmuna.ioc.annotation.Controller;
 import pres.qianmuna.ioc.annotation.RequestMapping;
@@ -44,12 +44,12 @@ public class DispatcherServlet extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         this.doPost(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             doDispatch(req,resp);
         } catch (IOException | InvocationTargetException | IllegalAccessException e) {
@@ -173,10 +173,6 @@ public class DispatcherServlet extends HttpServlet {
         // 初始化 组件
         initStrategies(applicationContext);
 
-        //=============mvc=================
-        // init HandlerMapping
-        doInitHandlerMapping();
-
         // success
         System.out.println("spring framework init success.");
     }
@@ -261,28 +257,8 @@ public class DispatcherServlet extends HttpServlet {
      * @param applicationContext spring
      */
     private void initHandlerMappings(ApplicationContext applicationContext) {
-    }
-
-    /**
-     * 初始化 本地语言 环境
-     * @param applicationContext spring
-     */
-    private void initLocaleResolver(ApplicationContext applicationContext) {
-    }
-
-    /**
-     * 多文件 上传
-     * @param applicationContext spring
-     */
-    private void initMultipartResolver(ApplicationContext applicationContext) {
-    }
-
-    /**
-     * 初始化 handler
-     */
-    private void doInitHandlerMapping() {
         if (this.applicationContext.getBeanDefinitionCount() == 0)
-            return;
+        return;
 
         String[] beanNames = this.applicationContext.getBeanDefinitionNames();
 
@@ -325,4 +301,19 @@ public class DispatcherServlet extends HttpServlet {
             }
         }
     }
+
+    /**
+     * 初始化 本地语言 环境
+     * @param applicationContext spring
+     */
+    private void initLocaleResolver(ApplicationContext applicationContext) {
+    }
+
+    /**
+     * 多文件 上传
+     * @param applicationContext spring
+     */
+    private void initMultipartResolver(ApplicationContext applicationContext) {
+    }
+
 }
