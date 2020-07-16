@@ -121,7 +121,7 @@ public class DispatcherServlet extends HttpServlet {
      * @param resp res
      * @param modelAndView view
      */
-    private void processDispatchResult(HttpServletRequest req, HttpServletResponse resp, ModelAndView modelAndView) {
+    private void processDispatchResult(HttpServletRequest req, HttpServletResponse resp, ModelAndView modelAndView) throws IOException {
 
         if (null == modelAndView )
             return;
