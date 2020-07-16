@@ -5,9 +5,11 @@ import pres.qianmuna.ioc.annotation.Controller;
 import pres.qianmuna.ioc.annotation.RequestMapping;
 import pres.qianmuna.ioc.annotation.RequestParam;
 import pres.qianmuna.ioc.service.InfoService;
+import pres.qianmuna.ioc.v2.framework.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author HJC
@@ -25,6 +27,24 @@ public class MyController {
 
     @RequestMapping("/hello")
     public void hello(@RequestParam("name") String name , HttpServletRequest request , HttpServletResponse response){
+
+    }
+
+
+    /**
+     * out
+     * @param response response
+     * @param str str
+     * @return mv
+     */
+    private ModelAndView print(HttpServletResponse response , String str){
+
+        try {
+            response.getWriter().write(str);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 

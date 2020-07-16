@@ -16,6 +16,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -39,6 +40,7 @@ public class DispatcherServlet extends HttpServlet {
     /**
      *  handler 容器
      */
+    @Deprecated
     private Map<String , HandlerMapping> handlerMappings = new HashMap<>();
 
     /**
@@ -68,14 +70,19 @@ public class DispatcherServlet extends HttpServlet {
             doDispatch(req,resp);
         } catch (IOException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
-            resp.getWriter().write("500 exception error -> " + Arrays.toString(e.getStackTrace()));
+//            resp.getWriter().write("500 exception error -> " + Arrays.toString(e.getStackTrace()));
+
+            Map<String , Object> model = new HashMap<>();
+            model.put("detail", "server error 500 !");
+            model.put("stackTrace", Arrays.toString(e.getStackTrace()));
+            processDispatchResult(req,resp , new ModelAndView("500" , model));
         }
     }
 
     /**
      * 调用 具体 方法
-     * @param req
-     * @param resp
+     * @param req req
+     * @param resp  resp
      */
     private void doDispatch(HttpServletRequest req, HttpServletResponse resp) throws IOException, InvocationTargetException, IllegalAccessException {
         // get handler
@@ -89,7 +96,7 @@ public class DispatcherServlet extends HttpServlet {
         // get HandlerAdapter
         HandlerAdapter adapter = getAdapter(handler);
 
-        ModelAndView modelAndView = Objects.requireNonNull(adapter).handler(req,resp,handler);
+        ModelAndView modelAndView = Objects.requireNonNull(adapter).handle(req,resp,handler);
 
         // 选择 viewResolver
         processDispatchResult(req,resp,modelAndView);
@@ -103,7 +110,9 @@ public class DispatcherServlet extends HttpServlet {
      * @return adapter
      */
     private HandlerAdapter getAdapter(HandlerMapping handler) {
-        return null;
+        if (this.handlerAdapters.isEmpty())
+            return null;
+        return this.handlerAdapters.get(handler);
     }
 
     /**
@@ -113,6 +122,17 @@ public class DispatcherServlet extends HttpServlet {
      * @param modelAndView view
      */
     private void processDispatchResult(HttpServletRequest req, HttpServletResponse resp, ModelAndView modelAndView) {
+
+        if (null == modelAndView )
+            return;
+        if (this.viewResolvers.isEmpty())
+            return;
+        // 查找 视图
+        for (ViewResolver resolver : this.viewResolvers) {
+            View view = resolver.resolverViewName(modelAndView.getViewName());
+            // 渲染
+            view.render(modelAndView.getModel() , req,resp);
+        }
     }
 
     /**
@@ -121,6 +141,21 @@ public class DispatcherServlet extends HttpServlet {
      * @return handler
      */
     private HandlerMapping getHandler(HttpServletRequest req) {
+        //get url
+        String uri = req.getRequestURI();
+        String path = req.getContextPath();
+        uri = ( "/" + uri).replaceAll(path , "").replaceAll("/+" , "/");
+
+        // 匹配
+        for (HandlerMapping mapping : handlerMappingList) {
+            // 得到 匹配式
+            Matcher matcher = mapping.getUrl().matcher(uri);
+            if (!matcher.matches())
+                continue;
+
+            return mapping;
+        }
+        // null 404
         return null;
     }
 

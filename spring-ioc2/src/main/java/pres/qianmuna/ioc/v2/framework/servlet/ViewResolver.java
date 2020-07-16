@@ -16,4 +16,13 @@ public class ViewResolver {
     public ViewResolver(String templateRoot) {
 
     }
+
+    /**
+     * view
+     * @param viewName
+     * @return
+     */
+    public View resolverViewName(Object viewName) {
+        return null;
+    }
 }

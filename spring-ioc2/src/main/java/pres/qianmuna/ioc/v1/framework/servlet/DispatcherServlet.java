@@ -82,7 +82,7 @@ public class DispatcherServlet extends HttpServlet {
      */
     private void doDispatch(HttpServletRequest req, HttpServletResponse resp) throws IOException, InvocationTargetException, IllegalAccessException {
 
-        /*//得到请求路径
+        //得到请求路径
         String uri = req.getRequestURI();
         // 相对 路径
         String contextPath = req.getContextPath();
@@ -112,7 +112,7 @@ public class DispatcherServlet extends HttpServlet {
         Map<String , Integer> paramIndex = new HashMap<>();
 
         // 优化
-        Annotation[][] params = method.getParameterAnnotations();
+        /*Annotation[][] params = method.getParameterAnnotations();
         // 保存 参数名 和 下标
         for (int i = 0; i < params.length; i++) {
             for (Annotation annotation : params[i]) {
@@ -166,7 +166,7 @@ public class DispatcherServlet extends HttpServlet {
             else
                 values[i] = null;
 
-        }
+        }*/
 
         // 得到 对象
         // beanName
@@ -174,7 +174,6 @@ public class DispatcherServlet extends HttpServlet {
         String simpleName = toLowerFirstCase(method.getDeclaringClass().getSimpleName());
         // 执行
         method.invoke(ioc.get(simpleName) , req, resp , values);
-*/
     }
 
     @Override
