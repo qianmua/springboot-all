@@ -71,6 +71,18 @@ public class HandlerAdapter {
             values[index] = caseStringValue(valueName,types[index]);
         }
 
+        // req
+        //resp
+        // 赋值
+        if (paramIndex.containsKey(HttpServletRequest.class.getName())){
+            int index = paramIndex.get(HttpServletRequest.class.getName());
+            values[index] = req;
+        }
+        if (paramIndex.containsKey(HttpServletResponse.class.getName())){
+            int index = paramIndex.get(HttpServletResponse.class.getName());
+            values[index] = resp;
+        }
+
 
         //执行
         Object invoke = handler.getMethod().invoke(handler.getController(), req, resp, values);

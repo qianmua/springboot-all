@@ -82,4 +82,14 @@ public class View {
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(buffer.toString());
     }
+
+
+    /**
+     * 处理 特殊字符
+     * @param str str
+     * @return str
+     */
+    public static String makeStringForExp(String str){
+        return str.replace("","");
+    }
 }
