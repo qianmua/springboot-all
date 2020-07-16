@@ -240,4 +240,12 @@ public class ApplicationContext {
     public String[] getBeanDefinitionNames() {
         return this.beanDefinitionMap.keySet().toArray(new String[this.getBeanDefinitionCount()]);
     }
+
+    /**
+     * 返回配置信息
+     * @return Properties
+     */
+    public Properties getConfig() {
+        return this.reader.getConfig();
+    }
 }

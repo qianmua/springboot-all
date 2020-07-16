@@ -5,7 +5,10 @@ package pres.qianmuna.ioc.v2.framework.servlet;
  * @version 1.0
  * 谦谦君子 卑以自牧也
  * @date 2020/7/16  20:25
- * @description :
+ * @description : ModelAndView
  */
 public class ModelAndView {
+    public ModelAndView(String s) {
+
+    }
 }

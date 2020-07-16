@@ -156,4 +156,12 @@ public class BeanDefinitionReader {
         chars[0] += 32;
         return String.valueOf(chars);
     }
+
+    /**
+     * 返回配置信息
+     * @return Properties
+     */
+    public Properties getConfig() {
+        return this.contextConfig;
+    }
 }

@@ -3,7 +3,6 @@ package pres.qianmuna.ioc.v2.framework.servlet;
 import pres.qianmuna.ioc.annotation.Controller;
 import pres.qianmuna.ioc.annotation.RequestMapping;
 import pres.qianmuna.ioc.annotation.RequestParam;
-import pres.qianmuna.ioc.annotation.Service;
 import pres.qianmuna.ioc.v2.framework.context.ApplicationContext;
 
 import javax.servlet.ServletConfig;
@@ -11,21 +10,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * @author HJC
  * @version 1.0
  * 谦谦君子 卑以自牧也
  * @date 2020/7/14  21:47
- * @description :
+ * @description : DispatcherServlet
  */
 public class DispatcherServlet extends HttpServlet {
-
 
     private static final long serialVersionUID = -113306101643492603L;
 
@@ -39,8 +39,22 @@ public class DispatcherServlet extends HttpServlet {
     /**
      *  handler 容器
      */
-    private Map<String , Method> handlerMapping = new HashMap<>();
+    private Map<String , HandlerMapping> handlerMappings = new HashMap<>();
 
+    /**
+     * handlerMapping 包含 url
+     */
+    private List<HandlerMapping> handlerMappingList = new ArrayList<>();
+
+    /**
+     * adapter 容器
+     */
+    private Map<HandlerMapping , HandlerAdapter> handlerAdapters = new HashMap<>();
+
+    /**
+     * 视图 容器
+     */
+    private List<ViewResolver> viewResolvers = new ArrayList<>();
 
 
     @Override
@@ -64,99 +78,50 @@ public class DispatcherServlet extends HttpServlet {
      * @param resp
      */
     private void doDispatch(HttpServletRequest req, HttpServletResponse resp) throws IOException, InvocationTargetException, IllegalAccessException {
+        // get handler
+        HandlerMapping handler = getHandler(req);
 
-        //得到请求路径
-        String uri = req.getRequestURI();
-        // 相对 路径
-        String contextPath = req.getContextPath();
-
-        // 处理 路径
-        uri = ( "/" + uri).replaceAll(contextPath , "").replaceAll("/+" , "/");
-
-
-        if (!this.handlerMapping.containsKey(uri))
-            resp.getWriter().write("404 not found!");
-
-
-        Method method = this.handlerMapping.get(uri);
-
-        // 调用 1、obj 2、param
-        // ...[]
-
-        // 形参
-        // 参数类型
-        Class<?>[] types = method.getParameterTypes();
-
-        // 实参
-        Map<String, String[]> parameterMap = req.getParameterMap();
-        Object[] values = new Object[types.length];
-
-        // 参数 顺序
-        Map<String , Integer> paramIndex = new HashMap<>();
-
-        // 优化
-        Annotation[][] params = method.getParameterAnnotations();
-        // 保存 参数名 和 下标
-        for (int i = 0; i < params.length; i++) {
-            for (Annotation annotation : params[i]) {
-                if (annotation instanceof RequestParam){
-                    String pName = ((RequestParam) annotation).value().trim();
-                    paramIndex.put(pName , i);
-
-                }
-            }
+        if (handler == null){
+            processDispatchResult(req,resp,new ModelAndView("404"));
+            return;
         }
 
-        // 实参 赋值
-        // 判断 类型
-        for (int i = 0; i < values.length; i++) {
-            Class<?> type = types[i];
-            if (type == HttpServletRequest.class)
-                values[i] = req;
-            else if (type == HttpServletResponse.class)
-                values[i] = resp;
-            else if (type == String.class){
-                // 得到 参数 注解
-                // 有注解?
+        // get HandlerAdapter
+        HandlerAdapter adapter = getAdapter(handler);
 
-                //优化
-                // 从下标中得到 //
-//                String value = paramIndex.get();
-                /*if (!"".equals(value)){
-                    // 解析 并得到 参数
-                    String valueName = Arrays.toString(parameterMap.get(value))
-                            .replaceAll("[\\[\\]]", "")
-                            .replaceAll("\\s", "");
-                    // 赋值
-                    values[i] = valueName;
-                }*/
-                Annotation[][] pa = method.getParameterAnnotations();
-                for (Annotation annotation : pa[i]) {
-                    // 是当前 注解？
-                    if (annotation instanceof RequestParam){
-                        String value = ((RequestParam) annotation).value().trim();
-                        if (!"".equals(value)){
-                            // 解析 并得到 参数
-                            String valueName = Arrays.toString(parameterMap.get(value))
-                                    .replaceAll("[\\[\\]]", "")
-                                    .replaceAll("\\s", "");
-                            // 赋值
-                            values[i] = valueName;
-                        }
-                    }
-                }
-            }
-            else
-                values[i] = null;
+        ModelAndView modelAndView = Objects.requireNonNull(adapter).handler(req,resp,handler);
 
-        }
+        // 选择 viewResolver
+        processDispatchResult(req,resp,modelAndView);
 
-        // 得到 对象
-        // beanName
-        // 从application 上下文
-        // 执行
-        method.invoke(applicationContext.getBean(method.getDeclaringClass()) , req, resp , values);
 
+    }
+
+    /**
+     * 得到 参数 适配
+     * @param handler handler
+     * @return adapter
+     */
+    private HandlerAdapter getAdapter(HandlerMapping handler) {
+        return null;
+    }
+
+    /**
+     * 统一 结果 处理
+     * @param req req
+     * @param resp res
+     * @param modelAndView view
+     */
+    private void processDispatchResult(HttpServletRequest req, HttpServletResponse resp, ModelAndView modelAndView) {
+    }
+
+    /**
+     * get HandlerMapping
+     * @param req url
+     * @return handler
+     */
+    private HandlerMapping getHandler(HttpServletRequest req) {
+        return null;
     }
 
 
@@ -225,6 +190,19 @@ public class DispatcherServlet extends HttpServlet {
      * @param applicationContext spring
      */
     private void initViewResolvers(ApplicationContext applicationContext) {
+        // a page -> a resolver
+
+        // 读取 配置 路径
+        String templateRoot = applicationContext.getConfig().getProperty("template-root");
+        // 路径下fileName
+        String classPathFileName = this.getClass().getClassLoader().getResource(templateRoot).getFile();
+        File templateRootFile = new File(classPathFileName);
+        for (File file : Objects.requireNonNull(templateRootFile.listFiles())) {
+            //a file -> a resolver
+            this.viewResolvers.add(new ViewResolver(templateRoot));
+
+        }
+
     }
 
     /**
@@ -249,6 +227,11 @@ public class DispatcherServlet extends HttpServlet {
      * @param applicationContext spring
      */
     private void initHandlerAdapters(ApplicationContext applicationContext) {
+        // a method - > a adapter
+        for (HandlerMapping handlerMapping : handlerMappingList) {
+            this.handlerAdapters.put(handlerMapping , new HandlerAdapter());
+        }
+
     }
 
     /**
@@ -292,11 +275,18 @@ public class DispatcherServlet extends HttpServlet {
 
                 // 接口 路径
                 // 接口 / 修正
-                String url = ("/" + baseUrl + "/" + mapping.value() ).replaceAll("/+" , "/");
+                String regex = ("/" + baseUrl + "/" + mapping.value() )
+                        .replaceAll("\\*" , ".*")
+                        .replaceAll("/+" , "/");
+
+                // 正则 表示
+                // 匹配
+                Pattern pattern = Pattern.compile(regex);
+
 
                 // 添加 到 handler 容器 后面调用
-                handlerMapping.put(url , method );
-                System.out.println(" scan url -> " + url);
+                handlerMappingList.add(new HandlerMapping(pattern , bean  ,method) );
+                System.out.println(" scan url -> " + pattern);
 
             }
         }

@@ -8,4 +8,12 @@ package pres.qianmuna.ioc.v2.framework.servlet;
  * @description :
  */
 public class ViewResolver {
+
+    /**
+     * 视图
+     * @param templateRoot templateRoot
+     */
+    public ViewResolver(String templateRoot) {
+
+    }
 }
