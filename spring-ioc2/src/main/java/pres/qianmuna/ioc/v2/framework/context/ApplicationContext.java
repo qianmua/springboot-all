@@ -3,6 +3,8 @@ package pres.qianmuna.ioc.v2.framework.context;
 import pres.qianmuna.ioc.annotation.Autowired;
 import pres.qianmuna.ioc.annotation.Controller;
 import pres.qianmuna.ioc.annotation.Service;
+import pres.qianmuna.ioc.v2.framework.aop.JdkDynamicAopProxy;
+import pres.qianmuna.ioc.v2.framework.aop.support.AdvicedSupport;
 import pres.qianmuna.ioc.v2.framework.beans.BeanWrapper;
 import pres.qianmuna.ioc.v2.framework.beans.config.BeanDefinition;
 import pres.qianmuna.ioc.v2.framework.beans.support.BeanDefinitionReader;
@@ -204,6 +206,18 @@ public class ApplicationContext {
 
             // aop 代理
             // 入口
+            // aop 接入
+            AdvicedSupport config = instanceAopConfig(definition);
+
+            // 代理
+            Objects.requireNonNull(config).setTargetClass(aClass);
+            config.setTarget(instance);
+            //匹配
+            if (config.pointCutMatch()){
+                // 覆盖 实例
+                // 代理 实例
+                instance = new JdkDynamicAopProxy(config).getProxy();
+            }
 
 
             //缓存 原型对象
@@ -213,6 +227,16 @@ public class ApplicationContext {
             e.printStackTrace();
         }
         return instance;
+    }
+
+    /**
+     * aop 接入
+     * @param definition definition
+     * @return AdvicedSupport
+     */
+    private AdvicedSupport instanceAopConfig(BeanDefinition definition) {
+
+        return null;
     }
 
 
