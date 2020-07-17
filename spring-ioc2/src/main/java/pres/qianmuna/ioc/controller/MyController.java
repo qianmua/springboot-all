@@ -24,7 +24,6 @@ public class MyController {
 
     @Autowired private InfoService infoService;
 
-
     @RequestMapping("/hello")
     public void hello(@RequestParam("name") String name , HttpServletRequest request , HttpServletResponse response){
 
