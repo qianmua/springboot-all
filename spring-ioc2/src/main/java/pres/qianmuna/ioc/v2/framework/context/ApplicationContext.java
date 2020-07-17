@@ -4,6 +4,7 @@ import pres.qianmuna.ioc.annotation.Autowired;
 import pres.qianmuna.ioc.annotation.Controller;
 import pres.qianmuna.ioc.annotation.Service;
 import pres.qianmuna.ioc.v2.framework.aop.JdkDynamicAopProxy;
+import pres.qianmuna.ioc.v2.framework.aop.config.AopConfig;
 import pres.qianmuna.ioc.v2.framework.aop.support.AdvicedSupport;
 import pres.qianmuna.ioc.v2.framework.beans.BeanWrapper;
 import pres.qianmuna.ioc.v2.framework.beans.config.BeanDefinition;
@@ -208,6 +209,8 @@ public class ApplicationContext {
             // 入口
             // aop 接入
             AdvicedSupport config = instanceAopConfig(definition);
+            config.setTargetClass(aClass);
+            config.setTarget(instance);
 
             // 代理
             Objects.requireNonNull(config).setTargetClass(aClass);
@@ -235,8 +238,17 @@ public class ApplicationContext {
      * @return AdvicedSupport
      */
     private AdvicedSupport instanceAopConfig(BeanDefinition definition) {
+        AopConfig aopConfig = new AopConfig();
 
-        return null;
+        // 解析
+        aopConfig.setPointCut(this.reader.getConfig().getProperty("point-cut"));
+        aopConfig.setAspectClass(this.reader.getConfig().getProperty("aspect-class"));
+        aopConfig.setAspectBefore(this.reader.getConfig().getProperty("aspect-before"));
+        aopConfig.setAspectAfter(this.reader.getConfig().getProperty("aspect-after"));
+        aopConfig.setAspectAfterThrow(this.reader.getConfig().getProperty("aspect-after-throw"));
+        aopConfig.setAspectAfterThrowingName(this.reader.getConfig().getProperty("aspect-after-throwing-name"));
+
+        return new AdvicedSupport(aopConfig);
     }
 
 
