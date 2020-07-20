@@ -11,7 +11,7 @@ import java.util.*;
  * @date 2020/7/20  17:58
  * @description :
  */
-public class RpcServer {
+public class RpcServer implements Runner{
     /**
      * 注册 表
      * k 业务接口 名
@@ -31,16 +31,32 @@ public class RpcServer {
     public void publish(String basePackage){
         getProviderClass(basePackage);
 
-        doRegister();
+        try {
+            doRegister();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void doRegister() {
+    /**
+     * 发布
+     */
+    private void doRegister() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        if (classCache.isEmpty())
+            return;
+        // get ins
+        for (String s : classCache) {
+            Class<?> aClass = Class.forName(s);
+            // 单个接口 单个实现
+            rejisterMap.put(aClass.getInterfaces()[0].getName() , aClass.newInstance());
+
+        }
 
     }
 
     /**
      * get instance
-     * @param basePackage
+     * @param basePackage basePackage
      */
     private void getProviderClass(String basePackage) {
         // scan data
@@ -61,7 +77,12 @@ public class RpcServer {
             if (!file.getName().endsWith(".class"))
                 continue;
             // CLASS NAME
-            classCache.add(file.getName().replace(".class" , "").trim());
+            classCache.add(basePackage + "." + file.getName().replace(".class" , "").trim());
         }
+    }
+
+    @Override
+    public void start(){
+        
     }
 }
