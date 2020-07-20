@@ -87,8 +87,19 @@
                 success | fail(exception)
             advices.get.after
                 getmethod.invoke
-    
-    
+                
+                
+    result:
+        getBean
+        instanceBean
+            ?proxy
+                proxy
+            JdkDynamicAopProxy.invoke
+                adviceSupport.get
+                advice.getbefore    
+                advice.getafter    
+                advice.err
+                
     
     
     
