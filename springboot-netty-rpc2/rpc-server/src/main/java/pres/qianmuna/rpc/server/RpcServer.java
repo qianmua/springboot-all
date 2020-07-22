@@ -1,6 +1,7 @@
 package pres.qianmuna.rpc.server;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
@@ -59,8 +60,11 @@ public class RpcServer implements Runner{
         // get ins
         for (String s : classCache) {
             Class<?> aClass = Class.forName(s);
+            Class<?>[] interfaces = aClass.getInterfaces();
             // 单个接口 单个实现
-            rejisterMap.put(aClass.getInterfaces()[0].getName() , aClass.newInstance());
+            if (interfaces.length != 1)
+                continue;
+            rejisterMap.put(interfaces[0].getName() , aClass.newInstance());
 
         }
 
@@ -128,7 +132,12 @@ public class RpcServer implements Runner{
                             pipeline.addLast();
                         }
                     });
-
+            // 同步 绑定 //
+            ChannelFuture future = bootstrap.bind(8849).sync();
+            System.out.println("start server port : 8849");
+            future.channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         } finally {
             bossGroup.shutdownGracefully();
             childGroup.shutdownGracefully();
