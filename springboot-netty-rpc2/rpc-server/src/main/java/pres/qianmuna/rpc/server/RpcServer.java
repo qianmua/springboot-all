@@ -133,6 +133,7 @@ public class RpcServer implements Runner{
                         }
                     });
             // 同步 绑定 //
+            // 监听
             ChannelFuture future = bootstrap.bind(8849).sync();
             System.out.println("start server port : 8849");
             future.channel().closeFuture().sync();

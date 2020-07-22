@@ -1,5 +1,8 @@
 package pres.qianmuna.rpc.consumer;
 
+import pres.qianmuna.rpc.client.RpcProxy;
+import pres.qianmuna.rpc.service.TestService;
+
 /**
  * @author HJC
  * @version 1.0
@@ -9,5 +12,8 @@ package pres.qianmuna.rpc.consumer;
  */
 public class RpcConsumer {
 
-
+    public static void main(String[] args) {
+        TestService service = RpcProxy.create(TestService.class);
+        System.out.println(service.sayHello("test"));
+    }
 }
