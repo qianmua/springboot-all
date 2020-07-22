@@ -1,5 +1,17 @@
 package pres.qianmuna.rpc.server;
 
+import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.serialization.ClassResolver;
+import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.codec.serialization.ObjectDecoder;
+import io.netty.handler.codec.serialization.ObjectEncoder;
+
 import java.io.File;
 import java.net.URL;
 import java.util.*;
@@ -83,6 +95,43 @@ public class RpcServer implements Runner{
 
     @Override
     public void start(){
-        
+        NioEventLoopGroup bossGroup = new NioEventLoopGroup();
+        NioEventLoopGroup childGroup = new NioEventLoopGroup();
+
+        ServerBootstrap bootstrap = new ServerBootstrap();
+
+        try {
+            // bind
+            bootstrap.group(bossGroup , childGroup)
+                    // 缓冲 队列 // default 50
+                    .option(ChannelOption.SO_BACKLOG , 1024)
+                    // 长链接  2小时
+                    // 启动心跳机制 检测 长连接
+                    // 不检测 就 活 2小时
+                    .childOption(ChannelOption.SO_KEEPALIVE ,true)
+                    // channel
+                    .channel(NioServerSocketChannel.class)
+                    // channel handler
+                    // 解析
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel ch) throws Exception {
+                            ChannelPipeline pipeline = ch.pipeline();
+
+                            // handler
+                            /* 编解码器 */
+                            pipeline.addLast(new ObjectEncoder());
+                            // 节码 / maxValue / classLoader
+                            pipeline.addLast(new ObjectDecoder(Integer.MAX_VALUE ,
+                                    ClassResolvers.cacheDisabled(null)));
+                            // handler
+                            pipeline.addLast();
+                        }
+                    });
+
+        } finally {
+            bossGroup.shutdownGracefully();
+            childGroup.shutdownGracefully();
+        }
     }
 }
