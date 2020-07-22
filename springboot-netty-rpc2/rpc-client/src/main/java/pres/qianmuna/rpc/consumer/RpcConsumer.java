@@ -18,5 +18,6 @@ public class RpcConsumer {
         * */
         TestService service = RpcProxy.create(TestService.class);
         System.out.println(service.sayHello("test"));
+        System.out.println(service.hashCode());
     }
 }
