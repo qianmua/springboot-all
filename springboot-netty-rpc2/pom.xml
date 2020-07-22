@@ -13,6 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>rpc-server</module>
+        <module>rpc-client</module>
+        <module>rpc-api</module>
     </modules>
 
     <dependencyManagement>
