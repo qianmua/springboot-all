@@ -129,7 +129,8 @@ public class RpcServer implements Runner{
                             pipeline.addLast(new ObjectDecoder(Integer.MAX_VALUE ,
                                     ClassResolvers.cacheDisabled(null)));
                             // handler
-                            pipeline.addLast();
+                            // 处理 接收 信息
+                            pipeline.addLast(new RpcServerHandler(rejisterMap));
                         }
                     });
             // 同步 绑定 //

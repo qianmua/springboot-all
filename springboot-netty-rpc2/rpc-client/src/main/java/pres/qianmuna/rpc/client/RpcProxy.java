@@ -11,6 +11,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
+import pres.qianmuna.rpc.dto.Invocation;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -27,12 +28,12 @@ public class RpcProxy {
 
     /**
      * 生成 代理 服务
-     * @param testServiceClass T 泛型 方法
+     * @param clazz T 泛型 方法
      * @return T
      */
-    public static <T> T create(Class<?> testServiceClass) {
-        return  (T) Proxy.newProxyInstance(testServiceClass.getClassLoader(),
-                new Class[]{testServiceClass},
+    public static <T> T create(Class<?> clazz) {
+        return  (T) Proxy.newProxyInstance(clazz.getClassLoader(),
+                new Class[]{clazz},
                 new InvocationHandler() {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -41,7 +42,7 @@ public class RpcProxy {
                             return method.invoke(this , args);
 
                         // 远程 调用
-                        return rpcInvoker(method , args);
+                        return rpcInvoker(method , clazz,args);
                     }
                 });
     }
@@ -49,10 +50,13 @@ public class RpcProxy {
     /**
      * 远程 调用
      * @param method method
+     * @param clazz clazz
      * @param args  args
-     * @return Object
+     * @return Object result 远程 结果
      */
-    private static Object rpcInvoker(Method method, Object[] args) {
+    private static Object rpcInvoker(Method method, Class<?> clazz, Object[] args) {
+
+        RpcClientHandler handler = new RpcClientHandler();
 
         NioEventLoopGroup group = new NioEventLoopGroup();
 
@@ -77,12 +81,23 @@ public class RpcProxy {
                             pipeline.addLast(new ObjectDecoder(Integer.MAX_VALUE ,
                                     ClassResolvers.cacheDisabled(null)));
                             // handler
-                            pipeline.addLast();
+                            pipeline.addLast(handler);
                         }
                     });
 
             // link service
             ChannelFuture future = bootstrap.connect("localhost", 8849).sync();
+
+            // send rpc info
+            // param
+            // init 调用 信息
+            Invocation invocation = new Invocation();
+            invocation.setClassName(clazz.getName())
+                    .setMethodName(method.getName())
+                    .setParamType(method.getParameterTypes())
+                    .setParamValues(args);
+            // send server
+            future.channel().writeAndFlush(invocation).sync();
 
             future.channel().closeFuture().sync();
 
@@ -92,6 +107,6 @@ public class RpcProxy {
             group.shutdownGracefully();
         }
 
-        return null;
+        return handler.getResult();
     }
 }

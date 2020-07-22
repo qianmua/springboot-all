@@ -13,6 +13,9 @@ import pres.qianmuna.rpc.service.TestService;
 public class RpcConsumer {
 
     public static void main(String[] args) {
+        /*
+        * 转换 对应的 方法 去 远程 调用
+        * */
         TestService service = RpcProxy.create(TestService.class);
         System.out.println(service.sayHello("test"));
     }
