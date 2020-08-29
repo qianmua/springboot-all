@@ -1,0 +1,6 @@
+server:
+  port: 8989
+  undertow:
+    direct-buffers: true
+    io-threads: 4
+    worker-threads: 30

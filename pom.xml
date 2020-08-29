@@ -76,6 +76,7 @@
         <module>springboot-blog-commint</module>
         <module>spring-ioc2</module>
         <module>springboot-netty-rpc2</module>
+        <module>springboot-undertow</module>
     </modules>
 
     <dependencyManagement>
