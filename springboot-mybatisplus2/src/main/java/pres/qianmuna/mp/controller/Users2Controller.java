@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pres.qianmuna.mp.api.R;
 import pres.qianmuna.mp.entity.Users2;
+import pres.qianmuna.mp.exception.QmException;
 import pres.qianmuna.mp.service.Users2Service;
 
 import java.util.List;
@@ -28,7 +30,9 @@ public class Users2Controller {
     private Users2Service users2Service;
 
     @GetMapping("/de")
-    public R findAll(){
+    public R findAll(@RequestParam(value = "auth" ,required = false) String auth){
+
+
         List<Users2> list = users2Service.list();
         return R.ok()
                 .data("list" , list);

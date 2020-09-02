@@ -3,6 +3,7 @@ package pres.qianmuna.mp.api;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +16,9 @@ import java.util.Map;
  */
 @Data
 @Accessors( chain = true)
-public class R {
+public class R implements Serializable {
+
+    private static final long serialVersionUID = -3585505737521717135L;
 
     private Integer code;
 
@@ -24,7 +27,6 @@ public class R {
     private Map<String , Object> data = new HashMap<>();
 
     private R(){}
-
 
     public static R ok(){
         return new R()
