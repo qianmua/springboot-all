@@ -77,6 +77,7 @@
         <module>spring-ioc2</module>
         <module>springboot-netty-rpc2</module>
         <module>springboot-undertow</module>
+        <module>springboot-mybatisplus2</module>
     </modules>
 
     <dependencyManagement>
