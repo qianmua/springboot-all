@@ -78,6 +78,7 @@
         <module>springboot-netty-rpc2</module>
         <module>springboot-undertow</module>
         <module>springboot-mybatisplus2</module>
+        <module>springboot-kafka</module>
     </modules>
 
     <dependencyManagement>

@@ -1,0 +1,31 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: kafka-demo
+  profiles:
+    active: dev
+  kafka:
+    bootstrap-servers: localhost:9092
+    # provider
+    producer:
+      retries: 0
+      # 批量发送数据数量
+      batch-size: 16484
+      buffer-memory: 33554422
+      # key and value 编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    # consumer
+    consumer:
+      group-id: user-log-group
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      # key and value 编解码方式
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+
+
