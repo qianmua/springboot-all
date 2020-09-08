@@ -1,7 +1,12 @@
 package pres.qm.kafka;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import pres.qm.kafka.product.Product;
+
+import javax.annotation.PostConstruct;
+import java.util.stream.IntStream;
 
 /**
  * @author HJC
@@ -12,6 +17,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class KafkaTestBootstrap {
+
+    @Autowired
+    private Product product;
+
+    @PostConstruct
+    public void init(){
+        IntStream.range(1 , 10)
+                .forEach(v1 -> product.snedMessage(v1 + ""));
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(KafkaTestBootstrap.class , args);

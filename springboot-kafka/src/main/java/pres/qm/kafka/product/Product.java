@@ -7,6 +7,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 import pres.qm.kafka.msg.MsgPo;
 
+import javax.annotation.Resource;
 import java.util.UUID;
 
 /**
@@ -20,13 +21,13 @@ import java.util.UUID;
 @Component
 public class Product {
 
-    @Autowired
+    @Resource
     private KafkaTemplate<String , Object> kafkaTemplate;
 
-    public void snedMessage(){
+    public void snedMessage(String msg){
         MsgPo msgPo = new MsgPo();
         msgPo.setCode("1")
-                .setMessage("hello world")
+                .setMessage("hello world : " + msg)
                 .setToken(UUID.randomUUID().toString())
                 ;
 
