@@ -8,6 +8,7 @@ import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.RequestOptions;
@@ -17,17 +18,22 @@ import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.client.indices.PutMappingRequest;
 import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author HJC
@@ -264,9 +270,28 @@ public class ElasticApi {
     }
 
 
-    public void searchDocument(){
+    public void searchDocument(String indexNmae) throws IOException{
+        SearchRequest searchRequest = new SearchRequest(indexNmae);
 
+        BoolQueryBuilder booleanQueryBuilder = QueryBuilders.boolQuery();
+
+        // 过滤出年龄在15~40岁之间的docuemnt
+        booleanQueryBuilder.filter(QueryBuilders.rangeQuery("age").from(15).to(40));
+        // bool must条件， 找出description字段中包含Dubbo的document
+        booleanQueryBuilder.must(QueryBuilders.matchQuery("description", "Dubbo"));
+
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        sourceBuilder.query(booleanQueryBuilder);
+        sourceBuilder.from(0);
+        sourceBuilder.size(5);
+        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
+
+        searchRequest.source(sourceBuilder);
+
+        // 同步的方式发送请求
+        esClient.search(searchRequest, RequestOptions.DEFAULT);
     }
+
 
 
 
