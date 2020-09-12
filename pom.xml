@@ -80,7 +80,13 @@
         <module>springboot-mybatisplus2</module>
         <module>springboot-kafka</module>
         <module>springboot-elasticsearch</module>
+        <module>springboot-elasticsearch2</module>
     </modules>
+
+    <properties>
+
+        <elasticsearch.version>7.6.1</elasticsearch.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
