@@ -97,4 +97,212 @@ GET _analyze
 
 ```
 
+> 自定义词库
 
+    词典后缀 .dic
+    
+    
+## restful风格操作
+
+    一种原则和约束条件
+
+    rest 通过不同命令操作不同的类型
+
+    
+    
+> 创建索引
+
+    put     创建
+    post    创建
+    post    修改
+    delete  删除
+    get     查找一个
+    post    查找所有
+    
+    创建索引
+    PUT /test1/type1/1
+    {
+        "name": "aaa",
+        "age" : 111
+        
+    }
+    
+    // PUT /索引名/类型名（逐渐弃用）/文档id
+    {
+        请求体
+    }
+    
+> 类型
+
+    字符串类型
+    text    keyword
+    数值类型
+    long integer short byte double float half float scaled
+    日期类型
+    date
+    二进制类型
+    binary
+    ..
+    
+    
+> 指定字段类型
+    
+    创建规则
+```
+PUT /test2
+{
+    "mappings":{
+        "properties":{
+            "name":{
+                "type": "text" 
+            },
+            "age": {
+                "type" : "long"
+            }
+        }
+    }
+}
+
+```
+
+> Get
+
+    // 查看具体信息
+    `GET test2`
+
+
+**文档没有指定类型，es则会默认配置字段类型**
+
+
+> 修改文档
+
+
+    POST + _update
+```
+POST /test1/doc1/1/_update
+{
+    "tets":{
+        "name": "aaaa"
+    }
+}
+```
+
+
+> 查找
+
+`GET test1/docuser/_search?q=name:ddddd`
+
+    匹配设置
+    
+```
+GET test1/doc/_search
+{
+    "query":{
+    // 匹配
+        "match": {
+            "name": "ddd"
+        }
+    },
+    // 结果过滤 ， 按照 字段查找
+    "_source": ["name" , "desc"],
+    //排序
+    "sort" : [
+        {
+            "age": {
+                "order": "asc"
+            }
+        }
+    ],
+    // 分页
+    "from": 0,
+    "size" : 100,
+    // 布尔值查询
+    "bool" : {
+        // must  (and)
+        // should (or)
+        "must":[
+            {
+                "match": {
+                    "name": "a",
+                }
+            },
+            {
+                "match": {
+                    "age": 11
+                }
+            }
+        ]
+    },
+    // 过滤器
+    "filter":{
+        "range":{
+            "age":{
+                "lt" : 10
+            }
+        }
+    }
+}
+```
+
+> 过滤器
+    
+- gt >
+- lt <
+- gte >= 
+- lte <= 
+
+
+    区间：
+    "age": {
+        "gt": 1,
+        "lt": 100
+    } 
+ 
+    
+> 匹配多个条件
+
+    用空格隔开
+```
+
+GET test1/doc/_search
+{
+    "query":{
+    // 匹配 多个条件
+        "match": {
+            "name": "ddd aaa ccc"
+        }
+    }
+}
+
+```
+> 精准查询
+
+    term // 直接通过倒排索引指定词条精确查询
+    
+    match // 使用分词器解析 (先分析文档 ， 然后用分析结果查询)
+    
+    
+## text keyword    
+
+    text 可以被分词器解析
+    
+    keyword 不会被解析
+    
+        
+> 高亮查询
+
+    "query":{
+        "match":{
+            "name":"qm啊"
+        }
+    },
+    "higlight":{
+        // 自定义标签
+        // 默认 <em>
+        "pres_tags": "<p class='key' stype='color:red'>",
+        "post_tags": "</p>"
+        
+        "fields":{
+            "name": {} // 查询结果字段 <em>qm</em><em>啊</em>test
+        }
+    }
