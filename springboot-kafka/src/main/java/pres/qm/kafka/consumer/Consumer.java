@@ -25,5 +25,6 @@ public class Consumer {
             Object o = optionalO.get();
             System.out.println(o);
         }
+
     }
 }
