@@ -28,10 +28,12 @@ public class ConsumerFastStart {
         // 值序列化器
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG , "127.0.0.1:9092");
+        // 消费者组
         properties.put(ConsumerConfig.GROUP_ID_CONFIG , "group.qm");
 
         // 消息订阅
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
+        // 订阅主题
         consumer.subscribe(Collections.singletonList("qm_kafka"));
 
         while (true){

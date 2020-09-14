@@ -35,6 +35,8 @@ public class ProductFastStart {
         // 拦截器
         properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG , ProducerinterceptorPrefix.class.getName());
 
+        properties.put(ProducerConfig.ACKS_CONFIG , "1");
+
         // product
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 
