@@ -4,6 +4,7 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
+import pres.qm.kafka.chapter2.ProducerinterceptorPrefix;
 
 import java.util.Properties;
 
@@ -30,6 +31,9 @@ public class ProductFastStart {
 
         // 集群地址
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG , "localhost:9092");
+
+        // 拦截器
+        properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG , ProducerinterceptorPrefix.class.getName());
 
         // product
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
