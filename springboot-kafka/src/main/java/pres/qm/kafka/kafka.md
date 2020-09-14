@@ -104,8 +104,26 @@
     因此肯定是producer会比consumer处理速度快，如果没有kafka，producer直接调用consumer，
     那么就会造成整个系统的处理速度慢，加一层kafka作为MQ，可以起到缓冲的作用。
        
+       
+**异步通信** 作为MQ，Producer与Consumer异步通信
+
+- Broker：Kafka节点，一个Kafka节点就是一个broker，多个broker可以组成一个Kafka集群。
+- Topic：一类消息，消息存放的目录即主题，例如page view日志、以topic的形式存在，Kafka集群能够同时负责多个topic的分发。
+- Partition topic物理上的分组，一个topic可以分为多个partition，每个partition是一个有序的队列
+- Segment：partition物理上由多个segment组成，每个Segment存着message信息    
+- Producer 生产message发送到topic
+- Consumer  订阅topic消费message, consumer作为一个线程来消费
+- Consumer Group 一个Consumer Group包含多个consumer
 
 
+
+## Kafka文件存储机制
+
+     Kafka中发布订阅的对象是topic。
+     我们可以为每类数据创建一个topic，把向topic发布消息的客户端称作producer，从topic订阅消息的客户端称作consumer。
+     Producers和consumers可以同时从多个topic读写数据
+     。一个kafka集群由一个或多个broker服务器组成，它负责持久化和备份具体的kafka消息。
+    
 ## kafka 数据产生消费
 
     producer send
@@ -141,4 +159,15 @@
 > 自定义序列化器
 
     实现 Serializer<T> 接口
+    
+## 分区器
+
+    默认分区策略
+    
+    消息传递key：
+    
+        hash（key）%分区数量（numPartions） key相同 分配到同一分区    
+        
+> 自定义分区器
+
     
