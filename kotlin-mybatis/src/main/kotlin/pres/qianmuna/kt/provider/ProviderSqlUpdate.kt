@@ -23,6 +23,7 @@ open class ProviderSqlUpdate{
         when{ providerModel.proAddress != null -> sql.SET("proAddress = #{proAddress}") }
         when{ providerModel.proFax != null -> sql.SET("proFax = #{proFax}") }
         sql.WHERE("id = #{id}")
+        sql.AND()
 
         return sql.toString()
     }
