@@ -262,11 +262,77 @@
 
 ## 再均衡监听器
 
+    为消费组高可用，和伸缩性提供保证
     
+    就是消息重复消费，消息丢失
     
+    在均衡期间 消息不可被消费，STW
     
+    // subscribe
+    做一个同步位移提交
+    `consumer.subscribe(Arrays.asList(topic) , new ConsumerRebalanceListener(){
+        ...
+        cousumer.commitSync(b)
+    })`
+    // 记录消费位置
     
-    
+## 消费者 拦截器
 
+    对消息处理进行定制
+    无效消息处理，消息超时还未消费，处理
     
+## 主题 topic
+    
+    主题元数据保存在zookeeper节点
+    
+> 创建主题
+
+    bin/kafka-topic.sh --zookeeper localhost:2181 --create --topic topicName --partition 2 --replication-factor 1
+    localhost:2181 多个 zookeeper 使用 ， 分割    
+    --replication-factor 副本数 ，不能超过节点数
+    
+> 修改主题
+
+    动作命令 --alter
+    
+    bin/kafka-topic.sh --alter --zookeeper localhost:2181 --topic topicName --config flush.message=1
+    
+    
+> 删除主题    
+    
+    bin/kafka-topic.sh --alter --zookeeper localhost:2181 --topic topicName --delete-config flush.message
+    
+> 增加分区
+    
+    bin/kafka-topic.sh --alter --zookeeper localhost:2181 --topic topicName --partitiion 3
+    
+    只能增加不能减少
+    
+## 分区机制
+
+    topic 包含多个分区
+    分区包含多个副本 （broker）
+    副本中有个一leader ，当一个leader不可用时 ， 会选举其他副本作为leader
+    
+> leader 选举
+
+    ISR 与leader保持同步 有资格选举leader
+    OSR 跟leader又点滞后
+    
+## 储存结构
+
+    分区下面都有多个sengment数据段，储存消息
+    
+> segment 文件结构
+
+    包含index file ， data file 后缀为 .index , .log 索引文件 数据文件
+    
+## 日志索引
+
+    数据文件分段 ， 文件命名以该段中最小的offser命名 ， 使用使用二分查找可快速查找    
+    
+    偏移量索引 将索引分割 （稀疏索引） 索引区域 去找指定索引message 二分之查找
+    
+## 日志删除
+
     
