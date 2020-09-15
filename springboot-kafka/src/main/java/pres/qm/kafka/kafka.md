@@ -410,4 +410,25 @@
         
         
         
-        
+## 数据管道 connect
+
+    数据导出 source -> sink
+    
+    connect
+
+> task
+    
+    将数据移入移出kafka
+    
+> worker
+
+    负责管理连接器配置，启动链接器和链接器任务
+    提供REST API
+    
+> 转换器 
+
+    comect 与其他储存系统发送接收数据之间转换
+    
+## 与文件系统之间数据传递
+
+    
