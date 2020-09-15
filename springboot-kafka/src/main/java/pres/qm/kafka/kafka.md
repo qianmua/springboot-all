@@ -335,4 +335,79 @@
     
 ## 日志删除
 
+
+## 幂等性
+
+    场景：
+    在单个片会话中保证幂等性， 不跨片区
     
+## 事务
+
+    弥补幂等性
+    可以保证多个分区下写入操作的原子性
+    
+> 开启
+
+    生产者 开启幂等性
+    // 默认为true
+    transaction.id 设置为空
+    
+    
+## 控制器
+
+    kafka 集群中 多个 broker节点，其中一个节点会被选举为 控制器 controller
+    负责管理 集群中所有分区副本与状态， leader出现问题时，控制器负责该分区重新选举
+    
+    topic增加分区时，也是控制器负责重新分配
+    
+    控制器依赖于zoopeeker（zoopeeker leader选举机制）
+    zookeeper中存在一个与控制器有关的节点， 持久节点，存放控制器发生变更的次数（控制器纪元）
+    
+## 可靠性保证
+
+    保证分区消息顺序
+    
+> 失效副本
+
+    ISR 中副本 读写超时，复制速度跟不上leader速度，从ISR剔除，
+    如果跟上后 ，在拉回ISR
+
+
+## 一致性保证
+
+    leader 挂掉之后 选举新的leader ， 以新leader的 HW 为准，要是老leader数据还未写完
+    
+    当老leader重启后，会从新leader 的HW开始同步
+    （数据不一致）       
+    要是 在老leader 回复时有新的消息来，老leader HW 与 新leader HW 同步 导致数据不一致
+    
+    解决：
+    通过一对值（epoch 【leader版本号】 ， offset 【对应该leader写入第一条消息时位移】）
+    
+    
+## 消息重复场景， 解决方案
+
+    生产端重复：
+    
+        生产者发送没有得到正确broker响应 导致 producer重试
+        解决：
+        开启幂等性 配置文件：enable.idempotence=true
+        ack=0 不充实，可能会造成数据丢失（eg: 日志收集）
+        
+    消费端重复：
+    
+        数据消费完没有即时提交offset 到broker
+        
+        解决方案：
+        取消自动提交
+        下游做幂等性
+        
+        
+## 消费者组管理
+
+    查看消费者组：
+        bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+        
+        
+        
+        
