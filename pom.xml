@@ -81,6 +81,7 @@
         <module>springboot-kafka</module>
         <module>springboot-elasticsearch</module>
         <module>springboot-elasticsearch2</module>
+        <module>springboot-kafka2</module>
     </modules>
 
     <properties>
