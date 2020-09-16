@@ -4,3 +4,6 @@ spring:
   kafka:
     producer:
       bootstrap-servers: 127.0.0.1:9092
+      # 事务
+      transaction-id-prefix: kafka_tx.
+
