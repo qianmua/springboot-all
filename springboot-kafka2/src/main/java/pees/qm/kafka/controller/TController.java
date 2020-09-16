@@ -68,9 +68,9 @@ public class TController {
     public String txSendMsg2(@PathVariable String msg){
 
 
-        kafkaTemplate.send(topic,"A");
+        kafkaTemplate.send(topic,"A" + msg);
 //            throw new RuntimeException("err");
-        kafkaTemplate.send(topic,"B");
+        kafkaTemplate.send(topic,"B" + msg);
         return "success";
     }
 
