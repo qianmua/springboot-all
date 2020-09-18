@@ -82,6 +82,7 @@
         <module>springboot-elasticsearch</module>
         <module>springboot-elasticsearch2</module>
         <module>springboot-kafka2</module>
+        <module>spring-s-m-4-javaConfig</module>
     </modules>
 
     <properties>
