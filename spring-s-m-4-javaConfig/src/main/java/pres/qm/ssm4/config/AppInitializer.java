@@ -1,6 +1,6 @@
 package pres.qm.ssm4.config;
 
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+//import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
  * @author HJC
@@ -9,8 +9,8 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  * @date 2020/9/18  16:43
  * @description :
  */
-public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-    @Override
+public class AppInitializer /*extends AbstractAnnotationConfigDispatcherServletInitializer*/ {
+    /*@Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[]{RootConfig.class};
     }
@@ -23,5 +23,5 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
-    }
+    }*/
 }
