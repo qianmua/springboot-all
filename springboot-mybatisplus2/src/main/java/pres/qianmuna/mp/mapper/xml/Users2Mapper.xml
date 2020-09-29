@@ -2,4 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pres.qianmuna.mp.mapper.Users2Mapper">
 
+    <insert id="saveBatchsMore" >
+        insert into users2( password, tel, name, address, addrName) VALUES
+            <foreach collection="list" item="item" index="index" separator=",">
+                (#{index.password} , #{index.tel} , #{index.name} , #{index.address} ,#{index.addrName} )
+            </foreach>
+    </insert>
+
 </mapper>
