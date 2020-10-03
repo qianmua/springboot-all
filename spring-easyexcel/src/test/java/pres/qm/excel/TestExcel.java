@@ -1,18 +1,17 @@
 package pres.qm.excel;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.util.FileUtils;
+import com.alibaba.excel.write.builder.ExcelWriterTableBuilder;
 import com.alibaba.excel.write.metadata.WriteSheet;
+import com.alibaba.excel.write.metadata.WriteTable;
+import org.apache.poi.ss.usermodel.TableStyle;
 import org.junit.Test;
-import pres.qm.excel.po.ComplexHeadData;
-import pres.qm.excel.po.ConverterData;
-import pres.qm.excel.po.ImageData;
-import pres.qm.excel.po.TestData;
+import pres.qm.excel.po.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -99,11 +98,73 @@ public class TestExcel {
         }
     }
 
+    @Test
+    public void m6() throws FileNotFoundException {
+        String s = TestExcel.class.getResource("/").getPath() + "simplyWrite" + System.currentTimeMillis() + ".xlsx";
+        String date = "2020年09月32日出货表";
+
+        EasyExcel.write(s, DemoStyleData.class)
+                .head(head(date))
+                .sheet("模板")
+                .doWrite(data3());
+
+    }
+
+
+    private List<List<String>> head(String date) {
+        List<List<String>> list = new ArrayList<List<String>>();
+
+        List<String> head0 = new ArrayList<String>();
+        List<String> head1 = new ArrayList<String>();
+        List<String> head2 = new ArrayList<String>();
+        List<String> head3 = new ArrayList<String>();
+        List<String> head4 = new ArrayList<String>();
+        List<String> head5 = new ArrayList<String>();
+        List<String> head6 = new ArrayList<String>();
+        List<String> head7 = new ArrayList<String>();
+
+        head0.add(date);
+        head1.add(date);
+        head2.add(date);
+        head3.add(date);
+        head4.add(date);
+        head5.add(date);
+        head6.add(date);
+        head7.add(date);
+
+        head0.add("客户");
+        head1.add("订单号");
+        head2.add("货号");
+        head3.add("数量");
+        head4.add("工厂");
+        head5.add("工厂交期");
+        head6.add("船期");
+        head7.add("贸易条款");
 
 
 
+        list.add(head0);
+        list.add(head1);
+        list.add(head2);
+        list.add(head3);
+        list.add(head4);
+        list.add(head5);
+        list.add(head6);
+        list.add(head7);
 
-
+        return list;
+    }
+    private List<DemoStyleData> data3(){
+        ArrayList<DemoStyleData> testData = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            DemoStyleData data = new DemoStyleData();
+            data.setString("str1");
+            data.setDate(new Date());
+            data.setDoubleData(0.05 + 0.34);
+            testData.add(data);
+        }
+        return testData;
+    }
 
     private List<ComplexHeadData> cData(){
         ArrayList<ComplexHeadData> testData = new ArrayList<>();
