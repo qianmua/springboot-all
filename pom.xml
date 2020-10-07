@@ -84,6 +84,7 @@
         <module>springboot-kafka2</module>
         <module>spring-s-m-4-javaConfig</module>
         <module>spring-easyexcel</module>
+        <module>springboot-test-localdate</module>
     </modules>
 
     <properties>
