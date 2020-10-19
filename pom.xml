@@ -85,6 +85,7 @@
         <module>spring-s-m-4-javaConfig</module>
         <module>spring-easyexcel</module>
         <module>springboot-test-localdate</module>
+        <module>springboot-aqs</module>
     </modules>
 
     <properties>
