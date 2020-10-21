@@ -43,6 +43,7 @@ public class TransactionProvider {
                 5,
                 20,
                 TimeUnit.SECONDS,
+                // 有界队列
                 new ArrayBlockingQueue<>(20),
                 /*r -> {
                     Thread thread = new Thread(r);

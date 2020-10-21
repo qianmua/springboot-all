@@ -26,7 +26,7 @@ public class Init {
         consumer.setConsumeMessageBatchMaxSize(2);
 
         consumer.subscribe("topic_provider_hello_world", // 订阅 主题
-                "Tags || TagA" // or * // 晓飞规则·
+                "Tags || TagA" // or * // 消费规则·
                 );
 
 

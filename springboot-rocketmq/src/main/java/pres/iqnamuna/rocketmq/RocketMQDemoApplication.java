@@ -1,5 +1,8 @@
 package pres.iqnamuna.rocketmq;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 /**
  * @author HJC
  * @version 1.0
@@ -7,5 +10,10 @@ package pres.iqnamuna.rocketmq;
  * @date 2020/5/30  12:44
  * @description :
  */
+@SpringBootApplication
 public class RocketMQDemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(RocketMQDemoApplication.class,args);
+    }
 }

@@ -33,7 +33,7 @@ public class ConsumerB {
         consumer.setConsumeMessageBatchMaxSize(3);
 
         consumer.subscribe("topic_broad_hello_world", // 订阅 主题
-                "Tags || TagA" // or * // 晓飞规则·
+                "Tags || TagA" // or * // 消费规则·
                 );
         /*
         * 有序 消费
