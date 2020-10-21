@@ -7,3 +7,9 @@ spring:
     pool:
       # 最大链接数
       max-connections: 10
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8
+

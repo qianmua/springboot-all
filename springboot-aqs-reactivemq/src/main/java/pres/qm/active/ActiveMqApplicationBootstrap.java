@@ -1,8 +1,14 @@
 package pres.qm.active;
 
+import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jms.annotation.EnableJms;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.jms.Queue;
+
 
 /**
  * @author HJC
@@ -13,7 +19,17 @@ import org.springframework.jms.annotation.EnableJms;
  */
 @SpringBootApplication
 @EnableJms
+@EnableTransactionManagement
 public class ActiveMqApplicationBootstrap {
+
+    /**
+     * node jms
+     * @return jms queue
+     */
+    @Bean
+    public Queue queue(){
+        return new ActiveMQQueue("demo_req");
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(ActiveMqApplicationBootstrap.class,args);
