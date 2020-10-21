@@ -1,0 +1,9 @@
+server:
+  port: 9090
+spring:
+  activemq:
+    broker-url: tcp://139.196.166.75:61617
+    in-memory: false
+    pool:
+      # 最大链接数
+      max-connections: 10

@@ -86,6 +86,7 @@
         <module>spring-easyexcel</module>
         <module>springboot-test-localdate</module>
         <module>springboot-aqs</module>
+        <module>springboot-aqs-reactivemq</module>
     </modules>
 
     <properties>

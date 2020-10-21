@@ -43,7 +43,7 @@ public class AQSController {
             return "fail null";
         }
         // volatile
-        stock ++;
+        stock --;
         jdbcTemplate.update("update shop_order set stock=? where id= 1" , stock);
         System.out.println("success -> " + stock);
         //unlock
