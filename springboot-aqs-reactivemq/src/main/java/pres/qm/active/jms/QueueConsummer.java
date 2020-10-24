@@ -47,17 +47,17 @@ public class QueueConsummer {
             messageConsumer = session.createConsumer(destination);
 
             while (true){
-                messageConsumer.receive(1000);
+                // 取出消息
+                TextMessage textMessage = (TextMessage) messageConsumer.receive(100000);
+
+                if (textMessage != null){
+                    System.out.println("message : " + textMessage.getText());
+                }else
+                    break;
             }
 
         } catch (JMSException e) {
             e.printStackTrace();
-        }finally {
-
         }
-    }
-
-    private static void sendMessage(Session session, MessageProducer messageProducerl) {
-
     }
 }

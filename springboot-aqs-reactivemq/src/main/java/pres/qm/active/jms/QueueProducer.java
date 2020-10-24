@@ -18,7 +18,7 @@ public class QueueProducer {
     // 默认psw
     public static final String PASSWORD = ActiveMQConnectionFactory.DEFAULT_PASSWORD;
     // 默认url
-    public static final String ACTIVE = ActiveMQConnectionFactory.DEFAULT_BROKER_URL;
+    public static final String ACTIVE = "tcp://139.196.166.75:61617";
     // 发送条数
     public static final int MessageNum = 10;
 
@@ -54,11 +54,27 @@ public class QueueProducer {
         } catch (JMSException e) {
             e.printStackTrace();
         }finally {
-
+            if (connection != null){
+                try {
+                    connection.close();
+                } catch (JMSException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-    private static void sendMessage(Session session, MessageProducer messageProducerl) {
-
+    /**
+     * send message
+     * @param session
+     * @param messageProducerl
+     * @throws JMSException
+     */
+    private static void sendMessage(Session session, MessageProducer messageProducerl) throws JMSException {
+        for (int i = 0; i < QueueProducer.MessageNum; i++) {
+            TextMessage textMessage = session.createTextMessage("send message" + i);
+            System.out.println("send message is " + i);
+            messageProducerl.send(textMessage);
+        }
     }
 }
