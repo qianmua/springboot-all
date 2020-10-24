@@ -24,8 +24,6 @@ public class TestController {
     @Autowired
     private Queue queue;
 
-
-
     @RequestMapping("/send")
     public void send(){
         String s = "A";

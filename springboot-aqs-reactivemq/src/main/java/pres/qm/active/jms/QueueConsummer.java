@@ -18,7 +18,7 @@ public class QueueConsummer {
     // 默认psw
     public static final String PASSWORD = ActiveMQConnectionFactory.DEFAULT_PASSWORD;
     // 默认url
-    public static final String ACTIVE = ActiveMQConnectionFactory.DEFAULT_BROKER_URL;
+    public static final String ACTIVE = "tcp://139.196.166.75:61617";
     // 发送条数
     public static final int MessageNum = 10;
 
