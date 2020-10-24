@@ -15,7 +15,7 @@ import javax.jms.Queue;
  * @version 1.0
  * 谦谦君子 卑以自牧也
  * @date 2020/10/21  14:08
- * @description :
+ * @description : 流量削峰
  */
 @SpringBootApplication
 @EnableJms

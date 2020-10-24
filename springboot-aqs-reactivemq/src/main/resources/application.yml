@@ -6,7 +6,7 @@ spring:
     in-memory: false
     pool:
       # 最大链接数
-      max-connections: 10
+      max-connections: 100
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
