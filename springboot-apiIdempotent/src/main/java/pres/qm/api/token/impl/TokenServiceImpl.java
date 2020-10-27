@@ -29,7 +29,7 @@ public class TokenServiceImpl implements TokenService {
     private RedisTemplate<String , Serializable> redisTemplate;
 
     @Override
-    public ServerResponse createToken() {
+    public String createToken() {
         String str = UUID.randomUUID().toString().replace("-" , "");
 
         // 拼接 token
@@ -38,7 +38,7 @@ public class TokenServiceImpl implements TokenService {
         token.append("API:").append(str);
         redisTemplate.opsForValue().set(token.toString() , token.toString() , 1800 , TimeUnit.SECONDS);
         // return token
-        return ServerResponse.ok().body(token);
+        return token.toString();
     }
 
     @Override
@@ -59,13 +59,13 @@ public class TokenServiceImpl implements TokenService {
         // NPE
         if(!redisTemplate.hasKey(token)){
             // redis 中不存在存在token
-            throw new RuntimeException("token 不存在");
+            throw new RuntimeException("token 不存在，违法请求");
         }
 
         // delete
         Boolean delete = redisTemplate.delete(token);
         if (delete != null && !delete){
-            throw new RuntimeException("删除token")
+            throw new RuntimeException("删除token失败");
         }
 
 
