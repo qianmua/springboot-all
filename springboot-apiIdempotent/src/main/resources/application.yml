@@ -1,0 +1,9 @@
+server:
+  port: 9090
+spring:
+  redis:
+    host: 47.96.230.44
+    password: my_redis1.
+    lettuce:
+      pool:
+        max-active: 8

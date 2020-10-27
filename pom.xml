@@ -87,6 +87,7 @@
         <module>springboot-test-localdate</module>
         <module>springboot-aqs</module>
         <module>springboot-aqs-reactivemq</module>
+        <module>springboot-apiIdempotent</module>
     </modules>
 
     <properties>
