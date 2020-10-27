@@ -52,7 +52,7 @@ public class TokenServiceImpl implements TokenService {
             if (StringUtils.isBlank(token)){
                 // 参数中不存在
                 // 该干嘛干嘛
-                throw new RuntimeException("token异常");
+                throw new RuntimeException("非法请求");
             }
         }
 

@@ -88,6 +88,7 @@
         <module>springboot-aqs</module>
         <module>springboot-aqs-reactivemq</module>
         <module>springboot-apiIdempotent</module>
+        <module>springboot-tomcat-netty</module>
     </modules>
 
     <properties>
