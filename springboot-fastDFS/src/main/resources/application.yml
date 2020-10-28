@@ -1,0 +1,10 @@
+server:
+  port: 9090
+fdfs:
+  connect-timeout: 600
+  so-timeout: 1500
+  thumb-image:
+    height: 60
+    width: 60
+  tracker-list:
+    - 192.168.10.128:22122
