@@ -90,6 +90,7 @@
         <module>springboot-apiIdempotent</module>
         <module>springboot-tomcat-netty</module>
         <module>springboot-fastDFS</module>
+        <module>springboot-freemarker</module>
     </modules>
 
     <properties>

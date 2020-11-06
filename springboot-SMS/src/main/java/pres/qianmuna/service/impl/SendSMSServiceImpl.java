@@ -59,8 +59,6 @@ public class SendSMSServiceImpl implements SendSMSService {
             // 响应
             System.out.println(response.getData());
             response.getHttpResponse().isSuccess();
-        } catch (ServerException e) {
-            e.printStackTrace();
         } catch (ClientException e) {
             e.printStackTrace();
         }
