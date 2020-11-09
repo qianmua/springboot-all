@@ -30,6 +30,8 @@ public class ShiroConfig {
 
         //配置系统的受限资源
         //配置系统的公共资源
+
+
         /*
             anon : 无需认证，所有的可以访问
             authc : 必须认证了才能访问
@@ -37,6 +39,7 @@ public class ShiroConfig {
             perms : 必须拥有对某个资源的权限才能访问
             role ： 拥有某个角色权限才能访问
          */
+
         Map<String, String> map = new HashMap<>();
         map.put("/user/login","anon");
         map.put("/user/register","anon");
@@ -45,8 +48,9 @@ public class ShiroConfig {
 
 
         //设置默认认证登录界面路径
-        shiroFilterFactoryBean.setLoginUrl("/toLogin");
+        shiroFilterFactoryBean.setLoginUrl("/login");
 
+        // filter
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;
     }
@@ -60,10 +64,14 @@ public class ShiroConfig {
         defaultWebSecurityManager.setRealm(realm);
         return defaultWebSecurityManager;
     }
-    //3.创建自定义realm
+
+    /**
+     * 自定义校验器
+     */
     @Bean("getRealm")
     public Realm getRealm(){
         CustomerRealm customerRealm = new CustomerRealm();
+
         //修改凭证校验匹配器
         HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
         //设置加密算法给md5

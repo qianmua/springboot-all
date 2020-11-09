@@ -34,6 +34,9 @@ public class Role implements Serializable {
     @ApiModelProperty(value = "角色名称")
     private String name;
 
+    /**
+     * 权限路由
+     */
     private List<Perms> perms;
 
 

@@ -40,6 +40,7 @@ public class User implements Serializable {
     @ApiModelProperty(value = "盐")
     private String salt;
 
+    // Role List
     @ApiModelProperty(value = "角色列表")
     private List<Role> roles;
 

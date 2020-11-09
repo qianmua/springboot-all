@@ -35,6 +35,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //2.将随机盐保存到数据库
         user.setSalt(salt);
         //3.根据明文密码进行md5加密 + salt +hash散列
+        // hash save to config
         Md5Hash md5Hash = new Md5Hash(user.getPassword(),salt,1024);
         user.setPassword(md5Hash.toHex());
         this.baseMapper.insert(user);
