@@ -91,6 +91,7 @@
         <module>springboot-tomcat-netty</module>
         <module>springboot-fastDFS</module>
         <module>springboot-freemarker</module>
+        <module>springboot-shiro3</module>
     </modules>
 
     <properties>

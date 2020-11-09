@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * @author HJC
  * @version 1.0
@@ -15,7 +17,10 @@ import lombok.experimental.Accessors;
 @Data
 @NoArgsConstructor
 @Accessors( chain = true)
-public class CommonGlobalsJSON<T> {
+public class CommonGlobalsJSON<T> implements Serializable {
+
+    private static final long serialVersionUID = -8224611445043678244L;
+
     private Integer code;
     private String message;
     private T data;
