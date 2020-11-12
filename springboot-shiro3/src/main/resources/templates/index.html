@@ -55,7 +55,7 @@
 
         <td >
             <a shiro:hasRole="admin" th:href="@{/shiro/emp/a/update/{id}(id=${l1.getEId()} )}" th:if="${l1.suc == 0}" class="btn btn-outline-danger">修改</a>
-            <a shiro:hasRole="user" th:href="@{/shiro/emp/update/{id}(id=${l1.getEId()} )}" th:if="${l1.suc == 0}" class="btn btn-outline-warning">审批</a>
+            <a shiro:hasRole="user" th:href="@{/shiro/emp/a/shen/{id}(id=${l1.getEId()} )}" th:if="${l1.suc == 0}" class="btn btn-outline-warning">审批</a>
             <a th:href="@{/shiro/emp/a/update/{id}(id=${l1.getEId()} ) }" th:if="${l1.suc == 1}"  class="btn btn-outline-info">查看</a>
             <a th:href="@{/shiro/emp/delete/{id}(id=${l1.getEId()} ) }" onclick="removeById()" th:if="${l1.status == 1}" class="btn btn-outline-danger">删除</a>
         </td>

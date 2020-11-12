@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import pres.qm.shiro.pojo.Emp;
 import pres.qm.shiro.service.EmpService;
 
+import java.util.Date;
+
 /**
  * <p>
  *  前端控制器
@@ -47,6 +49,18 @@ public class EmpController {
         return "redirect:/";
     }
 
+    @PostMapping("/shen")
+    public String shen(Emp emp){
+
+        Subject subject = SecurityUtils.getSubject();
+
+        emp.setP1((String) subject.getPrincipal());
+        emp.setUpdateTime(new Date());
+        empService.updateById(emp);
+
+        return "redirect:/";
+    }
+
     @PostMapping("/add")
     public String add(Emp emp){
         Subject subject = SecurityUtils.getSubject();
@@ -57,6 +71,7 @@ public class EmpController {
         emp.setDept("开发部");
         emp.setStatus(0);
         emp.setSuc(0);
+        emp.setCreateTime(new Date());
 
         empService.save(emp);
 
