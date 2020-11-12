@@ -1,7 +1,7 @@
 package pres.qm.shiro.service;
 
+import pres.qm.shiro.entity.Types;
 import com.baomidou.mybatisplus.extension.service.IService;
-import pres.qm.shiro.pojo.Perms;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import pres.qm.shiro.pojo.Perms;
  * </p>
  *
  * @author qianmuna
- * @since 2020-11-05
+ * @since 2020-11-12
  */
-public interface PersService extends IService<Perms> {
+public interface TypesService extends IService<Types> {
 
 }

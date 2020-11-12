@@ -1,7 +1,7 @@
 package pres.qm.shiro.mapper;
 
+import pres.qm.shiro.pojo.Emp;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import pres.qm.shiro.pojo.Role;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import pres.qm.shiro.pojo.Role;
  * </p>
  *
  * @author qianmuna
- * @since 2020-11-05
+ * @since 2020-11-12
  */
-public interface RoleMapper extends BaseMapper<Role> {
+public interface EmpMapper extends BaseMapper<Emp> {
 
 }

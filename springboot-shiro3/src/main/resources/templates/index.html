@@ -11,9 +11,68 @@
 </head>
 <body>
 
-<h1>系统主页</h1>
+<h4 >当前登录人 <span th:text="${userName}"></span></h4>
 <a th:href="@{/user/logout}"  class="btn btn-outline-danger">退出</a>
-<ul>
+
+<a th:href="@{/shiro/emp/a/add}"  class="btn btn-outline-info">添加</a>
+
+<!--<form th:action="@{/shiro/emp/query}" method="post">-->
+<!--    <input type="text" >-->
+<!--</form>-->
+
+<table border="1" cellpadding="1" cellspacing="1">
+
+    <tr>
+        <td><input type="checkbox" onclick="selectAll()"></td>
+        <td>请假编号</td>
+        <td>请假人</td>
+        <td>请假标题</td>
+        <td>请假起始时间</td>
+        <td>请假结束时间</td>
+        <td>原因</td>
+        <td>部门</td>
+        <td>审批人</td>
+        <td>请假时间</td>
+        <td>审批时间</td>
+        <td>请假状态</td>
+        <td>是否同意</td>
+        <td>操作</td>
+    </tr>
+    <tr th:each="l1 : ${list}">
+        <td ><input type="checkbox" name="c1" th:disabled="${l1.getStatus() == 1}"></td>
+        <td th:text="${l1.getEId()}"></td>
+        <td th:text="${l1.getEName()}"></td>
+        <td th:text="${l1.getTitle()}"></td>
+        <td th:text="${#dates.format(l1.getStartTime() , 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${#dates.format(l1.getEndTime() , 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${l1.getContext()}"></td>
+        <td th:text="${l1.getDept()}"></td>
+        <td th:text="${l1.getP1()}"></td>
+        <td th:text="${#dates.format(l1.getCreateTime() , 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${#dates.format(l1.getUpdateTime() , 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${l1.getStatus() == 0 ? '审批中' : '已归档'}"></td>
+        <td th:text="${l1.getSuc() == 0 ? '不同意' : '同意'}"></td>
+
+        <td >
+            <a shiro:hasRole="admin" th:href="@{/shiro/emp/a/update/{id}(id=${l1.getEId()} )}" th:if="${l1.suc == 0}" class="btn btn-outline-danger">修改</a>
+            <a shiro:hasRole="user" th:href="@{/shiro/emp/update/{id}(id=${l1.getEId()} )}" th:if="${l1.suc == 0}" class="btn btn-outline-warning">审批</a>
+            <a th:href="@{/shiro/emp/a/update/{id}(id=${l1.getEId()} ) }" th:if="${l1.suc == 1}"  class="btn btn-outline-info">查看</a>
+            <a th:href="@{/shiro/emp/delete/{id}(id=${l1.getEId()} ) }" onclick="removeById()" th:if="${l1.status == 1}" class="btn btn-outline-danger">删除</a>
+        </td>
+
+    </tr>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
+
+<!--<ul>
     <div  shiro:hasRole="user">
         <li>
             <a href="#">用户管理</a>
@@ -39,6 +98,21 @@
         <li><a href="#">订单管理</a></li>
         <li><a href="#">物流管理</a></li>
     </div>
-</ul>
+</ul>-->
 </body>
+
+<script>
+
+    function removeById() {
+        return confirm("确认删除？");
+    }
+
+    function selectAll(){
+        let byName = document.getElementsByName("c1");
+        console.log("aaa");
+        for (let i = 0; i < byName.length; i++) {
+            byName[i].checked = true;
+        }
+    }
+</script>
 </html>
