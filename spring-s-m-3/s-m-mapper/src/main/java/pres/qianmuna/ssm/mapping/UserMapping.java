@@ -1,6 +1,7 @@
 package pres.qianmuna.ssm.mapping;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 import pres.qianmuna.ssm.model.UserModel;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * @description :
  */
 @Mapper
+@Component
 public interface UserMapping {
 
     List<UserModel> queryAll();
