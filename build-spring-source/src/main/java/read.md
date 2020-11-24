@@ -127,11 +127,20 @@ gradle :spring-oxm:compileTestJava
     在弹出的对话框中选择spring-core.main，在重新build项目即可。
     
     
+    // spring code
+    // spring context 重新build后 记得修改 library地方
+    
+    //  不然可能不生效
+    
+    
 ## 测试
 
     新建 gradle项目 spring test
     
     测试吧
+    
+    
+    
         
     
 
