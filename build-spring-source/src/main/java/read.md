@@ -137,6 +137,9 @@ gradle :spring-oxm:compileTestJava
 
     新建 gradle项目 spring test
     
+    导入context包
+    compile project(":spring-context")
+    
     测试吧
     
     
