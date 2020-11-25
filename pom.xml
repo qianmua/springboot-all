@@ -93,6 +93,8 @@
         <module>springboot-freemarker</module>
         <module>springboot-shiro3</module>
         <module>build-spring-source</module>
+        <module>build-spring-boot-source</module>
+        <module>build-mybatis-source</module>
     </modules>
 
     <properties>

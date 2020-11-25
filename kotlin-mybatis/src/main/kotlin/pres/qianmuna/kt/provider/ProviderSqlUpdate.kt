@@ -12,6 +12,9 @@ import pres.qianmuna.kt.entity.ProviderModel
  */
 
 open class ProviderSqlUpdate{
+
+
+
     fun updateInfo(providerModel: ProviderModel): String {
         var sql = SQL()
         sql.UPDATE("smbms_provider").SET("modifyDate = now()")
@@ -22,6 +25,7 @@ open class ProviderSqlUpdate{
         when{ providerModel.proPhone != null -> sql.SET("proPhone = #{proPhone}") }
         when{ providerModel.proAddress != null -> sql.SET("proAddress = #{proAddress}") }
         when{ providerModel.proFax != null -> sql.SET("proFax = #{proFax}") }
+
         sql.WHERE("id = #{id}")
         sql.AND()
 
