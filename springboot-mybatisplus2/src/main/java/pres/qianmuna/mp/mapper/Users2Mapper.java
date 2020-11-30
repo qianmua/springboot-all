@@ -23,4 +23,7 @@ public interface Users2Mapper extends BaseMapper<Users2> {
      */
     Integer saveBatchsMore(@Param("list") List<Users2> list);
 
+
+    List<Users2> queryByMoreTable();
+
 }

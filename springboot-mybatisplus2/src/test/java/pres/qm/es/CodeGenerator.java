@@ -55,6 +55,7 @@ public class CodeGenerator {
         pc.setEntity("entity");
         pc.setService("service");
         pc.setMapper("mapper");
+
         mpg.setPackageInfo(pc);
 
 

@@ -40,5 +40,8 @@ public class Users2 implements Serializable {
     @TableField("addrName")
     private String addrName;
 
+    @TableField( exist = false)
+    private Object o;
+
 
 }
