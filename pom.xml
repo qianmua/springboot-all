@@ -96,6 +96,7 @@
         <module>build-spring-boot-source</module>
         <module>build-mybatis-source</module>
         <module>springboot-netty3</module>
+        <module>springboot-es-promise</module>
     </modules>
 
     <properties>
