@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>sync</h1>
+</body>
+<script>
+    window.onload = function () {
+
+        function getAjax(url){
+            return new Promise((resolve, reject) => {
+                var request = new XMLHttpRequest();
+                request.open("GET" , url , true)
+                request.onload = () =>{
+                    if (request.status === 200){
+                        resolve(JSON.parse(request.responseText))
+                    }
+                }
+                request.onerror = () => {
+                    reject(request.statusText)
+                }
+
+                request.send()
+            })
+        }
+
+        async function queryInfo() {
+            const r = await getAjax("/api/data/list")
+        }
+
+    }
+    
+</script>
+</html>
