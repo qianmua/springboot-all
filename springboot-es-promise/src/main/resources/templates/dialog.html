@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>自定义弹窗</h1>
+</body>
+
+<script>
+
+    window.onload=function () {
+
+        function require(q) {
+
+            var instance;
+            
+            function Dialog(config) {
+                this.title = config.title ? config.title : '标题';
+                this.content = config.content ? config.content : '提示内容';
+                this.html =
+                    '<div class="dialog-dropback">' +
+                        '<div class="container">' +
+                            '<div class="head">'+ this.title +'</div>' +
+                            '<div class="content">'+ this.content +'</div>' +
+                            '<div class="footer">' +
+                                '<button class="cancel">取消</button>' +
+                                '<button class="confirm">确认</button>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>'
+
+                Dialog.prototype = {
+                    constructor: Dialog,
+                    show : function(){
+                        var _this = this
+                        if (instance){
+                            this.destory()
+                        }
+
+                        instance = this
+
+                        return new Promise( (resolve, reject) => {
+                            // 退出
+                            // _this.hidden;
+                            document.getElementById('#cancel').onclick = (e) =>{
+                                _this.hide()
+                                reject(e)
+                            }
+                            document.getElementById('#confirm').onclick = (e) =>{
+                                _this.hide()
+                                resolve(e)
+                            }
+                        })
+                    },
+                    destory: function(){
+                        instance = null
+                        //ddddd
+                    },
+                    hide: function () {
+                        this.destory()
+                    }
+                }
+            }
+
+            
+        }
+    }
+</script>
+</html>
