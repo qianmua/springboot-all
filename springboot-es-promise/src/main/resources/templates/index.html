@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="shortcuticon" href="../resources/favicon.ico" th:href="@{/static/favicon.ico}">
+</head>
+<body>
+    <h1>promise Demo</h1>
+
+    <button id="queryData">button</button>
+
+
+    <a href="javascript:void(0)" onclick="(() => { alert('清除成功！') })()">清理垃圾</a>
+</body>
+
+<script>
+    window.onload= function(){
+
+        new Promise( (resolve, reject) => {
+            // wait
+            if (1){
+                resolve('success')
+            }
+            reject('fail')
+        }).then( res => {
+            console.log(res)
+        } , err => {
+            console.log(err)
+        }).then(res => {
+            console.log(res)
+        });
+
+
+        Promise.all([p1() , p2() , p3()]).then(res => {
+            console.log("ending.....")
+            // res
+            console.log(res);
+        }).catch(e => {
+            console.log(e);
+        })
+
+        //全部完成才算完
+        Promise.all([p1() , p2()]).then(res => {
+            console.log(res);
+        })
+        // 任意完成 就算完成
+        Promise.race([p1() , p3()]).then(res => {
+
+        })
+
+
+
+        function p1(){
+            let p1 = new Promise((resolve, reject) => {
+                resolve("is qianmu na")
+            })
+
+            return p1;
+        }
+        
+        function p2() {
+            let p2 = new Promise((resolve, reject) => {
+                resolve('success to')
+            })
+            return p2
+        }
+        function p3() {
+            // reject
+            let p3 = new Promise( (resolve, reject) => {
+                reject('reject')
+            })
+            return p3
+        }
+    }
+</script>
+</html>
