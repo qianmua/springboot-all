@@ -97,10 +97,12 @@
         <module>build-mybatis-source</module>
         <module>springboot-netty3</module>
         <module>springboot-es-promise</module>
+        <module>java-spi-filter-chain</module>
     </modules>
 
     <properties>
-
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <elasticsearch.version>7.6.1</elasticsearch.version>
     </properties>
 
