@@ -98,6 +98,8 @@
         <module>springboot-netty3</module>
         <module>springboot-es-promise</module>
         <module>java-spi-filter-chain</module>
+        <module>spring-websocket</module>
+        <module>spring-activiti</module>
     </modules>
 
     <properties>
