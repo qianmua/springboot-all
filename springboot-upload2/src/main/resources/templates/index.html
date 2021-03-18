@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="file" id="cert">
+    <input type="button" value="submit" id="sub" />
+</body>
+</html>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+<script>
+$(function(){
+    $("#sub").click(function (){
+        let type = "data";
+        let code = "code";
+        let id = "cert";
+        let formData = new FormData();
+        const f = {
+            data: $("#"+id)[0].files[0],
+            code : "200"
+        }
+
+        $.ajax({
+            type: "POST",
+            url: '/u/upload',
+            data: JSON.stringify(f),
+            processData: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                alert(data);
+            }
+        })
+    })
+
+})
+</script>
