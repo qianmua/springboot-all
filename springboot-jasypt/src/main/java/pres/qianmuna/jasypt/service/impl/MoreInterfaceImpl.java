@@ -13,13 +13,13 @@ import pres.qianmuna.jasypt.service.MoreBInterface;
  * @date 2021/5/25  10:24
  */
 @Service
-public class MoreInterfaceImpl implements MoreAInterface, MoreBInterface {
+public class MoreInterfaceImpl implements MoreAInterface<String>, MoreBInterface {
 
     private final Logger logger = LoggerFactory.getLogger(MoreInterfaceImpl.class);
 
     @Override
-    public void methodAInA() {
-        logger.info("{}" , "A");
+    public void methodAInA(String t) {
+        logger.info("{}" , t);
     }
 
     @Override

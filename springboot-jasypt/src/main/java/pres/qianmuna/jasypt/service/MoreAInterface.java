@@ -6,6 +6,6 @@ package pres.qianmuna.jasypt.service;
  * @author jinchao.hu
  * @date 2021/5/25  10:22
  */
-public interface MoreAInterface {
-    void methodAInA();
+public interface MoreAInterface<T> {
+    void methodAInA(T t);
 }

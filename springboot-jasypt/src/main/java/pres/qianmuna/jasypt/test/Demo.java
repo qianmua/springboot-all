@@ -1,6 +1,9 @@
 package pres.qianmuna.jasypt.test;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import pres.qianmuna.jasypt.mapper.PrintInfo;
+import pres.qianmuna.jasypt.mapper.PrintInfoService;
 import pres.qianmuna.jasypt.service.MoreAInterface;
 import pres.qianmuna.jasypt.service.MoreBInterface;
 
@@ -17,7 +20,10 @@ public class Demo {
 
     private final MoreBInterface moreBInterface;
 
-    private final MoreAInterface moreAInterface;
+    private final MoreAInterface<String> moreAInterface;
+
+    @Autowired
+    private PrintInfoService printInfoService;
 
     public Demo(MoreBInterface moreBInterface, MoreAInterface moreAInterface) {
         this.moreBInterface = moreBInterface;
@@ -27,7 +33,9 @@ public class Demo {
 
     @PostConstruct
     public void create(){
-        moreAInterface.methodAInA();
+        moreAInterface.methodAInA("A");
         moreBInterface.methodAInB();
+
+        printInfoService.createUser("????");
     }
 }
