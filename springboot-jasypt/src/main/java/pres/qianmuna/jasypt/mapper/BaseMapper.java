@@ -10,4 +10,7 @@ public interface BaseMapper<T> {
 
     void create(T t);
 
+
+    void createt1();
+
 }

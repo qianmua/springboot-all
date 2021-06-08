@@ -15,4 +15,9 @@ public class PrintInfo extends BaseMapperImpl<String> implements PrintInfoServic
     public void createUser(String ss) {
         getBaseMapper().create(ss);
     }
+
+    @Override
+    public void createt1() {
+
+    }
 }

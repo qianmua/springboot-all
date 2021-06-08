@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author jinchao.hu
  * @date 2021/5/25  18:06
  */
-public class BaseMapperImpl<T> implements BaseMapper<T>{
+public abstract class BaseMapperImpl<T> implements BaseMapper<T>{
 
     private final Logger logger = LoggerFactory.getLogger(BaseMapperImpl.class);
 
