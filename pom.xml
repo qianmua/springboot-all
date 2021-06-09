@@ -102,6 +102,7 @@
         <module>spring-activiti</module>
         <module>springboot-upload2</module>
         <module>java-disruptor</module>
+        <module>java-flow-engine</module>
     </modules>
 
     <properties>
