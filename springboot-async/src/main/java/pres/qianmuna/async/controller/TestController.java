@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pres.qianmuna.async.async.DemoAsync;
+import pres.qianmuna.async.service.AService;
+import pres.qianmuna.async.service.BService;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.Future;
 
 /**
@@ -22,9 +25,15 @@ public class TestController {
     @Autowired
     private DemoAsync demoAsync;
 
+    @Autowired
+    AService aService;
+
+    @Autowired
+    BService bService;
+
     @GetMapping("/test")
     public String test(){
-
+        System.out.println(Thread.currentThread().getName());
         long a1 = System.currentTimeMillis();
         demoAsync.task1();
         demoAsync.task2();
@@ -38,5 +47,11 @@ public class TestController {
         }
 
         return str;
+    }
+
+    @PostConstruct
+    public void init(){
+        aService.method("A");
+        bService.method("B");
     }
 }
