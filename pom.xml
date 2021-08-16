@@ -103,6 +103,7 @@
         <module>springboot-upload2</module>
         <module>java-disruptor</module>
         <module>java-flow-engine</module>
+        <module>springboot-custom-listener</module>
     </modules>
 
     <properties>
