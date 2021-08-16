@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
-
 /**
  * <p>
  * 
@@ -18,7 +16,7 @@ import java.io.Serializable;
  */
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="Users2对象", description="")
-public class Users2 implements Serializable {
+public class Users2 extends Base {
 
     @TableId(value = "utid", type = IdType.AUTO)
     private Integer utid;

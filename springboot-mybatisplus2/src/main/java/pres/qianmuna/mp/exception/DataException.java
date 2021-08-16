@@ -20,12 +20,14 @@ public class DataException {
 
     @ExceptionHandler( value = Exception.class)
     public R error(Exception e){
+        e.printStackTrace();
         return R.fail()
                 .setMessage(e.getMessage());
     }
 
     @ExceptionHandler( value = RuntimeException.class)
     public R error(RuntimeException e){
+        e.printStackTrace();
         return R.fail()
                 .setMessage(e.getMessage());
     }
