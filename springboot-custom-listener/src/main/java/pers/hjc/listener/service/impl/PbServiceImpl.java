@@ -21,6 +21,6 @@ public class PbServiceImpl implements PbService {
 
     @Override
     public void send() {
-        notifySender.sendMail("Hello world !");
+        notifySender.sendMail("C");
     }
 }
