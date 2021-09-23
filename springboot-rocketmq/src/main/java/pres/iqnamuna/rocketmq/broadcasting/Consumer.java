@@ -1,8 +1,8 @@
 package pres.iqnamuna.rocketmq.broadcasting;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
-import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
@@ -52,7 +52,7 @@ public class Consumer {
         * */
         //MessageListenerOrderly 有序 消费
         //MessageListenerConcurrently 不好
-        consumer.setMessageListener((MessageListenerOrderly) (list, consumeConcurrentlyContext) -> {
+        consumer.setMessageListener((MessageListenerConcurrently) (list, consumeConcurrentlyContext) -> {
             //得到消息
             list.forEach( r -> {
                 try {
@@ -74,7 +74,7 @@ public class Consumer {
                 }
             });
             // 消息发送成功S
-            return ConsumeOrderlyStatus.SUCCESS;
+            return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         });
 
         consumer.start();

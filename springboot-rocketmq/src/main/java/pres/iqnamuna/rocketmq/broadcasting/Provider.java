@@ -23,13 +23,11 @@ public class Provider {
 
     public static void main(String[] args) throws MQClientException, UnsupportedEncodingException, RemotingException, InterruptedException, MQBrokerException {
 
-
         DefaultMQProducer provider = new DefaultMQProducer("group_demo_broad_provider");
 
         provider.setNamesrvAddr("127.0.0.1:9876");
 
         provider.start();
-
 
         /// 批量 消息
         List<Message> list = new ArrayList<>(16);
@@ -48,6 +46,7 @@ public class Provider {
         // result
         System.out.println(result);
 
+//        provider.queryMessage("topic_broad_hello_world" , "primary_key1" , 10 , 1L , 1L);
 
         // 关闭掉
         provider.shutdown();
